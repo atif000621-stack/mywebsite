@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mise Global | Engineered for Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="main-nav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="gallery.html">gallery </a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <img src="assets/logo.jpg.png" alt="Mise Global Logo" class="header-logo">
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-gold" style="padding: 8px 20px; font-size: 0.8rem; border-radius: 5px;">Get a Quote</a>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <i class="fas fa-times close-btn" onclick="closeMenu()"></i>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="work.html">Our Work</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <section class="hero-video-container">
+        <video autoplay muted loop playsinline id="bg-video">
+            <source src="assets/assetsevent-reel.mp4.MP4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" data-aos="zoom-in">
+            <h1>Engineered for Excellence.<br>Executed with Precision.</h1>
+            <p>Pan-India Presence. Global Standards. Creative Brilliance.</p>
+            <div class="hero-btns">
+                <a href="work.html" class="btn-primary">View Our Portfolio</a>
+                <a href="contact.html" class="btn-primary outline">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-container" id="counter-section">
+        <div class="stat-item" data-aos="fade-up">
+            <h2 class="counter" data-target="50">0</h2><span class="plus">+</span>
+            <p>Events Managed</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+            <h2 class="counter" data-target="10">0</h2><span class="plus">+</span>
+            <p>Govt. Projects</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+            <h2 class="counter" data-target="200">0</h2><span class="plus">+</span>
+            <p>Creative Designs</p>
+        </div>
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+            <h2 class="counter" data-target="15">0</h2><span class="plus">+</span>
+            <p>Cities Pan-India</p>
+        </div>
+    </div>
+
+    <section class="section-padding welcome-section">
+        <div class="container" data-aos="fade-up" style="max-width: 1000px; margin: auto; text-align: center;">
+            <h2 class="section-title">Global Excellence. <span>Pan-India Presence.</span></h2>
+            <p style="font-size: 1.15rem; line-height: 1.9; color: #444; text-align: justify; margin-top: 20px;">
+                <strong>Mise Global</strong> is a premier, Pan-India event management consultancy engineered for high-impact execution. With strategic roots and an operational footprint that spans across the nation, we specialize in world-class medical conferences, corporate summits, and large-scale pharmaceutical events. Our team works with a global mindset to drive results that matter, integrating international practices with meticulous attention to detail.
+            </p>
+        </div>
+    </section>
+
+    <section class="section-padding bg-light">
+        <h2 class="section-title" data-aos="fade-down">Industry <span>Expertise</span></h2>
+        <div class="expertise-grid">
+            <div class="spec-box" data-aos="fade-up"><i class="fas fa-microscope"></i><h3>Medical & Healthcare</h3><p>Specialists in Medical Conferences, CMEs, and Pharmaceutical summits.</p></div>
+            <div class="spec-box" data-aos="fade-up" data-aos-delay="100"><i class="fas fa-laptop-code"></i><h3>Corporate & Tech</h3><p>Seamless execution of product launches and tech summits.</p></div>
+            <div class="spec-box" data-aos="fade-up" data-aos-delay="200"><i class="fas fa-landmark"></i><h3>Public Sector</h3><p>Managing government awareness and inauguration events.</p></div>
+            <div class="spec-box" data-aos="fade-up" data-aos-delay="300"><i class="fas fa-pills"></i><h3>Pharmaceutical</h3><p>Comprehensive logistics for doctor-connect programs.</p></div>
+            <div class="spec-box" data-aos="fade-up" data-aos-delay="400"><i class="fas fa-hands-helping"></i><h3>NGO & Foundations</h3><p>Strategic awareness drives for international NGOs.</p></div>
+            <div class="spec-box" data-aos="fade-up" data-aos-delay="500"><i class="fas fa-graduation-cap"></i><h3>Academic</h3><p>Managing convocations and prestigious academic seminars.</p></div>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-about">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Muzaffarpur, Bihar | Serving Pan-India</p>
+                <p>+91 62053 94680 | info@miseglobal.com</p>
+            </div>
+        </div>
+        <div class="copyright-bar">
+            © 2026 Mise Global. All Rights Reserved. | <span style="color: #c5a059;">Driven by Precision</span>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        // Counter Animation
+        const counters = document.querySelectorAll('.counter');
+        const observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const inc = target / 100;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else { counter.innerText = target; }
+                    };
+                    updateCount();
+                });
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        observer.observe(document.querySelector('#counter-section'));
+
+        function openMenu() { document.getElementById("sideMenu").style.left = "0"; document.getElementById("menuOverlay").style.opacity = "1"; document.getElementById("menuOverlay").style.visibility = "visible"; }
+        function closeMenu() { document.getElementById("sideMenu").style.left = "-350px"; document.getElementById("menuOverlay").style.opacity = "0"; document.getElementById("menuOverlay").style.visibility = "hidden"; }
+    </script>
+</body>
+</html>

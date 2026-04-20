@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Mise Global</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<nav style="justify-content: space-between; padding: 10px 5%;">
+    <div style="display: flex; align-items: center; gap: 15px;">
+        <i class="fas fa-bars menu-btn" onclick="openMenu()"></i>
+        <a href="index.html" style="display: flex; align-items: center;">
+            <img src="assets/logo.jpg.png" alt="Mise Global Logo" height="50" style="cursor: pointer;">
+        </a>
+    </div>
+    <a href="contact.html" class="btn-gold" style="padding: 8px 20px; font-size: 0.8rem; border-radius: 5px;">Get a Quote</a>
+</nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    
+    <div class="side-menu" id="sideMenu">
+        <i class="fas fa-times close-btn" onclick="closeMenu()"></i>
+        <div class="logo" style="color: var(--primary-navy); margin-bottom: 40px; font-size: 1.8rem;">
+            MISE <span style="color: var(--luxury-gold);">GLOBAL</span>
+        </div>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="services.html">Services</a>
+        <a href="work.html">Our Work</a>
+        <a href="#">Clients</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+    <header class="page-header">
+        <div>
+            <h1>Let's Connect</h1>
+            <p>Plan your next big event with Bihar's premium agency.</p>
+        </div>
+    </header>
+
+    <section class="contact-container">
+        
+        <div class="contact-info">
+            <h3>Get In Touch</h3>
+            <p>Mise Global is always ready to conceptualize and execute your dream event. Reach out to us today for a seamless experience.</p>
+            
+            <div class="contact-list">
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <strong>Our Address</strong>
+                        <p>Near Ram Janki Mandir, Shashtri Nagar, Muzaffarpur – 842002, Bihar</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <strong>Call Us</strong>
+                        <p>+91 62053 94680</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div>
+                        <strong>Email Us</strong>
+                        <p>info@miseglobal.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.1); border: 1px solid #eee;">
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3591.135764356066!2d85.372134575402!3d26.1270923771239!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed10e7b24399e5%3A0xc3f837583626245!2sShastri%20Nagar%2C%20Muzaffarpur%2C%20Bihar%20842002!5e0!3m2!1sen!2sin!4v1712420000000!5m2!1sen!2sin" 
+        width="100%" 
+        height="300" 
+        style="border:0;" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+</div>
+        </div>
+
+        <div class="contact-box">
+            <h3 style="color: var(--primary-navy); margin-bottom: 25px; text-align: center; text-transform: uppercase; letter-spacing: 1px;">Send an Inquiry</h3>
+            <form id="whatsappForm">
+                <div class="form-group">
+                    <label>Your Name / Organization</label>
+                    <input type="text" id="wa-name" placeholder="E.g., Dr. Sharma or API India" required>
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" id="wa-email" placeholder="example@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Type of Event</label>
+                    <select id="wa-event" required>
+                        <option value="" disabled selected>Select Event Type...</option>
+                        <option value="Medical Conference">Medical Conference / CME</option>
+                        <option value="Corporate Summit">Corporate Summit</option>
+                        <option value="Government Campaign">Government Campaign</option>
+                        <option value="Other">Other Events</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Event Requirements</label>
+                    <textarea id="wa-message" rows="4" placeholder="Tell us about your estimated guest count, dates, and specific needs..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send via WhatsApp <i class="fab fa-whatsapp" style="margin-left: 5px;"></i></button>
+            </form>
+        </div>
+
+    </section>
+
+    <section class="social-section">
+        <h3>Connect With Mise Global</h3>
+        <p style="margin-bottom: 20px; color: #666;">Follow us for event highlights and industry updates.</p>
+        <div class="social-icons">
+            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://twitter.com" target="_blank" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            let name = document.getElementById('wa-name').value;
+            let email = document.getElementById('wa-email').value;
+            let eventType = document.getElementById('wa-event').value;
+            let message = document.getElementById('wa-message').value;
+
+            let whatsappMessage = `*New Event Inquiry - Mise Global*%0A%0A*Name/Org:* ${name}%0A*Email:* ${email}%0A*Event Type:* ${eventType}%0A*Details:* ${message}`;
+            
+            // Yahan aapka number set hai
+            let whatsappNumber = "916205394680"; 
+            
+            let whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+            window.open(whatsappURL, '_blank');
+        });
+    </script>
+
+<script>
+        function openMenu() {
+            document.getElementById("sideMenu").style.left = "0";
+            document.getElementById("menuOverlay").style.opacity = "1";
+            document.getElementById("menuOverlay").style.visibility = "visible";
+        }
+
+        function closeMenu() {
+            document.getElementById("sideMenu").style.left = "-350px";
+            document.getElementById("menuOverlay").style.opacity = "0";
+            document.getElementById("menuOverlay").style.visibility = "hidden";
+        }
+    </script>
+ <a href="https://wa.me/916205394680?text=Hello%20Mise%20Global,%20I%20want%20to%20plan%20an%20event!" class="floating-whatsapp" target="_blank" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+
+    <footer data-aos="fade-in">
+        <div class="footer-grid">
+            <div class="footer-links">
+                <img src="assets/miselogo2.png" alt="Mise Global Logo" width="150" style="filter: brightness(0) invert(1);">
+                <p style="margin-top: 15px; font-size: 0.9rem; color: #8892b0;">Muzaffarpur, Bihar | Serving Globally</p>
+                <div class="social-footer">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Portfolio</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h3>Contact Us</h3>
+                <p style="color: #cbd5e1; font-size: 0.9rem;">
+                    Near Ram Janki Mandir, Muzaffarpur<br>
+                    Bihar - 842002<br><br>
+                    <strong>Phone:</strong> +91 62053 94680<br>
+                    <strong>Email:</strong> info@miseglobal.com
+                </p>
+            </div>
+        </div>
+
+        <div class="copyright-bar">
+            &copy; 2026 Mise Global. All Rights Reserved. | <span style="color: var(--luxury-gold);">Driven by Precision</span>
+        </div>
+    </footer>
+
+</body>
+</html>
