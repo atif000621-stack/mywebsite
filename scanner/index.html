@@ -79,7 +79,8 @@
   </div>
 
   <script>
-    const SCRIPT_API_URL = 'https://script.google.com/macros/s/AKfycbwn9rvuf7bE0SZQZFyfkd70np4-NV0wXQmB-I0skJVOcJdVCaVObYqo6_ir32zHgwCu/exec';
+    // 🎯 Aapka Naya Verified Endpoint Link
+    const SCRIPT_API_URL = 'https://script.google.com/macros/s/AKfycbwuIBOxXuzNr2q4YFd-_V_d7ZJnte5IbUUHHiBeGZDKJ4TjWr2-zzJa0v_tWYr7pxhA/exec';
 
     const video = document.getElementById("webcam");
     const canvasElement = document.getElementById("qr-canvas");
@@ -149,7 +150,7 @@
       requestAnimationFrame(scanVideoFrame);
     }
 
-    // 🚀 JSONP GLOBAL RESPONSE HANDLER
+    // 🚀 JSONP GLOBAL RESPONSE HANDLER (NO CORS BLOCK)
     window.onScanProcessed = function(response) {
       statusCard.style.display = 'block';
       if (response && response.status === 'ALLOWED') {
@@ -193,7 +194,8 @@
 
       const script = document.createElement('script');
       script.id = 'jsonp-scan-script';
-      script.src = SCRIPT_API_URL + '?action=scan&callback=onScanProcessed&slot=' + encodeURIComponent(mealSlot) + '&data=' + encodeURIComponent(decodedData);
+      // Added cache-buster (_t) to prevent network lag on mobile
+      script.src = SCRIPT_API_URL + '?action=scan&callback=onScanProcessed&slot=' + encodeURIComponent(mealSlot) + '&data=' + encodeURIComponent(decodedData) + '&_t=' + new Date().getTime();
       
       script.onerror = function() {
         playBeep('error');
