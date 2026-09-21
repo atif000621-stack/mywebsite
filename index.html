@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mise Global | Engineered for Excellence</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== HEADER DIRECT NAVIGATION STYLE (FIXED COLORS) ===== */
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+        .nav-link-item {
+            position: relative;
+        }
+        .nav-link-item a {
+            font-family: var(--font-body), sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #ffffff !important; 
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .main-nav.scrolled .nav-link-item a {
+            color: #0c1b2e !important; 
+        }
+        .nav-link-item a:hover {
+            color: #c9a84c !important; 
+        }
+        
+        @media (max-width: 1024px) {
+            .nav-center { display: none; }
+        }
+
+        /* ===== HERO SECTION (PREMIUM CINEMATIC UPGRADE) ===== */
+        .hero-slider-wrapper {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-color: #0c1b2e;
+        }
+
+        /* Live Premium Conference Image with Breathing Animation */
+        .bg-1 { 
+            background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            animation: cinematicZoom 20s infinite alternate linear;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+        
+        @keyframes cinematicZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.08); }
+        }
+
+        /* Deep Navy Gradient & Geometric Mesh Overlay */
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(12, 27, 46, 0.92) 0%, rgba(6, 14, 24, 0.75) 100%);
+            z-index: 2;
+        }
+        .hero-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+            padding: 0 5%;
+            margin-top: 50px;
+        }
+        .hero-eyebrow {
+            display: flex; align-items: center; justify-content: center; gap: 15px;
+            color: #c9a84c; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px;
+            margin-bottom: 24px; font-weight: 600;
+        }
+        .eyebrow-line { width: 50px; height: 1px; background: #c9a84c; }
+        
+        /* Typography Upgrade */
+        .hero-title {
+            font-family: var(--font-display), 'Playfair Display', serif;
+            font-size: clamp(3.5rem, 8vw, 6.5rem);
+            color: #ffffff;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            letter-spacing: -1px;
+        }
+        
+        /* Animated Gold Gradient Text Effect */
+        .hero-title em { 
+            font-style: italic; 
+            background: linear-gradient(to right, #e8d08d 20%, #c9a84c 40%, #e8d08d 60%, #c9a84c 80%);
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: textShine 5s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes textShine {
+            to { background-position: 200% center; }
+        }
+
+        .hero-sub {
+            font-size: 1.25rem; color: rgba(255,255,255,0.85); 
+            max-width: 750px; margin: 0 auto 45px; line-height: 1.7; font-weight: 300;
+        }
+        
+        .hero-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+        .btn-primary { background: #c9a84c; color: #0c1b2e; padding: 18px 44px; font-weight: 600; border-radius: 4px; transition: all 0.3s ease; text-decoration: none; display: inline-block; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;}
+        .btn-primary:hover { background: #d4b572; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(201,168,76,0.3); }
+        .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #ffffff; padding: 18px 44px; font-weight: 600; border-radius: 4px; transition: all 0.3s ease; text-decoration: none; display: inline-block; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;}
+        .btn-outline:hover { background: #ffffff; color: #0c1b2e; transform: translateY(-3px); }
+
+        /* ===== STATS STRIP (100% FIXED VISIBILITY) ===== */
+        .stats-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            background: #ffffff !important;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+            max-width: 1200px;
+            margin: -50px auto 0;
+            border-radius: 8px;
+            border: 1px solid #E8E0D4;
+        }
+        .stat-item {
+            padding: 40px 20px; text-align: center; border-right: 1px solid #E8E0D4;
+            transition: all 0.4s ease; cursor: pointer; position: relative;
+            opacity: 1 !important; visibility: visible !important;
+        }
+        .stat-item:last-child { border-right: none; }
+        .stat-item:hover {
+            background: #f8f9fa !important; transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-radius: 8px; z-index: 2;
+        }
+        .stat-num-wrap { 
+            font-family: var(--font-display), serif; font-size: 3.5rem; font-weight: 700; 
+            color: #0c1b2e !important; line-height: 1; margin-bottom: 8px; transition: all 0.4s ease; display: inline-block; 
+            opacity: 1 !important;
+        }
+        .stat-item:hover .stat-num-wrap { transform: scale(1.1); color: #c9a84c !important; }
+        .stat-plus { color: #c9a84c !important; transition: color 0.4s ease; }
+        .stat-item:hover .stat-plus { color: #0c1b2e !important; }
+        .stat-item p { 
+            font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; 
+            color: #4a5568 !important; font-weight: 600; transition: color 0.4s ease; margin-top: 5px;
+            opacity: 1 !important;
+        }
+        .stat-item:hover p { color: #0c1b2e !important; }
+
+        /* ===== OPTION 1: CSS GEOMETRIC PREMIUM GLOW PANEL ===== */
+        .mid-showcase-section {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 0 5%;
+        }
+        .mid-showcase-frame {
+            width: 100%;
+            height: 380px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(184,150,90,0.3);
+            box-shadow: 0 25px 60px rgba(12,27,46,0.15);
+            position: relative;
+            background: linear-gradient(135deg, #0e2238 0%, #06101b 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .mid-showcase-frame::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: linear-gradient(rgba(184,150,90,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(184,150,90,0.04) 1px, transparent 1px);
+            background-size: 40px 40px; background-position: center;
+        }
+        .mid-showcase-frame::after {
+            content: ''; position: absolute; width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(184,150,90,0.08) 0%, rgba(12,27,46,0) 70%);
+            top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1; pointer-events: none;
+        }
+        .panel-branding-content { position: relative; z-index: 2; text-align: center; padding: 0 30px; }
+        .panel-branding-content i { font-size: 2.5rem; color: #c9a84c; margin-bottom: 20px; opacity: 0.9; text-shadow: 0 0 20px rgba(184,150,90,0.3); }
+        .panel-branding-content h2 { font-family: var(--font-display), serif; font-size: clamp(2rem, 4vw, 3rem); color: #ffffff; font-weight: 400; line-height: 1.2; letter-spacing: 1px; }
+        .panel-branding-content h2 em { font-style: italic; color: #e8d08d; }
+        .panel-branding-content p { font-family: var(--font-body), sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 3px; color: rgba(255,255,255,0.4); margin-top: 15px; font-weight: 500; }
+
+        /* ===== WELCOME SECTION ===== */
+        .welcome-section { padding: 80px 5% 80px; text-align: center; background: #FAF9F6; }
+        .welcome-inner { max-width: 800px; margin: 0 auto; }
+        .section-label { color: #c9a84c; font-size: 0.85rem; font-weight: 600; letter-spacing: 2px; margin-bottom: 15px; display: inline-block; }
+        .section-title { font-family: var(--font-display), serif; font-size: clamp(2rem, 4vw, 3rem); color: #0c1b2e; margin-bottom: 25px; line-height: 1.2; }
+        .section-title em { font-style: italic; color: #c9a84c; }
+        .welcome-body { font-size: 1.1rem; color: #4a5568; line-height: 1.8; margin-bottom: 30px; }
+        .btn-text-link { color: #0c1b2e; font-weight: 600; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.9rem; transition: color 0.3s; display: inline-flex; align-items: center; gap: 8px; }
+        .btn-text-link:hover { color: #c9a84c; }
+
+        /* ===== CORE EXPERTISE ===== */
+        .home-services { background: #0c1b2e; padding: 100px 5%; }
+        .dark-header { text-align: center; margin-bottom: 60px; }
+        .dark-header .section-label { color: rgba(255,255,255,0.5); }
+        .dark-header .section-title { color: #ffffff; }
+        
+        .h-services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        .h-svc-card {
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(184,150,90,0.2); border-radius: 8px;
+            padding: 40px 30px; text-decoration: none; display: block; transition: all 0.4s ease;
+            position: relative; overflow: hidden;
+        }
+        .h-svc-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 3px; background: #c9a84c; transition: width 0.4s ease; }
+        .h-svc-card:hover::before { width: 100%; }
+        .h-svc-card:hover { transform: translateY(-8px); background: rgba(255,255,255,0.06); border-color: #c9a84c; }
+        
+        .h-svc-icon { width: 60px; height: 60px; background: rgba(184,150,90,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 25px; }
+        .h-svc-icon i { font-size: 1.6rem; color: #c9a84c; }
+        .h-svc-card h3 { font-family: var(--font-display), serif; font-size: 1.6rem; color: #ffffff; margin-bottom: 15px; }
+        .h-svc-card p { font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 20px; }
+        .h-svc-link { color: #c9a84c; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; gap: 5px; }
+        
+        .all-svc-btn { text-align: center; margin-top: 50px; }
+
+        /* ===== INDUSTRY EXPERTISE ===== */
+        .expertise-section { background: #ffffff; padding: 100px 5%; }
+        .expertise-header { text-align: center; margin-bottom: 60px; }
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
+        
+        .spec-box { 
+            padding: 35px 25px; border: 1px solid #E8E0D4; border-radius: 6px; text-align: center; transition: all 0.3s ease; 
+        }
+        .spec-box:hover { border-color: transparent; box-shadow: 0 10px 30px rgba(0,0,0,0.06); transform: translateY(-5px); }
+        .spec-icon-wrap { margin-bottom: 20px; }
+        .spec-icon-wrap i { font-size: 2rem; color: #0c1b2e; transition: color 0.3s ease; }
+        .spec-box:hover .spec-icon-wrap i { color: #c9a84c; }
+        .spec-box h3 { font-family: var(--font-display), serif; font-size: 1.3rem; color: #0c1b2e; margin-bottom: 12px; }
+        .spec-box p { font-size: 0.9rem; color: #4a5568; line-height: 1.6; }
+
+        /* ===== CLIENTS SLIDER ===== */
+        .clients-section { background: #FAF9F6; padding: 80px 0; overflow: hidden; border-top: 1px solid #E8E0D4; }
+        .clients-header { text-align: center; margin-bottom: 40px; }
+        .clients-header h2 { font-family: var(--font-display), serif; font-size: 2rem; color: #0c1b2e; }
+        .clients-header h2 em { font-style: italic; color: #c9a84c; }
+        .logo-slider { width: 100%; overflow: hidden; position: relative; }
+        .logo-slider::before, .logo-slider::after { content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; }
+        .logo-slider::before { left: 0; background: linear-gradient(to right, rgba(250,249,246,1) 0%, rgba(250,249,246,0) 100%); }
+        .logo-slider::after { right: 0; background: linear-gradient(to left, rgba(250,249,246,1) 0%, rgba(250,249,246,0) 100%); }
+        .logo-track { display: flex; width: calc(200px * 14); animation: scroll-left 25s linear infinite; align-items: center; }
+        .logo-track:hover { animation-play-state: paused; }
+        .logo-slide { width: 200px; padding: 0 30px; display: flex; justify-content: center; align-items: center; opacity: 0.5; transition: all 0.4s ease; filter: grayscale(100%); }
+        .logo-slide:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+        .logo-slide img { max-width: 100%; max-height: 70px; object-fit: contain; }
+        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 7)); } }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner { background: #c9a84c; padding: 80px 5%; text-align: center; }
+        .cta-inner { max-width: 700px; margin: 0 auto; }
+        .cta-banner .section-label { color: #0c1b2e; opacity: 0.7; }
+        .cta-banner h2 { font-family: var(--font-display), serif; font-size: clamp(2rem, 4vw, 3rem); color: #0c1b2e; margin-bottom: 30px; }
+        .cta-banner h2 em.text-highlight-white { font-style: italic; color: #ffffff !important; text-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .cta-banner .btn-primary.large { padding: 18px 44px; font-size: 1rem; }
+
+        @media (max-width: 900px) {
+            .stats-strip { grid-template-columns: repeat(2, 1fr) !important; margin: 0; border-radius: 0; box-shadow: none; border-bottom: 1px solid #E8E0D4; }
+            .stat-item { border-bottom: 1px solid #E8E0D4; border-right: 1px solid #E8E0D4 !important; }
+            .stat-item:nth-child(even) { border-right: none !important; }
+            .mid-showcase-frame { height: 300px; }
+        }
+        @media (max-width: 600px) {
+            .hero-btns { flex-direction: column; width: 100%; }
+            .btn-primary, .btn-outline { width: 100%; text-align: center; }
+            .logo-slider::before, .logo-slider::after { width: 50px; }
+            .mid-showcase-frame { height: 240px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        
+        <div class="nav-center">
+            <div class="nav-link-item"><a href="index.html">Home</a></div>
+            <div class="nav-link-item"><a href="about.html">About Us</a></div>
+            <div class="nav-link-item"><a href="services.html">Services</a></div>
+            <div class="nav-link-item"><a href="work.html">Our Work</a></div>
+            <div class="nav-link-item"><a href="contact.html">Contact</a></div>
+        </div>
+
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <nav class="side-nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="work.html">Our Work</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="side-menu-footer">
+            <p>Pan-India Presence</p>
+            <p>+91 62053 94680</p>
+        </div>
+    </div>
+
+    <section class="hero-slider-wrapper">
+        <div class="bg-1"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+            <div class="hero-eyebrow">
+                <span class="eyebrow-line"></span>
+                <span>Pan-India Presence &nbsp;·&nbsp; Global Standards</span>
+                <span class="eyebrow-line"></span>
+            </div>
+            <h1 class="hero-title">
+                Architecting<br>
+                <em>Premium Events.</em>
+            </h1>
+            <p class="hero-sub">From world-class medical conferences to high-impact brand activations—Mise Global executes with precision across every physical and digital vertical.</p>
+            <div class="hero-btns">
+                <a href="services.html" class="btn-primary">Explore Our Services</a>
+                <a href="work.html" class="btn-outline">View Portfolio &nbsp;<i class="fas fa-long-arrow-alt-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-strip" id="counter-section">
+        <div class="stat-item">
+            <div class="stat-num-wrap"><span class="counter" data-target="50">0</span><span class="stat-plus">+</span></div>
+            <p>Events Managed</p>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num-wrap"><span class="counter" data-target="10">0</span><span class="stat-plus">+</span></div>
+            <p>Govt. Projects</p>
+        </div>
+        <div class="stat-item">
+            <div class="stat-num-wrap"><span class="counter" data-target="200">0</span><span class="stat-plus">+</span></div>
+            <p>Creative Designs</p>
+        </div>
+        <div class="stat-item" style="border-right: none;">
+            <div class="stat-num-wrap"><span class="counter" data-target="15">0</span><span class="stat-plus">+</span></div>
+            <p>Cities Pan-India</p>
+        </div>
+    </section>
+
+    <div class="mid-showcase-section reveal-el">
+        <div class="mid-showcase-frame">
+            <div class="panel-branding-content">
+                <i class="fas fa-layer-group"></i>
+                <h2>Borderless Strategy. <em>Flawless Execution.</em></h2>
+                <p>Global Agency Standards — Pan-India Network</p>
+            </div>
+        </div>
+    </div>
+
+    <section class="welcome-section">
+        <div class="welcome-inner reveal-el">
+            <div class="section-label">WHO WE ARE</div>
+            <h2 class="section-title">Engineered for <em>Excellence.</em></h2>
+            <p class="welcome-body">
+                <strong>Mise Global</strong> is a premier event management consultancy operating without boundaries. Driven by diverse industry experience and a borderless mindset, our team integrates international standards with meticulous attention to detail. We do not merely manage events—we architect experiences that leave a lasting impact.
+            </p>
+            <a href="about.html" class="btn-text-link">Discover Our Story <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section class="home-services">
+        <div class="dark-header reveal-el">
+            <div class="section-label">CORE EXPERTISE</div>
+            <h2 class="section-title">The Mise Global <em>Experience</em></h2>
+        </div>
+        <div class="h-services-grid">
+            <a href="physical-conferences.html" class="h-svc-card reveal-el">
+                <div class="h-svc-icon"><i class="fas fa-building"></i></div>
+                <h3>Physical Conferences</h3>
+                <p>End-to-end on-ground event architecture. From venue selection and scientific programming to premium hospitality and flawless execution.</p>
+                <span class="h-svc-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="virtual-conferences.html" class="h-svc-card reveal-el" style="transition-delay: 0.1s;">
+                <div class="h-svc-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Virtual Conferences</h3>
+                <p>State-of-the-art 3D virtual summits offering real-time engagement, global reach, and immersive digital environments.</p>
+                <span class="h-svc-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+            </a>
+            <a href="hybrid-conferences.html" class="h-svc-card reveal-el" style="transition-delay: 0.2s;">
+                <div class="h-svc-icon"><i class="fas fa-globe-asia"></i></div>
+                <h3>Hybrid Conferences</h3>
+                <p>Seamless integration of live on-venue audiences with global virtual attendees for maximum engagement and a unified experience.</p>
+                <span class="h-svc-link">Explore Details <i class="fas fa-arrow-right"></i></span>
+            </a>
+        </div>
+        <div class="all-svc-btn reveal-el">
+            <a href="services.html" class="btn-outline">View All Services</a>
+        </div>
+    </section>
+
+    <section class="expertise-section">
+        <div class="expertise-header reveal-el">
+            <div class="section-label">WHAT WE SPECIALISE IN</div>
+            <h2 class="section-title">Industry <em>Expertise</em></h2>
+        </div>
+        <div class="expertise-grid">
+            <div class="spec-box reveal-el">
+                <div class="spec-icon-wrap"><i class="fas fa-microscope"></i></div>
+                <h3>Medical & Healthcare</h3>
+                <p>Executing world-class CMEs, large-scale medical conferences, and global pharma summits with flawless precision.</p>
+            </div>
+            <div class="spec-box reveal-el" style="transition-delay: 0.1s;">
+                <div class="spec-icon-wrap"><i class="fas fa-briefcase"></i></div>
+                <h3>Corporate & Brand</h3>
+                <p>Architecting seamless product launches, high-impact brand activations, and executive corporate summits.</p>
+            </div>
+            <div class="spec-box reveal-el" style="transition-delay: 0.2s;">
+                <div class="spec-icon-wrap"><i class="fas fa-landmark"></i></div>
+                <h3>Government & Public Sector</h3>
+                <p>Managing high-profile government awareness campaigns and large-scale public initiatives with stringent protocol.</p>
+            </div>
+            <div class="spec-box reveal-el">
+                <div class="spec-icon-wrap"><i class="fas fa-music"></i></div>
+                <h3>Artist & Cultural Events</h3>
+                <p>End-to-end artist management and live cultural productions engineered for unforgettable experiences.</p>
+            </div>
+            <div class="spec-box reveal-el" style="transition-delay: 0.1s;">
+                <div class="spec-icon-wrap"><i class="fas fa-bullhorn"></i></div>
+                <h3>ATL & BTL Advertising</h3>
+                <p>Strategic Above-The-Line and Below-The-Line advertising campaigns delivering measurable ROI and global reach.</p>
+            </div>
+            <div class="spec-box reveal-el" style="transition-delay: 0.2s;">
+                <div class="spec-icon-wrap"><i class="fas fa-paint-brush"></i></div>
+                <h3>Creative & Design Studio</h3>
+                <p>Crafting premium brand identities, stage aesthetics, and high-converting event collateral that command attention.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="clients-section">
+        <div class="clients-header reveal-el">
+            <h2>Trusted by <em>Industry Leaders</em></h2>
+        </div>
+        <div class="logo-slider">
+            <div class="logo-track">
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-inner reveal-el">
+            <div class="section-label light">READY TO BEGIN?</div>
+            <h2>Let's Build Something <em class="text-highlight-white">Extraordinary.</em></h2>
+            <a href="contact.html" class="btn-primary large">Start a Conversation <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Medical Conferences</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                    <li><a href="#">Govt. Campaigns</a></li>
+                    <li><a href="#">BTL / ATL Activations</a></li>
+                    <li><a href="#">Artist Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p class="footer-tagline">Driven by Precision</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // ===== NAVBAR SCROLL EFFECT =====
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('mainNav');
+            nav.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ===== COUNTER ENGINE =====
+        const counters = document.querySelectorAll('.counter');
+        let counted = false;
+        const counterObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !counted) {
+                counted = true;
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    let count = 0;
+                    const inc = target / 80;
+                    const update = () => {
+                        count += inc;
+                        if (count < target) {
+                            counter.textContent = Math.ceil(count);
+                            requestAnimationFrame(update);
+                        } else {
+                            counter.textContent = target;
+                        }
+                    };
+                    update();
+                });
+            }
+        }, { threshold: 0.3 });
+        const counterSection = document.getElementById('counter-section');
+        if(counterSection) { counterObserver.observe(counterSection); }
+
+        // ===== SIDE MENU =====
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('open');
+            document.getElementById('menuOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('menuOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // ===== SCROLL REVEAL =====
+        const revealEls = document.querySelectorAll('.reveal-el');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(el => {
+                if (el.isIntersecting) {
+                    el.target.style.opacity = '1';
+                    el.target.style.transform = 'translateY(0)';
+                    revealObserver.unobserve(el.target);
+                }
+            });
+        }, { threshold: 0.15 });
+        
+        revealEls.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.8s ease';
+            revealObserver.observe(el);
+        });
+    </script>
+</body>
+</html>

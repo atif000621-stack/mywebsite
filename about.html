@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== ABOUT PAGE SPECIFIC UNIQUE STYLE PROPERTIES ===== */
+        :root {
+            --story-gold: #C9A84C;
+            --story-border: rgba(201,168,76,0.2);
+            --story-text-muted: #6B6B6B;
+            --story-text-mid: #A0A0A0;
+            --font-story-display: 'Playfair Display', Georgia, serif;
+            --font-story-body: 'Outfit', sans-serif;
+        }
+
+        .page-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.92) 0%, rgba(12,27,46,0.75) 100%),
+                        url('assets/apicon-stage.jpg.JPG') center/cover no-repeat;
+            min-height: 55vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 70px;
+            padding-top: 120px;
+        }
+        .page-hero-inner { max-width: 800px; }
+        .page-hero-inner .section-label { margin-bottom: 16px; }
+        .page-hero-inner h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 20px;
+        }
+        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
+        .page-hero-inner p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.65);
+            max-width: 560px;
+            line-height: 1.7;
+        }
+
+        /* ===== OUR STORY SUB-SECTION INHERITED STYLING ===== */
+        .story-container-wrapper {
+            background: #080808; /* Premium background for story block */
+            padding: 100px 5%;
+            border-bottom: 1px solid var(--story-border);
+        }
+        .our-story-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            font-family: var(--font-story-body);
+        }
+        
+        .our-story-section .section-label {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--story-gold);
+            margin-bottom: 1.5rem;
+        }
+        .our-story-section .section-label::before {
+            content: '';
+            display: block;
+            width: 32px;
+            height: 1px;
+            background: var(--story-gold);
+            flex-shrink: 0;
+        }
+
+        .story-headline {
+            font-family: var(--font-story-display);
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            font-weight: 700;
+            line-height: 1.05;
+            color: #F5F0E8;
+            margin-bottom: 2.5rem;
+        }
+        .story-headline em {
+            font-style: italic;
+            color: var(--story-gold);
+        }
+
+        .story-divider {
+            width: 56px;
+            height: 1px;
+            background: var(--story-border);
+            margin-bottom: 3rem;
+        }
+
+        .story-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem 4rem;
+            margin-bottom: 3.5rem;
+        }
+        .story-para {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--story-text-mid);
+            font-weight: 300;
+        }
+        .story-para strong {
+            color: #F5F0E8;
+            font-weight: 500;
+        }
+        .story-para.wide {
+            grid-column: 1 / -1;
+            font-size: 1.05rem;
+        }
+
+        .pull-quote {
+            border-left: 2px solid var(--story-gold);
+            padding: 1.2rem 2rem;
+            margin: 0 0 3.5rem;
+            background: rgba(201,168,76,0.04);
+        }
+        .pull-quote p {
+            font-family: var(--font-story-display);
+            font-style: italic;
+            font-size: 1.25rem;
+            line-height: 1.7;
+            color: #F5F0E8;
+            opacity: 0.85;
+        }
+
+        .story-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid var(--story-border);
+        }
+        .story-pillar {
+            padding: 2.5rem 2rem;
+            border-right: 1px solid var(--story-border);
+            position: relative;
+            overflow: hidden;
+            transition: background 0.3s ease;
+        }
+        .story-pillar:last-child {
+            border-right: none;
+        }
+        .story-pillar::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: var(--story-gold);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+        .story-pillar:hover::after { transform: scaleX(1); }
+        .story-pillar:hover { background: rgba(201,168,76,0.04); }
+        
+        .story-pillar-num {
+            font-size: 0.65rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--story-gold);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+        .story-pillar-title {
+            font-family: var(--font-story-display);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #F5F0E8;
+            margin-bottom: 0.6rem;
+        }
+        .story-pillar-sub {
+            font-size: 0.85rem;
+            line-height: 1.65;
+            color: var(--story-text-muted);
+        }
+
+        /* ===== ABOUT STATS STRIP ===== */
+        .about-stats {
+            background: var(--ivory);
+            border-top: 1px solid #E8E0D4;
+        }
+        .about-stats-inner {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .astat {
+            padding: 45px 20px;
+            border-right: 1px solid #E8E0D4;
+            transition: all 0.4s ease;
+            position: relative;
+            cursor: pointer;
+        }
+        .astat:last-child { border-right: none; }
+        .astat:hover {
+            background: var(--white);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            border-radius: 8px;
+            border-color: transparent;
+            z-index: 2;
+        }
+        .astat-num {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            line-height: 1;
+            margin-bottom: 8px;
+            display: inline-block;
+            transition: all 0.4s ease;
+        }
+        .astat:hover .astat-num {
+            transform: scale(1.1);
+            color: var(--gold);
+        }
+        .astat-num span { color: var(--gold); transition: color 0.4s ease; }
+        .astat:hover .astat-num span { color: var(--navy); }
+        .astat p { 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            color: var(--muted); 
+            transition: color 0.4s ease;
+        }
+        .astat:hover p { color: var(--navy); font-weight: 600; }
+
+        /* ===== CLIENTS SLIDER SCROLL EFFECT ===== */
+        .clients-section {
+            background: var(--white);
+            padding: 80px 0;
+            overflow: hidden;
+            border-top: 1px solid #E8E0D4;
+        }
+        .clients-header { text-align: center; margin-bottom: 40px; }
+        .clients-header h2 { font-family: var(--font-display); font-size: 2rem; color: var(--navy); }
+        .clients-header h2 em { font-style: italic; color: var(--gold); }
+        
+        .logo-slider { width: 100%; overflow: hidden; position: relative; }
+        .logo-slider::before, .logo-slider::after { content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; }
+        .logo-slider::before { left: 0; background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
+        .logo-slider::after { right: 0; background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); }
+        
+        .logo-track { display: flex; width: calc(200px * 14); animation: scroll-left 25s linear infinite; align-items: center; }
+        .logo-track:hover { animation-play-state: paused; }
+        .logo-slide { width: 200px; padding: 0 30px; display: flex; justify-content: center; align-items: center; opacity: 0.5; transition: all 0.4s ease; filter: grayscale(100%); }
+        .logo-slide:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
+        .logo-slide img { max-width: 100%; max-height: 70px; object-fit: contain; }
+        
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 7)); }
+        }
+
+        /* ===== ABOUT CTA STRIP ===== */
+        .about-cta { background: var(--gold); padding: 80px 5%; text-align: center; }
+        .about-cta h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); color: var(--navy); margin-bottom: 28px; }
+        .about-cta h2 em { font-style: italic; }
+        
+        .btn-dark {
+            display: inline-flex; align-items: center; gap: 10px; padding: 16px 40px;
+            background: var(--navy); color: var(--white); font-family: var(--font-body);
+            font-size: 0.9rem; font-weight: 600; border-radius: 4px; transition: var(--transition); text-decoration: none; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-dark:hover { background: var(--charcoal); transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
+
+        /* ===== HOVER DIRECT NAVIGATION HEADER HEADER ===== */
+        .nav-center { display: flex; align-items: center; gap: 32px; }
+        .nav-link-item { position: relative; }
+        .nav-link-item a {
+            font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1.5px; color: var(--white);
+            text-decoration: none; transition: color 0.3s ease;
+        }
+        .main-nav.scrolled .nav-link-item a { color: var(--navy); }
+        .nav-link-item a:hover { color: var(--gold); }
+
+        /* ===== INTERSECTION / MEDIA OVERRIDES ===== */
+        @media (max-width: 1024px) {
+            .nav-center { display: none; }
+        }
+        @media (max-width: 900px) {
+            .story-body { grid-template-columns: 1fr; gap: 1.5rem; }
+            .story-para.wide { grid-column: 1; }
+            .story-pillars { grid-template-columns: 1fr; }
+            .story-pillar { border-right: none; border-bottom: 1px solid var(--story-border); }
+            .story-pillar:last-child { border-bottom: none; }
+            .about-stats-inner { grid-template-columns: repeat(2, 1fr); }
+            .astat { border-right: none; border-bottom: 1px solid #E8E0D4; }
+            .astat:nth-child(2) { border-bottom: 1px solid #E8E0D4; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        
+        <!-- HEADER DIRECT NAVIGATION STRIP -->
+        <div class="nav-center">
+            <div class="nav-link-item"><a href="index.html">Home</a></div>
+            <div class="nav-link-item"><a href="about.html">About Us</a></div>
+            <div class="nav-link-item"><a href="services.html">Services</a></div>
+            <div class="nav-link-item"><a href="work.html">Our Work</a></div>
+            <div class="nav-link-item"><a href="contact.html">Contact</a></div>
+        </div>
+
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- Side Menu Drawer Overlay System -->
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <nav class="side-nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html" class="active">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="work.html">Our Work</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="side-menu-footer">
+            <p>Pan-India Presence</p>
+            <p>+91 62053 94680</p>
+        </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <div class="section-label">WHO WE ARE</div>
+            <h1>Our Identity.<br><em>Our Mission.</em></h1>
+            <p>A Pan-India consultancy engineered for precision, built on global standards.</p>
+        </div>
+    </header>
+
+    <!-- ===== RESTRUCTURED PREMIUM STORY SECTION ===== -->
+    <div class="story-container-wrapper">
+        <section class="our-story-section reveal-el">
+            <div class="section-label">Our Story</div>
+
+            <h2 class="story-headline">
+                Engineered<br>
+                for <em>Excellence.</em>
+            </h2>
+
+            <div class="story-divider"></div>
+
+            <div class="story-body">
+                <p class="story-para wide">
+                    <strong>Mise Global</strong> is a premier event management consultancy built for high-impact execution and global excellence. With a formidable Pan-India footprint, we specialise in conceptualising and delivering world-class medical conferences, CMEs, corporate summits, and large-scale pharmaceutical events.
+                </p>
+                <p class="story-para">
+                    Our strength lies in bridging the gap between complex logistical demands and flawless on-ground reality. Driven by diverse industry experience and a borderless mindset, our team integrates international standards with meticulous attention to detail.
+                </p>
+                <p class="story-para">
+                    Every engagement is treated as a unique challenge — requiring precision planning, creative problem-solving, and the kind of execution that leaves no room for compromise. We do not outsource accountability.
+                </p>
+            </div>
+
+            <div class="pull-quote">
+                <p>"We do not merely manage events — we architect premium experiences that leave a lasting impact, delivering precision on a global scale."</p>
+            </div>
+
+            <div class="story-pillars">
+                <div class="story-pillar">
+                    <div class="story-pillar-num">01</div>
+                    <div class="story-pillar-title">Global Mindset</div>
+                    <div class="story-pillar-sub">International standards applied on Indian ground — no compromise on quality.</div>
+                </div>
+                <div class="story-pillar">
+                    <div class="story-pillar-num">02</div>
+                    <div class="story-pillar-title">Precision Execution</div>
+                    <div class="story-pillar-sub">No detail is too small. No deadline too tight. We deliver, every time.</div>
+                </div>
+                <div class="story-pillar">
+                    <div class="story-pillar-num">03</div>
+                    <div class="story-pillar-title">Lasting Impact</div>
+                    <div class="story-pillar-sub">Experiences engineered to outlive the event — felt long after the last guest leaves.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- STATS CHIPS STRIP -->
+    <div class="about-stats section-padding" style="padding: 0;">
+        <div class="about-stats-inner">
+            <div class="astat"><div class="astat-num">50<span>+</span></div><p>Events Managed</p></div>
+            <div class="astat"><div class="astat-num">10<span>+</span></div><p>Govt. Projects</p></div>
+            <div class="astat"><div class="astat-num">200<span>+</span></div><p>Creative Designs</p></div>
+            <div class="astat"><div class="astat-num">15<span>+</span></div><p>Cities Pan-India</p></div>
+        </div>
+    </div>
+
+    <!-- CLIENTS SLIDER -->
+    <section class="clients-section">
+        <div class="clients-header">
+            <h2>Trusted by <em>Industry Leaders</em></h2>
+        </div>
+        <div class="logo-slider">
+            <div class="logo-track">
+                <!-- 7 Original Logos -->
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client 1"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client 2"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client 3"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client 4"></div>
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client 5"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client 6"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client 7"></div>
+                
+                <!-- Duplicate 7 Logos -->
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client 1"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client 2"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client 3"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client 4"></div>
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client 5"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client 6"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client 7"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="about-cta">
+        <h2>Ready to Create Something <em>Extraordinary?</em></h2>
+        <a href="contact.html" class="btn-dark">Start a Conversation <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Medical Conferences</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                    <li><a href="#">Govt. Campaigns</a></li>
+                    <li><a href="#">BTL / ATL Activations</a></li>
+                    <li><a href="#">Artist Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p class="footer-tagline">Driven by Precision</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth transition navbar framework logic
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('open');
+            document.getElementById('menuOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('menuOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        // Global scroll observer configurations
+        const revealEls = document.querySelectorAll('.reveal-el');
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach(e => { 
+                if(e.isIntersecting){ 
+                    e.target.style.opacity='1'; 
+                    e.target.style.transform='translateY(0)'; 
+                    ro.unobserve(e.target); 
+                } 
+            });
+        }, {threshold: 0.12});
+        
+        revealEls.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(28px)';
+            el.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            ro.observe(el);
+        });
+    </script>
+</body>
+</html>

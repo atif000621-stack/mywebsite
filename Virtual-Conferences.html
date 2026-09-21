@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Conferences | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== DETAIL PAGE SPECIFIC STYLES ===== */
+        .detail-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.95) 0%, rgba(12,27,46,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&q=80') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 60px;
+            text-align: center;
+        }
+        .detail-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .detail-hero-content .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        .detail-hero-content .back-link:hover { color: var(--white); }
+        .detail-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .detail-hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* Content Section */
+        .detail-content-wrap {
+            background: var(--ivory);
+            padding: 80px 5% 100px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        .f-icon {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .f-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .f-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .f-list li::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="detail-hero">
+        <div class="detail-hero-content">
+            <a href="services.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+            <h1>Virtual <em>Conferences</em></h1>
+            <p>We redefine digital boundaries by engineering state of the art virtual summits. Experience real time engagement immersive 3D environments and seamless tech that connects your brand with a truly global audience.</p>
+        </div>
+    </header>
+
+    <!-- DETAILS GRID -->
+    <div class="detail-content-wrap">
+        <div class="features-grid">
+
+            <!-- Card 1 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-vr-cardboard"></i></div>
+                <h3>Immersive 3D Environments</h3>
+                <ul class="f-list">
+                    <li>Dynamic digital convention centers and grand lobby entrances.</li>
+                    <li>Interactive auditoriums engineered for exceptional viewing experiences.</li>
+                    <li>Custom exhibition booths equipped with real time video and chat facilities.</li>
+                    <li>Exclusive networking lounges to foster global industry connections.</li>
+                </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-broadcast-tower"></i></div>
+                <h3>Broadcast & Streaming Excellence</h3>
+                <ul class="f-list">
+                    <li>High definition streaming integrated with custom motion graphics.</li>
+                    <li>Advanced multi window setups for seamless panel discussions.</li>
+                    <li>Simultaneous broadcasting across multiple virtual halls and social platforms.</li>
+                    <li>Bespoke sponsor branding integrated directly into the streaming interface.</li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-laptop-medical"></i></div>
+                <h3>Seamless Tech & Registration</h3>
+                <ul class="f-list">
+                    <li>Dedicated frictionless login portals with robust payment gateway integration.</li>
+                    <li>Unified online and offline registration systems including bulk industry sign ups.</li>
+                    <li>Instant automated certificate generation and hassle free download links.</li>
+                    <li>Interactive social walls and selfie booths for elevated attendee engagement.</li>
+                </ul>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-palette"></i></div>
+                <h3>Digital Branding & Aesthetics</h3>
+                <ul class="f-list">
+                    <li>Complete digital identity design from conference logos to thematic visuals.</li>
+                    <li>Expertly crafted ePosters CV slides and individual speaker profiles.</li>
+                    <li>Comprehensive design for brochures agendas sponsor invoices and certificates.</li>
+                    <li>High impact social media campaigns and promotional video teasers.</li>
+                </ul>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-user-tie"></i></div>
+                <h3>Faculty & Speaker Management</h3>
+                <ul class="f-list">
+                    <li>Exclusive virtual green rooms and faculty lounges for pre session preparation.</li>
+                    <li>Seamless VIP check in experiences and dedicated technical support.</li>
+                    <li>Professional assistance with pre recording and editing of scientific sessions.</li>
+                    <li>Flawless coordination of master agendas and speaker introductions.</li>
+                </ul>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-chart-pie"></i></div>
+                <h3>Real Time Data Analytics</h3>
+                <ul class="f-list">
+                    <li>Live dashboards tracking registered versus active logged in users.</li>
+                    <li>Geographic tracking with detailed live location reports of global delegates.</li>
+                    <li>Comprehensive tracking of booth visits scheduled appointments and document downloads.</li>
+                    <li>In depth session wise engagement reports for measurable ROI.</li>
+                </ul>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-headset"></i></div>
+                <h3>Dedicated Secretariat Support</h3>
+                <ul class="f-list">
+                    <li>24/7 technical helpline embedded directly on the login and event pages.</li>
+                    <li>Dedicated virtual secretariat handling administration and payment follow ups.</li>
+                    <li>RSVP management and proactive call back facilities for seamless onboarding.</li>
+                    <li>Live helpdesk operations throughout the duration of the summit.</li>
+                </ul>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-photo-video"></i></div>
+                <h3>Post Event Amplification</h3>
+                <ul class="f-list">
+                    <li>Precision feedback collection forms distributed to all global participants.</li>
+                    <li>Creation of high impact summary videos and cinematic event highlight reels.</li>
+                    <li>Professional editing of recorded sessions to create bite sized video snippets.</li>
+                    <li>Detailed post event analytical summaries delivered to stakeholders.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="services-cta" style="background: var(--navy); color: var(--white); padding: 80px 5%; text-align: center;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 28px; color: var(--white);">Ready to host a world class <em>Virtual Summit?</em></h2>
+        <a href="contact.html" class="btn-dark" style="background: var(--gold); color: var(--navy);">Consult Our Experts <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom" style="text-align: center; padding: 20px; background: #081220; color: #fff;">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        
+        const cards = document.querySelectorAll('.feature-card');
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach((e,i) => {
+                if(e.isIntersecting){
+                    setTimeout(() => {
+                        e.target.style.opacity='1';
+                        e.target.style.transform='translateY(0)';
+                    }, i * 100);
+                    ro.unobserve(e.target);
+                }
+            });
+        }, {threshold: 0.1});
+        cards.forEach(el => {
+            el.style.opacity='0';
+            el.style.transform='translateY(30px)';
+            el.style.transition='all 0.6s ease';
+            ro.observe(el);
+        });
+    </script>
+</body>
+</html>

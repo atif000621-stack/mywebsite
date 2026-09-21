@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== WORK PAGE SPECIFIC ===== */
+        .page-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.92) 0%, rgba(12,27,46,0.7) 100%),
+                        url('assets/apicon-bg.jpg') center/cover no-repeat;
+            min-height: 52vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 70px;
+            padding-top: 120px;
+        }
+        .page-hero-inner h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
+        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
+
+        /* Portfolio Section */
+        .portfolio-section { background: var(--ivory); }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .folder-card {
+            background: var(--white);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid #E8E0D4;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+        .folder-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--gold);
+        }
+
+        .folder-img-wrap {
+            position: relative;
+            overflow: hidden;
+            height: 260px;
+        }
+        .folder-img-wrap img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .folder-card:hover .folder-img-wrap img { transform: scale(1.07); }
+
+        .folder-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(12,27,46,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .folder-card:hover .folder-overlay { opacity: 1; }
+        .folder-overlay span {
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 10px 22px;
+            border-radius: 3px;
+        }
+
+        .photo-badge {
+            position: absolute;
+            top: 16px; right: 16px;
+            background: var(--gold);
+            color: var(--navy);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 5px 12px;
+            border-radius: 2px;
+            z-index: 2;
+        }
+
+        .folder-info { padding: 28px; }
+        .folder-info .card-tag {
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 8px;
+        }
+        .folder-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 10px;
+        }
+        .folder-info p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
+
+        /* ===== LIGHTBOX MODAL ===== */
+        #galleryModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,15,25,0.97);
+            z-index: 4000;
+            overflow-y: auto;
+            padding: 90px 5% 60px;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 36px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .modal-header h2 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--gold);
+        }
+        .close-modal {
+            width: 44px; height: 44px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            color: var(--white);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .close-modal:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .modal-grid img {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid rgba(184,150,90,0.2);
+            transition: var(--transition);
+            aspect-ratio: 4/3;
+            object-fit: cover;
+        }
+        .modal-grid img:hover {
+            border-color: var(--gold);
+            transform: scale(1.02);
+        }
+
+        /* Testimonials / Trust markers */
+        .trust-strip {
+            background: var(--navy);
+            padding: 70px 5%;
+            text-align: center;
+        }
+        .trust-strip .section-label { margin-bottom: 14px; }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .trust-badge {
+            border: 1px solid rgba(184,150,90,0.3);
+            border-radius: 4px;
+            padding: 18px 32px;
+            color: rgba(255,255,255,0.65);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .trust-badge:hover {
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        @media (max-width: 600px) {
+            .portfolio-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <nav class="side-nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="work.html" class="active">Our Work</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="side-menu-footer">
+            <p>Pan-India Presence</p>
+            <p>+91 62053 94680</p>
+        </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <div class="section-label">PORTFOLIO</div>
+            <h1>Case <em>Studies.</em></h1>
+            <p>Witness our execution precision through landmark events across India.</p>
+        </div>
+    </header>
+
+    <!-- PORTFOLIO -->
+    <section class="section-padding portfolio-section">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <div class="section-label">OUR WORK</div>
+            <h2 class="section-title">Selected <em>Projects</em></h2>
+        </div>
+        <div class="portfolio-grid">
+
+            <div class="folder-card" onclick="openGallery('apicon')">
+                <div class="photo-badge"><i class="fas fa-images"></i> &nbsp;4 Photos</div>
+                <div class="folder-img-wrap">
+                    <img src="assets/apicon-bg.jpg" alt="APICON 2026">
+                    <div class="folder-overlay"><span>View Gallery</span></div>
+                </div>
+                <div class="folder-info">
+                    <span class="card-tag">Medical Conference</span>
+                    <h3>APICON 2026</h3>
+                    <p>Exclusive Branding & Execution Partner for Bihar's premier medical conference — end-to-end management of India's largest gathering of physicians.</p>
+                </div>
+            </div>
+
+            <div class="folder-card" onclick="openGallery('corporate')">
+                <div class="photo-badge"><i class="fas fa-images"></i> &nbsp;3 Photos</div>
+                <div class="folder-img-wrap">
+                    <img src="assets/corporate-event.jpg" alt="Corporate Meets">
+                    <div class="folder-overlay"><span>View Gallery</span></div>
+                </div>
+                <div class="folder-info">
+                    <span class="card-tag">Corporate Events</span>
+                    <h3>Corporate Summits</h3>
+                    <p>Seamless management of high-profile corporate summits, product launches, and networking dinners across Bihar and Pan-India.</p>
+                </div>
+            </div>
+
+            <div class="folder-card" onclick="openGallery('ngo')">
+                <div class="photo-badge"><i class="fas fa-images"></i> &nbsp;3 Photos</div>
+                <div class="folder-img-wrap">
+                    <img src="assets/ngo-event.jpg" alt="NGO & Govt Events">
+                    <div class="folder-overlay"><span>View Gallery</span></div>
+                </div>
+                <div class="folder-info">
+                    <span class="card-tag">Government & NGO</span>
+                    <h3>Public Sector Campaigns</h3>
+                    <p>Large-scale government awareness initiatives and NGO campaigns executed with meticulous logistics and VIP protocol management.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+        <div class="section-label light">TRUSTED BY</div>
+        <h2 class="section-title light" style="margin-bottom: 0;">Events that <em>Defined Excellence</em></h2>
+        <div class="trust-logos">
+            <div class="trust-badge">APICON 2026</div>
+            <div class="trust-badge">Medical Pharma Summits</div>
+            <div class="trust-badge">Govt. of Bihar</div>
+            <div class="trust-badge">Corporate Conclaves</div>
+            <div class="trust-badge">Cultural Fests</div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="galleryModal">
+        <div class="modal-header">
+            <h2 id="modalTitle"></h2>
+            <button class="close-modal" onclick="closeGallery()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="modal-grid" id="modalImages"></div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Medical Conferences</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                    <li><a href="#">Govt. Campaigns</a></li>
+                    <li><a href="#">BTL / ATL Activations</a></li>
+                    <li><a href="#">Artist Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p class="footer-tagline">Driven by Precision</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        const galleryData = {
+            'apicon': {
+                title: "APICON 2026 — Medical Conference",
+                images: ['assets/apicon1.jpg','assets/apicon2.jpg','assets/apicon3.jpg','assets/apicon4.jpg']
+            },
+            'corporate': {
+                title: "Corporate Summits",
+                images: ['assets/corp1.jpg','assets/corp2.jpg','assets/corp3.jpg']
+            },
+            'ngo': {
+                title: "Government & NGO Events",
+                images: ['assets/ngo1.jpg','assets/ngo2.jpg','assets/ngo3.jpg']
+            }
+        };
+
+        function openGallery(key) {
+            const data = galleryData[key];
+            document.getElementById('modalTitle').innerText = data.title;
+            const container = document.getElementById('modalImages');
+            container.innerHTML = '';
+            data.images.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = data.title;
+                container.appendChild(img);
+            });
+            document.getElementById('galleryModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeGallery() {
+            document.getElementById('galleryModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        // Close on ESC
+        document.addEventListener('keydown', e => { if(e.key === 'Escape') closeGallery(); });
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('open');
+            document.getElementById('menuOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('menuOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
+        const cards = document.querySelectorAll('.folder-card');
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach((e,i) => {
+                if(e.isIntersecting){
+                    setTimeout(() => { e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; }, i*120);
+                    ro.unobserve(e.target);
+                }
+            });
+        }, {threshold: 0.1});
+        cards.forEach(el => {
+            el.style.opacity='0'; el.style.transform='translateY(28px)';
+            el.style.transition='opacity 0.6s ease, transform 0.6s ease';
+            ro.observe(el);
+        });
+    </script>
+</body>
+</html>

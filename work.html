@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Work | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== WORK GALLERY SPECIFIC ===== */
+        .page-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.92) 0%, rgba(12,27,46,0.7) 100%),
+                        url('assets/apicon-bg.jpg') center/cover no-repeat;
+            min-height: 52vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 70px;
+            padding-top: 120px;
+        }
+        .page-hero-inner h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
+        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
+
+        /* Gallery Section */
+        .gallery-section { background: var(--ivory); padding: 80px 5% 60px; }
+
+        /* Perfect 4x4 Grid Layout */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 600px; /* Framework maintains height during transition */
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 4px;
+            background: var(--white);
+            border: 1px solid #E8E0D4;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+        }
+        
+        /* Show class for JS animation */
+        .gallery-item.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 25px rgba(184,150,90,0.15);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Hover Overlay Indicator */
+        .item-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(12,27,46,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 2;
+        }
+        .gallery-item:hover .item-overlay { opacity: 1; }
+        .item-overlay i { color: var(--white); font-size: 1.5rem; }
+
+        /* Premium Pagination Style */
+        .gallery-pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 50px auto 0;
+            max-width: 1200px;
+        }
+        .pg-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #E8E0D4;
+            background: var(--white);
+            color: var(--navy);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .pg-btn.active, .pg-btn:hover:not(:disabled) {
+            background: var(--navy);
+            color: var(--white);
+            border-color: var(--navy);
+        }
+        .pg-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        .pg-btn.pg-nav {
+            width: auto;
+            padding: 0 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            gap: 8px;
+        }
+        .pg-btn.pg-nav:hover:not(:disabled) {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+        }
+
+        /* ===== LIGHTBOX MODAL ===== */
+        #lightboxModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(10,15,25,0.98);
+            z-index: 4000;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 85vw;
+            max-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 2px;
+            border: 1px solid rgba(184,150,90,0.3);
+        }
+        .close-lightbox {
+            position: absolute;
+            top: -50px; right: 0;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-lightbox:hover { color: var(--gold); }
+        
+        /* Navigation Arrows */
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--white);
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            z-index: 4100;
+        }
+        .nav-arrow:hover { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+        .arrow-left { left: -70px; }
+        .arrow-right { right: -70px; }
+
+        /* Trust strip */
+        .trust-strip {
+            background: var(--navy);
+            padding: 70px 5%;
+            text-align: center;
+        }
+        .trust-strip .section-label { margin-bottom: 14px; }
+        .trust-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .trust-badge {
+            border: 1px solid rgba(184,150,90,0.3);
+            border-radius: 4px;
+            padding: 18px 32px;
+            color: rgba(255,255,255,0.65);
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+        .trust-badge:hover {
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        @media (max-width: 1024px) {
+            .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .arrow-left { left: 20px; top: auto; bottom: -70px; transform: none; }
+            .arrow-right { right: 20px; top: auto; bottom: -70px; transform: none; }
+        }
+        @media (max-width: 768px) {
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 480px) {
+            .gallery-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <nav class="side-nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="work.html" class="active">Our Work</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+        <div class="side-menu-footer">
+            <p>Pan-India Presence</p>
+            <p>+91 62053 94680</p>
+        </div>
+    </div>
+
+    <!-- PAGE HERO -->
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <div class="section-label">PORTFOLIO</div>
+            <h1>Our <em>Gallery.</em></h1>
+            <p>Witness our execution precision through landmark events across India.</p>
+        </div>
+    </header>
+
+    <!-- PORTFOLIO GALLERY -->
+    <section class="gallery-section">
+        <div style="text-align: center; margin-bottom: 56px;">
+            <div class="section-label">OUR WORK</div>
+            <h2 class="section-title">Visual <em>Showcase</em></h2>
+        </div>
+        
+        <!-- Grid automatically handled by JavaScript -->
+        <div class="gallery-grid" id="galleryGrid"></div>
+
+        <!-- Pagination Controls -->
+        <div class="gallery-pagination">
+            <button class="pg-btn pg-nav" id="prevBtn" onclick="changePage(currentPage - 1)"><i class="fas fa-chevron-left"></i> Prev</button>
+            <div id="pageNumbers" style="display: flex; gap: 10px;"></div>
+            <button class="pg-btn pg-nav" id="nextBtn" onclick="changePage(currentPage + 1)">Next <i class="fas fa-chevron-right"></i></button>
+        </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+        <div class="section-label light">TRUSTED BY</div>
+        <h2 class="section-title light" style="margin-bottom: 0;">Events that <em>Defined Excellence</em></h2>
+        <div class="trust-logos">
+            <div class="trust-badge">APICON 2026</div>
+            <div class="trust-badge">Medical Pharma Summits</div>
+            <div class="trust-badge">Govt. of Bihar</div>
+            <div class="trust-badge">Corporate Conclaves</div>
+            <div class="trust-badge">Cultural Fests</div>
+        </div>
+    </section>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightboxModal">
+        <div class="lightbox-content">
+            <button class="close-lightbox" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+            <button class="nav-arrow arrow-left" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
+            <img id="lightboxImg" src="" alt="Mise Global Fullscreen Showcase">
+            <button class="nav-arrow arrow-right" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Medical Conferences</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                    <li><a href="#">Govt. Campaigns</a></li>
+                    <li><a href="#">BTL / ATL Activations</a></li>
+                    <li><a href="#">Artist Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p class="footer-tagline">Driven by Precision</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        // ==========================================
+        // DATA BANK: APNI SAARI PHOTOS KI LIST YAHAN DAALEIN
+        // ==========================================
+        // Aap jitni chahein photos is list me line-by-line badha sakte hain.
+        // JS automatic har 16 photos ke baad ek naya page (1, 2, 3...) bana dega.
+        const allImages = [
+            'Assets/corp-meet.jpg', 'assets/apicon2.jpg', 'assets/apicon3.jpg', 'assets/apicon4.jpg',
+            'assets/corp1.jpg', 'assets/corp2.jpg', 'assets/corp3.jpg', 'assets/ngo1.jpg',
+            'assets/ngo2.jpg', 'assets/ngo3.jpg', 'assets/apicon-bg.jpg', 'assets/corporate-event.jpg',
+            'assets/ngo-event.jpg', 'assets/apicon-stage.jpg.JPG', 'assets/corporate-event.jpg', 'assets/apicon-bg.jpg',
+            
+            // Page 2 par dikhne wali photos (Example):
+            'assets/corp2.jpg', 'assets/ngo1.jpg', 'assets/apicon3.jpg', 'assets/apicon1.jpg',
+            'assets/ngo3.jpg', 'assets/apicon-bg.jpg', 'assets/apicon4.jpg', 'assets/corp3.jpg'
+        ];
+        
+        const limitPerPage = 16; // 4x4 Grid = 16 images per page
+        let currentPage = 1;
+        let activeLightboxIndex = 0;
+        let currentVisibleImages = [];
+
+        // Function to render the 4x4 Grid based on pagination
+        function renderGrid(page) {
+            const gridContainer = document.getElementById('galleryGrid');
+            gridContainer.innerHTML = ''; // Clear old grid
+            
+            const startIdx = (page - 1) * limitPerPage;
+            const endIdx = startIdx + limitPerPage;
+            
+            // Get slice of 16 images for the current page
+            currentVisibleImages = allImages.slice(startIdx, endIdx);
+
+            if(currentVisibleImages.length === 0) {
+                gridContainer.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--muted);">No images found.</p>`;
+                return;
+            }
+
+            currentVisibleImages.forEach((imgSrc, index) => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.setAttribute('onclick', `openLightbox(${index})`);
+                
+                item.innerHTML = `
+                    <div class="item-overlay"><i class="fas fa-expand"></i></div>
+                    <img src="${imgSrc}" alt="Mise Global Event Showcase">
+                `;
+                
+                gridContainer.appendChild(item);
+                
+                // Smooth stagger animation effect
+                setTimeout(() => {
+                    item.classList.add('show');
+                }, (index % 4) * 60);
+            });
+
+            renderPaginationControls();
+        }
+
+        // Function to compute and render pagination number chips
+        function renderPaginationControls() {
+            const totalPages = Math.ceil(allImages.length / limitPerPage) || 1;
+            const pageNumbersContainer = document.getElementById('pageNumbers');
+            pageNumbersContainer.innerHTML = '';
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = `pg-btn ${i === currentPage ? 'active' : ''}`;
+                btn.innerText = i;
+                btn.onclick = () => changePage(i);
+                pageNumbersContainer.appendChild(btn);
+            }
+
+            document.getElementById('prevBtn').disabled = (currentPage === 1);
+            document.getElementById('nextBtn').disabled = (currentPage === totalPages);
+        }
+
+        function changePage(newPage) {
+            const totalPages = Math.ceil(allImages.length / limitPerPage) || 1;
+            if (newPage >= 1 && newPage <= totalPages) {
+                currentPage = newPage;
+                renderGrid(currentPage);
+                
+                // Scroll smoothly back to top of the gallery section
+                document.getElementById('galleryGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        /* ===== LIGHTBOX ENGINE ===== */
+        function openLightbox(index) {
+            activeLightboxIndex = index;
+            document.getElementById('lightboxImg').src = currentVisibleImages[activeLightboxIndex];
+            document.getElementById('lightboxModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightboxModal').style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function nextImage() {
+            activeLightboxIndex = (activeLightboxIndex + 1) % currentVisibleImages.length;
+            document.getElementById('lightboxImg').src = currentVisibleImages[activeLightboxIndex];
+        }
+
+        function prevImage() {
+            activeLightboxIndex = (activeLightboxIndex - 1 + currentVisibleImages.length) % currentVisibleImages.length;
+            document.getElementById('lightboxImg').src = currentVisibleImages[activeLightboxIndex];
+        }
+
+        // Keyboard bindings
+        document.addEventListener('keydown', e => { 
+            if(document.getElementById('lightboxModal').style.display === 'flex') {
+                if(e.key === 'Escape') closeLightbox();
+                if(e.key === 'ArrowRight') nextImage();
+                if(e.key === 'ArrowLeft') prevImage();
+            }
+        });
+
+        // Initialize on boot
+        window.addEventListener('DOMContentLoaded', () => {
+            renderGrid(currentPage);
+        });
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('open');
+            document.getElementById('menuOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('menuOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

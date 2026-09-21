@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== CONTACT PAGE SPECIFIC ===== */
+        .page-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.96) 0%, rgba(12,27,46,0.78) 100%),
+                        url('assets/corporate-event.jpg') center/cover no-repeat;
+            min-height: 48vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 70px;
+            padding-top: 120px;
+        }
+        .page-hero-inner h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 5vw, 5rem);
+            color: var(--white);
+            line-height: 1.05;
+            margin-bottom: 16px;
+        }
+        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
+        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
+
+        /* Contact Layout */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            align-items: start;
+        }
+
+        /* Info Side */
+        .contact-info-side .section-label { margin-bottom: 14px; }
+        .contact-info-side h2 {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            color: var(--navy);
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .contact-info-side h2 em { color: var(--gold); font-style: italic; }
+        .contact-info-side > p {
+            font-size: 0.98rem;
+            color: var(--muted);
+            line-height: 1.75;
+            margin-bottom: 36px;
+        }
+
+        .info-cards { display: flex; flex-direction: column; gap: 16px; }
+
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding: 20px 22px;
+            background: var(--white);
+            border: 1px solid #E8E0D4;
+            border-left: 3px solid var(--gold);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .info-card:hover {
+            transform: translateX(6px);
+            box-shadow: var(--shadow-md);
+        }
+        .info-card-icon {
+            width: 46px; height: 46px;
+            background: rgba(184,150,90,0.1);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+        .info-card-icon i { font-size: 1.1rem; color: var(--gold); }
+        .info-card-text strong {
+            display: block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--navy);
+            margin-bottom: 4px;
+        }
+        .info-card-text p, .info-card-text a {
+            font-size: 0.92rem;
+            color: var(--muted);
+            text-decoration: none;
+            line-height: 1.5;
+        }
+        .info-card-text a:hover { color: var(--gold); }
+
+        /* Form Side */
+        .form-box {
+            background: var(--white);
+            border-radius: 6px;
+            padding: 48px 40px;
+            border: 1px solid #E8E0D4;
+            border-top: 4px solid var(--gold);
+            box-shadow: var(--shadow-md);
+        }
+        .form-box-header { margin-bottom: 32px; }
+        .form-box-header .section-label { margin-bottom: 10px; }
+        .form-box-header h3 {
+            font-family: var(--font-display);
+            font-size: 1.9rem;
+            color: var(--navy);
+        }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+        .form-group { margin-bottom: 22px; }
+        .form-group label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--navy);
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 1.5px solid #E8E0D4;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--charcoal);
+            background: var(--ivory);
+            transition: var(--transition);
+            appearance: none;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--gold);
+            outline: none;
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(184,150,90,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: var(--navy);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: var(--transition);
+            margin-top: 8px;
+        }
+        .btn-submit:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(184,150,90,0.3);
+        }
+        .btn-submit i { font-size: 1.15rem; }
+
+        /* Social Strip */
+        .social-strip {
+            background: var(--navy);
+            padding: 70px 5%;
+            text-align: center;
+        }
+        .social-strip h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+        .social-strip p { font-size: 0.92rem; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+        .social-icons-row {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+        }
+        .social-icons-row a {
+            width: 52px; height: 52px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: rgba(255,255,255,0.6);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .social-icons-row a:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--navy);
+            transform: translateY(-4px);
+        }
+
+        @media (max-width: 900px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+            .form-row { grid-template-columns: 1fr; }
+            .form-box { padding: 36px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+                <div class="hover-menu">
+                    <a href="index.html">Home</a>
+                    <a href="about.html">About Us</a>
+                    <a href="services.html">Services</a>
+                    <a href="work.html">Our Work</a>
+                    <a href="contact.html">Contact</a>
+                </div>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+    <div class="side-menu" id="sideMenu">
+        <button class="close-btn" onclick="closeMenu()">✕</button>
+        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <nav class="side-nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="services.html">Services</a>
+            <a href="work.html">Our Work</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+        <div class="side-menu-footer">
+            <p>Pan-India Presence</p>
+            <p>+91 62053 94680</p>
+        </div>
+    </div>
+
+    <header class="page-hero">
+        <div class="page-hero-inner">
+            <div class="section-label">GET IN TOUCH</div>
+            <h1>Let's <em>Connect.</em></h1>
+            <p>Plan your next big event with Bihar's premier event consultancy.</p>
+        </div>
+    </header>
+
+    <section class="section-padding" style="background: var(--ivory);">
+        <div class="contact-wrapper">
+
+            <div class="contact-info-side">
+                <div class="section-label">REACH US</div>
+                <h2>We're Ready to <em>Build With You.</em></h2>
+                <p>Mise Global is engineered to transition complex event blueprints into seamless, high-impact realities. Connect with our consultancy today, let us strategize and elevate your next landmark execution.</p>
+
+                <div class="info-cards">
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="info-card-text">
+                            <strong>Our Address</strong>
+                            <p>Near Ram Janki Mandir, Shashtri Nagar,<br>Muzaffarpur – 842002, Bihar</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info-card-text">
+                            <strong>Call Us</strong>
+                            <a href="tel:+919534647077">+91 95346 47077</a><br>
+                            <a href="tel:+916205394680">+91 62053 94680</a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-card-text">
+                            <strong>Email Us</strong>
+                            <a href="mailto:info@miseglobal.com">info@miseglobal.com</a><br>
+                            <a href="mailto:miseglobal.india@gmail.com">miseglobal.india@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-card-icon"><i class="fas fa-globe"></i></div>
+                        <div class="info-card-text">
+                            <strong>Operations</strong>
+                            <p>Pan-India — 15+ Cities Served</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-side">
+                <div class="form-box">
+                    <div class="form-box-header">
+                        <div class="section-label">INQUIRY FORM</div>
+                        <h3>Send Us a Message</h3>
+                    </div>
+                    <form id="whatsappForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Your Name</label>
+                                <input type="text" id="wa-name" placeholder="Name / Company" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Email Address</label>
+                                <input type="email" id="wa-email" placeholder="example@email.com" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Type of Event</label>
+                            <select id="wa-event" required>
+                                <option value="" disabled selected>Select Event Type...</option>
+                                <option value="Medical Conference / CME">Medical Conference / CME</option>
+                                <option value="Corporate Summit">Corporate Summit</option>
+                                <option value="Government Campaign">Government Campaign</option>
+                                <option value="Cultural Event / Artist Management">Cultural Event / Artist Management</option>
+                                <option value="BTL / ATL Activation">BTL / ATL Activation</option>
+                                <option value="Other">Other Events</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Event Requirements</label>
+                            <textarea id="wa-message" rows="5" placeholder="Tell us about your estimated guest count, dates, location, and specific needs..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            Send via WhatsApp  <i class="fab fa-whatsapp"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="social-strip">
+        <h3>Follow Mise Global</h3>
+        <p>Stay updated with our latest events, highlights, and industry insights.</p>
+        <div class="social-icons-row">
+            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+        </div>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Navigation</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="services.html">Services</a></li>
+                    <li><a href="work.html">Our Work</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Medical Conferences</a></li>
+                    <li><a href="#">Corporate Events</a></li>
+                    <li><a href="#">Govt. Campaigns</a></li>
+                    <li><a href="#">BTL / ATL Activations</a></li>
+                    <li><a href="#">Artist Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="contact-list">
+                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p class="footer-tagline">Driven by Precision</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+    <script>
+        document.getElementById('whatsappForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('wa-name').value;
+            const email = document.getElementById('wa-email').value;
+            const event = document.getElementById('wa-event').value;
+            const msg = document.getElementById('wa-message').value;
+            const text = `*New Inquiry — Mise Global*%0A%0A*Name/Org:* ${name}%0A*Email:* ${email}%0A*Event Type:* ${event}%0A*Details:* ${msg}`;
+            window.open(`https://wa.me/916205394680?text=${text}`, '_blank');
+        });
+
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        function openMenu() {
+            document.getElementById('sideMenu').classList.add('open');
+            document.getElementById('menuOverlay').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMenu() {
+            document.getElementById('sideMenu').classList.remove('open');
+            document.getElementById('menuOverlay').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    </script>
+</body>
+</html>

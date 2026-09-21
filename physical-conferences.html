@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physical Conferences | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== DETAIL PAGE SPECIFIC STYLES ===== */
+        .detail-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.95) 0%, rgba(12,27,46,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 60px;
+            text-align: center;
+        }
+        .detail-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .detail-hero-content .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        .detail-hero-content .back-link:hover { color: var(--white); }
+        .detail-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .detail-hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* Content Section */
+        .detail-content-wrap {
+            background: var(--ivory);
+            padding: 80px 5% 100px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        .f-icon {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .f-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .f-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .f-list li::before {
+            content: '\f105'; /* FontAwesome right angle */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--gold);
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR (Same as your main pages) -->
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="detail-hero">
+        <div class="detail-hero-content">
+            <a href="services.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+            <h1>Physical <em>Conferences</em></h1>
+            <p>We engineer masterful on-ground experiences. From intricate logistics and scientific programming to premium hospitality, Mise Global executes every physical event with flawless precision and unmatched grandeur.</p>
+        </div>
+    </header>
+
+    <!-- DETAILS GRID -->
+    <div class="detail-content-wrap">
+        <div class="features-grid">
+
+            <!-- Card 1 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Venue & Spatial Design</h3>
+                <ul class="f-list">
+                    <li>Strategic venue scouting, negotiation & finalization.</li>
+                    <li>Intelligent layout mapping for scientific halls, VIP lounges, and F&B zones.</li>
+                    <li>End-to-end exhibition space planning & shell scheme structuring.</li>
+                    <li>Premium branding, signages, and directional flow management.</li>
+                </ul>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-id-badge"></i></div>
+                <h3>Seamless Registration & Tech</h3>
+                <ul class="f-list">
+                    <li>Custom event website & mobile app development.</li>
+                    <li>Integrated payment gateways for frictionless ticketing.</li>
+                    <li>Self-check-in kiosks & quick-scan onsite registration counters.</li>
+                    <li>Automated badge printing & digital certificate distribution.</li>
+                </ul>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-microscope"></i></div>
+                <h3>Scientific Program & Abstracts</h3>
+                <ul class="f-list">
+                    <li>Curating master program outlines & scientific highlights.</li>
+                    <li>Secure online portal for abstract submissions & peer reviews.</li>
+                    <li>Speaker management, faculty invitations, and oral/poster guidelines.</li>
+                    <li>Coordination of travel grants and best-paper awards.</li>
+                </ul>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-concierge-bell"></i></div>
+                <h3>Premium Hospitality & Logistics</h3>
+                <ul class="f-list">
+                    <li>Comprehensive flight bookings & visa assistance for global faculties.</li>
+                    <li>Luxury accommodation, VIP rooming lists, and bespoke welcome kits.</li>
+                    <li>Dedicated ground transportation, airport transfers, and protocol handling.</li>
+                    <li>Curated F&B menus tailored to diverse attendee preferences.</li>
+                </ul>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-handshake"></i></div>
+                <h3>Sponsorship & Exhibitor Support</h3>
+                <ul class="f-list">
+                    <li>Designing compelling sponsorship prospectus & deliverable structures.</li>
+                    <li>Sponsor liaison, documentation, and benefit realization.</li>
+                    <li>Onsite exhibitor support, power supply logistics, and setup assistance.</li>
+                </ul>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-sliders-h"></i></div>
+                <h3>Production & Audio-Visual</h3>
+                <ul class="f-list">
+                    <li>State-of-the-art stage fabrication and technical setup.</li>
+                    <li>High-definition LED screens, lighting, and acoustic management.</li>
+                    <li>Flawless preview room operations and seamless e-poster displays.</li>
+                </ul>
+            </div>
+
+            <!-- Card 7 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-glass-cheers"></i></div>
+                <h3>Protocol, Gala & Entertainment</h3>
+                <ul class="f-list">
+                    <li>Chief Guest & dignitary protocol management for inaugurations.</li>
+                    <li>Curating memorable Gala Dinners, cultural nights, and social awareness programs.</li>
+                    <li>Complete artist booking, logistics, and technical riders.</li>
+                </ul>
+            </div>
+
+            <!-- Card 8 -->
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-shield-alt"></i></div>
+                <h3>Compliance & Administration</h3>
+                <ul class="f-list">
+                    <li>Procuring all legal, municipal, and foreign ministry clearances.</li>
+                    <li>CME credit hours coordination and documentation.</li>
+                    <li>Comprehensive event insurance, onsite security, and emergency medical support (Ambulance).</li>
+                    <li>Detailed post-event financial & attendance reporting.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="services-cta" style="background: var(--navy); color: var(--white); padding: 80px 5%; text-align: center;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 28px; color: var(--white);">Ready to execute a flawless <em>Physical Conference?</em></h2>
+        <a href="contact.html" class="btn-dark" style="background: var(--gold); color: var(--navy);">Consult Our Experts <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <!-- FOOTER (Same as main page) -->
+    <footer class="main-footer">
+        <!-- Copy your existing footer code here -->
+        <div class="footer-bottom">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        
+        // Simple scroll animation for cards
+        const cards = document.querySelectorAll('.feature-card');
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach((e,i) => {
+                if(e.isIntersecting){
+                    setTimeout(() => {
+                        e.target.style.opacity='1';
+                        e.target.style.transform='translateY(0)';
+                    }, i * 100);
+                    ro.unobserve(e.target);
+                }
+            });
+        }, {threshold: 0.1});
+        cards.forEach(el => {
+            el.style.opacity='0';
+            el.style.transform='translateY(30px)';
+            el.style.transition='all 0.6s ease';
+            ro.observe(el);
+        });
+    </script>
+</body>
+</html>

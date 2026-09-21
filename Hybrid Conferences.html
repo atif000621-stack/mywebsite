@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hybrid Conferences | Mise Global</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ===== DETAIL PAGE SPECIFIC STYLES ===== */
+        .detail-hero {
+            background: linear-gradient(160deg, rgba(12,27,46,0.95) 0%, rgba(12,27,46,0.85) 100%),
+                        url('https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&q=80') center/cover no-repeat;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 60px;
+            text-align: center;
+        }
+        .detail-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .detail-hero-content .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+            transition: var(--transition);
+        }
+        .detail-hero-content .back-link:hover { color: var(--white); }
+        .detail-hero-content h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            color: var(--white);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+        .detail-hero-content p {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+        }
+
+        /* Content Section */
+        .detail-content-wrap {
+            background: var(--ivory);
+            padding: 80px 5% 100px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 8px;
+            border-top: 3px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            transition: var(--transition);
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+        .f-icon {
+            font-size: 2rem;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+        .feature-card h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+        .f-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .f-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+        .f-list li::before {
+            content: '\f105';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--gold);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="main-nav" id="mainNav">
+        <div class="nav-left">
+            <div class="menu-container">
+                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
+            </div>
+            <a href="index.html" class="logo-link">
+                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            </a>
+        </div>
+        <div class="nav-right">
+            <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </nav>
+
+    <header class="detail-hero">
+        <div class="detail-hero-content">
+            <a href="services.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Services</a>
+            <h1>Hybrid <em>Conferences</em></h1>
+            <p>The future of events is boundless. We architect seamless Phygital experiences that perfectly bridge the gap between on-ground grandeur and global digital reach, ensuring a unified and premium journey for all attendees.</p>
+        </div>
+    </header>
+
+    <div class="detail-content-wrap">
+        <div class="features-grid">
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-ticket-alt"></i></div>
+                <h3>Unified Ticketing & Registration</h3>
+                <ul class="f-list">
+                    <li>Synchronized registration portals for both in-person and digital attendees.</li>
+                    <li>Self-check-in kiosks and rapid barcode scanning at the physical venue.</li>
+                    <li>Frictionless group onboarding for industry partners and sponsors.</li>
+                    <li>Custom-branded digital interfaces paired with premium physical badges.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-cubes"></i></div>
+                <h3>Dual-Realm Spatial Design</h3>
+                <ul class="f-list">
+                    <li>Strategic physical venue scouting paired with dynamic 3D virtual convention centers.</li>
+                    <li>Parallel layout mapping for physical scientific halls and digital auditoriums.</li>
+                    <li>Synchronized exhibition spaces: premium physical shell schemes alongside interactive virtual booths.</li>
+                    <li>Cohesive thematic branding across both physical signages and digital lobbies.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-project-diagram"></i></div>
+                <h3>Masterful Scientific Programming</h3>
+                <ul class="f-list">
+                    <li>Curating high-impact agendas optimized for both live and remote attention spans.</li>
+                    <li>Secure online portals for abstract submissions, peer reviews, and scoring.</li>
+                    <li>Meticulous coordination of local onsite speakers and global virtual faculties.</li>
+                    <li>Unified guidelines for physical e-posters and virtual oral presentations.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-satellite-dish"></i></div>
+                <h3>High-Fidelity Broadcasting</h3>
+                <ul class="f-list">
+                    <li>Custom rich-media streaming equipped with bespoke motion graphics.</li>
+                    <li>Advanced multi-window setups bridging live stage panels with virtual speakers.</li>
+                    <li>Zero-latency simultaneous broadcasting across multiple hybrid session halls.</li>
+                    <li>Strict acoustic quality control to ensure flawless audio for both realms.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-plane-arrival"></i></div>
+                <h3>Premium Logistics & Hospitality</h3>
+                <ul class="f-list">
+                    <li>End-to-end flight, airport transfer, and ground transit for physical attendees.</li>
+                    <li>Luxury accommodation, VIP rooming lists, and bespoke welcome amenities.</li>
+                    <li>Curated physical delegate kits perfectly matched with digital resource packs.</li>
+                    <li>Theme-based mementos and prestigious awards distribution.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-glass-cheers"></i></div>
+                <h3>Grand Protocol & Entertainment</h3>
+                <ul class="f-list">
+                    <li>Flawless protocol management for Chief Guests and special invitees.</li>
+                    <li>Spectacular Gala Dinners blending premium F&B with top-tier artist management.</li>
+                    <li>High-end acoustic and lighting setups for memorable musical nights.</li>
+                    <li>Inclusive cultural programs and designated public awareness campaigns.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>Omnichannel Brand Amplification</h3>
+                <ul class="f-list">
+                    <li>Data-driven promotion utilizing targeted email, SMS, and WhatsApp campaigns.</li>
+                    <li>High-impact social media narratives tailored for distinct audience segments.</li>
+                    <li>Dynamic physical hoardings paired with global digital advertisement pushes.</li>
+                    <li>Strategic PR invitations for media houses and press coverage.</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="f-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Compliance & Actionable ROI</h3>
+                <ul class="f-list">
+                    <li>Securing all essential municipal, safety, and legal permissions (including CME credits).</li>
+                    <li>Live admin dashboards tracking cross-platform hybrid attendance and demographics.</li>
+                    <li>Exhaustive post-event reporting covering F&B consumption, finance, and exhibition engagement.</li>
+                    <li>Automated, secure distribution of participation certificates and winner credentials.</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    <section class="services-cta" style="background: var(--navy); color: var(--white); padding: 80px 5%; text-align: center;">
+        <h2 style="font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.8rem); margin-bottom: 28px; color: var(--white);">Ready to seamlessly bridge the <em>Physical & Digital?</em></h2>
+        <a href="contact.html" class="btn-dark" style="background: var(--gold); color: var(--navy);">Consult Our Experts <i class="fas fa-arrow-right"></i></a>
+    </section>
+
+    <footer class="main-footer">
+        <div class="footer-bottom" style="text-align: center; padding: 20px; background: #081220; color: #fff;">
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+        });
+        
+        const cards = document.querySelectorAll('.feature-card');
+        const ro = new IntersectionObserver(entries => {
+            entries.forEach((e,i) => {
+                if(e.isIntersecting){
+                    setTimeout(() => {
+                        e.target.style.opacity='1';
+                        e.target.style.transform='translateY(0)';
+                    }, i * 100);
+                    ro.unobserve(e.target);
+                }
+            });
+        }, {threshold: 0.1});
+        cards.forEach(el => {
+            el.style.opacity='0';
+            el.style.transform='translateY(30px)';
+            el.style.transition='all 0.6s ease';
+            ro.observe(el);
+        });
+    </script>
+</body>
+</html>

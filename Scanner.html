@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>IACMCON 2026 - Access Control Scanner | Mise Global</title>
+  
+  <!-- Fast In-Browser QR Engine -->
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+    body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif; background: #07111E; color: #ffffff; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 16px 12px; }
+    .scanner-container { background: #0E2238; width: 100%; max-width: 480px; border-radius: 18px; padding: 22px 18px; box-shadow: 0 12px 35px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); text-align: center; }
+    
+    .event-badge { background: #00ADB5; color: #07111E; padding: 4px 14px; border-radius: 20px; font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1.5px; display: inline-block; margin-bottom: 8px; text-transform: uppercase; }
+    .portal-title { font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; margin-bottom: 14px; text-transform: uppercase; }
+    
+    .slot-wrapper { margin-bottom: 14px; text-align: left; }
+    .slot-label { font-size: 11px; font-weight: 700; color: #00ADB5; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; display: block; }
+    select { width: 100%; padding: 12px 14px; font-size: 14px; font-weight: 700; border-radius: 10px; border: 1.5px solid #00ADB5; outline: none; background: #040911; color: #ffffff; cursor: pointer; }
+    
+    .camera-viewport { position: relative; width: 100%; height: 320px; border-radius: 14px; overflow: hidden; background: #000000; border: 2px solid rgba(0,173,181,0.4); display: flex; align-items: center; justify-content: center; }
+    video { width: 100%; height: 100%; object-fit: cover; }
+    canvas { display: none; }
+    
+    .scanner-frame { position: absolute; width: 220px; height: 220px; border: 2px solid rgba(255, 255, 255, 0.25); border-radius: 12px; box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5); pointer-events: none; }
+    .scanner-frame:before, .scanner-frame:after { content: ""; position: absolute; width: 26px; height: 26px; border-color: #00ADB5; border-style: solid; }
+    .scanner-frame:before { top: -2px; left: -2px; border-width: 4px 0 0 4px; border-top-left-radius: 10px; }
+    .scanner-frame:after { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; border-bottom-right-radius: 10px; }
+    
+    .laser-line { position: absolute; width: 100%; height: 2.5px; background: linear-gradient(90deg, rgba(0,173,181,0) 0%, #00ADB5 50%, rgba(0,173,181,0) 100%); box-shadow: 0 0 10px #00ADB5; top: 0; animation: laserScan 2.2s infinite ease-in-out alternate; }
+    @keyframes laserScan { 0% { top: 5%; } 100% { top: 95%; } }
+    
+    .camera-prompt-btn { position: absolute; background: #00ADB5; color: #07111E; font-weight: 800; font-size: 14px; padding: 12px 22px; border-radius: 8px; border: none; cursor: pointer; z-index: 10; box-shadow: 0 4px 15px rgba(0,173,181,0.4); }
+    
+    #status-card { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-weight: 700; font-size: 14px; display: none; line-height: 1.45; }
+    .status-granted { background: #064E3B; color: #6EE7B7; border: 1.5px solid #10B981; }
+    .status-duplicate { background: #7F1D1D; color: #FCA5A5; border: 1.5px solid #EF4444; }
+    .status-evaluating { background: #1E293B; color: #38BDF8; border: 1.5px solid #0284C7; }
+    .status-header { font-size: 16px; font-weight: 800; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .delegate-details { font-size: 14px; font-weight: 700; color: #ffffff; }
+    .delegate-id { font-size: 12px; font-family: monospace; opacity: 0.9; letter-spacing: 0.5px; margin-top: 2px; }
+    
+    .footer-credits { font-size: 11px; color: #64748b; font-weight: 600; margin-top: 18px; letter-spacing: 1px; text-transform: uppercase; }
+    .footer-credits a { color: #00ADB5; text-decoration: none; font-weight: 700; }
+  </style>
+</head>
+<body>
+
+  <div class="scanner-container">
+    <div class="event-badge">IACMCON BIHAR 2026</div>
+    <h2 class="portal-title">Gate & Dining Access Control</h2>
+
+    <div class="slot-wrapper">
+      <label class="slot-label">Select Active Meal / Entry Gate</label>
+      <select id="mealSlot">
+        <option value="Attendance">🏨 Attendance & Kit Desk</option>
+        <option value="26-BF">☕ 26 Sept - Breakfast Session</option>
+        <option value="26-Lunch">🍛 26 Sept - Executive Lunch</option>
+        <option value="26-Dinner">🍲 26 Sept - Gala Dinner</option>
+        <option value="27-BF">☕ 27 Sept - Breakfast Session</option>
+        <option value="27-Lunch">🍛 27 Sept - Valedictory Lunch</option>
+      </select>
+    </div>
+
+    <div class="camera-viewport">
+      <video id="webcam" playsinline webkit-playsinline autoplay muted></video>
+      <div class="scanner-frame"><div class="laser-line"></div></div>
+      <canvas id="qr-canvas"></canvas>
+      <button id="btnGrantCam" class="camera-prompt-btn" style="display:none;" onclick="startContinuousStream()">Enable Scanner Camera</button>
+    </div>
+
+    <div id="status-card"></div>
+
+    <div class="footer-credits">
+      Engineered by <a href="https://www.miseglobal.com" target="_blank">Mise Global</a>
+    </div>
+  </div>
+
+  <script>
+    // ⚙️ APPS SCRIPT WEB APP URL
+    const SCRIPT_API_URL = 'https://script.google.com/macros/s/AKfycbwn9rvuf7bE0SZQZFyfkd70np4-NV0wXQmB-I0skJVOcJdVCaVObYqo6_ir32zHgwCu/exec';
+
+    const video = document.getElementById("webcam");
+    const canvasElement = document.getElementById("qr-canvas");
+    const canvas = canvasElement.getContext("2d", { willReadFrequently: true });
+    const statusCard = document.getElementById("status-card");
+    const btnGrantCam = document.getElementById("btnGrantCam");
+    let isEvaluating = false;
+    let audioCtx = null;
+
+    function playBeep(type) {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        if (type === 'success') {
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.12);
+          if (navigator.vibrate) navigator.vibrate(80);
+        } else {
+          osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+          gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
+          osc.start();
+          osc.stop(audioCtx.currentTime + 0.35);
+          if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+        }
+      } catch(e){}
+    }
+
+    function startContinuousStream() {
+      btnGrantCam.style.display = "none";
+      navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "environment", width: { ideal: 1280 }, height: { ideal: 720 } }
+      }).then(function(stream) {
+        video.srcObject = stream;
+        video.setAttribute("playsinline", "true");
+        video.play();
+        requestAnimationFrame(scanVideoFrame);
+      }).catch(function(err) {
+        btnGrantCam.style.display = "block";
+        statusCard.style.display = "block";
+        statusCard.className = "status-duplicate";
+        statusCard.innerHTML = "<div class='status-header'>CAMERA ACCESS REQUIRED</div>Please permit camera permission in your browser.";
+      });
+    }
+
+    function scanVideoFrame() {
+      if (video.readyState === video.HAVE_ENOUGH_DATA && !isEvaluating) {
+        canvasElement.height = video.videoHeight;
+        canvasElement.width = video.videoWidth;
+        canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+        const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
+        const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
+        if (code && code.data) {
+          onQRCodeIdentified(code.data);
+          return;
+        }
+      }
+      requestAnimationFrame(scanVideoFrame);
+    }
+
+    function onQRCodeIdentified(decodedData) {
+      isEvaluating = true;
+      const mealSlot = document.getElementById('mealSlot').value;
+      statusCard.style.display = 'block';
+      statusCard.className = 'status-evaluating';
+      statusCard.innerHTML = "<div class='status-header'>AUTHENTICATING PASS...</div>Verifying with Google Sheet database...";
+
+      // API Call to Google Apps Script
+      const targetUrl = SCRIPT_API_URL + '?action=scan&slot=' + encodeURIComponent(mealSlot) + '&data=' + encodeURIComponent(decodedData);
+
+      fetch(targetUrl)
+        .then(response => response.json())
+        .then(response => {
+          statusCard.style.display = 'block';
+          if (response.status === 'ALLOWED') {
+            playBeep('success');
+            statusCard.className = 'status-granted';
+            statusCard.innerHTML = `
+              <div class="status-header">✓ ACCESS GRANTED</div>
+              <div class="delegate-details">${response.name}</div>
+              <div class="delegate-id">${response.category} • ${response.id}</div>
+            `;
+          } else if (response.status === 'DUPLICATE') {
+            playBeep('error');
+            statusCard.className = 'status-duplicate';
+            statusCard.innerHTML = `
+              <div class="status-header">⚠ ENTRY ALREADY RECORDED</div>
+              <div class="delegate-details">${response.name}</div>
+              <div class="delegate-id">${response.message}</div>
+            `;
+          } else {
+            playBeep('error');
+            statusCard.className = 'status-duplicate';
+            statusCard.innerHTML = "<div class='status-header'>UNRECOGNIZED PASS</div>Pass not found in system database.";
+          }
+
+          setTimeout(() => {
+            statusCard.style.display = 'none';
+            isEvaluating = false;
+            requestAnimationFrame(scanVideoFrame);
+          }, 2400);
+        })
+        .catch(err => {
+          playBeep('error');
+          statusCard.className = 'status-duplicate';
+          statusCard.innerHTML = "<div class='status-header'>NETWORK TIMEOUT</div>Please check internet connectivity.";
+          setTimeout(() => {
+            isEvaluating = false;
+            requestAnimationFrame(scanVideoFrame);
+          }, 3000);
+        });
+    }
+
+    window.onload = function() {
+      startContinuousStream();
+    };
+  </script>
+</body>
+</html>
