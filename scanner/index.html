@@ -153,9 +153,21 @@
       isEvaluating = true;
       const mealSlot = document.getElementById('mealSlot').value;
       
-      let cleanId = decodedData.trim();
-      const match = decodedData.match(/Reg ID:\s*([^\n\r]+)/i) || decodedData.match(/(IACM[^\s\n\r]+)/i);
-      if (match) cleanId = match[1].trim();
+      let raw = decodedData.trim();
+      let cleanId = raw;
+      let extractedName = "Delegate";
+
+      // 🎯 Universal Parser: "ID|Name" format aur Multiline QR dono support karta hai
+      if (raw.indexOf('|') > -1) {
+        const parts = raw.split('|');
+        cleanId = parts[0].trim();
+        extractedName = parts[1] ? parts[1].trim() : "Delegate";
+      } else {
+        const idMatch = raw.match(/Reg ID:\s*([^\n\r]+)/i) || raw.match(/(IACM[^\s\n\r]+)/i);
+        if (idMatch) cleanId = idMatch[1].trim();
+        const nameMatch = raw.match(/Name:\s*([^\n\r]+)/i);
+        if (nameMatch) extractedName = nameMatch[1].trim();
+      }
 
       statusCard.style.display = 'block';
       statusCard.className = 'status-evaluating';
@@ -175,15 +187,15 @@
           statusCard.className = 'status-granted';
           statusCard.innerHTML = `
             <div class="status-header">✓ ACCESS GRANTED</div>
-            <div class="delegate-details">${res.name}</div>
-            <div class="delegate-id">${res.id} • ${res.message}</div>
+            <div class="delegate-details">${res.name || extractedName}</div>
+            <div class="delegate-id">${res.id} • Marked at ${res.message}</div>
           `;
         } else if (res && res.status === 'DUPLICATE') {
           playBeep('error');
           statusCard.className = 'status-duplicate';
           statusCard.innerHTML = `
             <div class="status-header">🚫 ENTRY DENIED</div>
-            <div class="delegate-details">${res.name}</div>
+            <div class="delegate-details">${res.name || extractedName}</div>
             <div class="delegate-id">ALREADY RECORDED (${res.message})</div>
           `;
         } else {
