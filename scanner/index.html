@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>IACMCON 2026 - Access Control Scanner | Mise Global</title>
+  <title>IACMCON 2026 - Ultra Fast Scanner | Mise Global</title>
   
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
@@ -11,7 +11,7 @@
   <style>
     * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
     body { font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif; background: #07111E; color: #ffffff; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 16px 12px; }
-    .scanner-container { background: #0E2238; width: 100%; max-width: 480px; border-radius: 18px; padding: 22px 18px; box-shadow: 0 12px 35px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); text-align: center; }
+    .scanner-container { background: #0E2238; width: 100%; max-width: 480px; border-radius: 18px; padding: 20px 16px; box-shadow: 0 12px 35px rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.08); text-align: center; }
     
     .event-badge { background: #00ADB5; color: #07111E; padding: 4px 14px; border-radius: 20px; font-family: 'Oswald', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 1.5px; display: inline-block; margin-bottom: 8px; text-transform: uppercase; }
     .portal-title { font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 0.5px; margin-bottom: 14px; text-transform: uppercase; }
@@ -24,17 +24,18 @@
     video { width: 100%; height: 100%; object-fit: cover; }
     canvas { display: none; }
     
-    .scanner-frame { position: absolute; width: 220px; height: 220px; border: 2px solid rgba(255, 255, 255, 0.25); border-radius: 12px; box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.5); pointer-events: none; }
-    .scanner-frame:before, .scanner-frame:after { content: ""; position: absolute; width: 26px; height: 26px; border-color: #00ADB5; border-style: solid; }
-    .scanner-frame:before { top: -2px; left: -2px; border-width: 4px 0 0 4px; border-top-left-radius: 10px; }
-    .scanner-frame:after { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; border-bottom-right-radius: 10px; }
+    .scanner-frame { position: absolute; width: 230px; height: 230px; border: 2px solid rgba(255, 255, 255, 0.25); border-radius: 14px; box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.52); pointer-events: none; }
+    .scanner-frame:before, .scanner-frame:after { content: ""; position: absolute; width: 28px; height: 28px; border-color: #00ADB5; border-style: solid; }
+    .scanner-frame:before { top: -2px; left: -2px; border-width: 4px 0 0 4px; border-top-left-radius: 12px; }
+    .scanner-frame:after { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; border-bottom-right-radius: 12px; }
     
-    .laser-line { position: absolute; width: 100%; height: 2.5px; background: linear-gradient(90deg, rgba(0,173,181,0) 0%, #00ADB5 50%, rgba(0,173,181,0) 100%); box-shadow: 0 0 10px #00ADB5; top: 0; animation: laserScan 2.2s infinite ease-in-out alternate; }
+    .laser-line { position: absolute; width: 100%; height: 2.5px; background: linear-gradient(90deg, rgba(0,173,181,0) 0%, #00ADB5 50%, rgba(0,173,181,0) 100%); box-shadow: 0 0 10px #00ADB5; top: 0; animation: laserScan 1.6s infinite ease-in-out alternate; }
     @keyframes laserScan { 0% { top: 5%; } 100% { top: 95%; } }
     
     .camera-prompt-btn { position: absolute; background: #00ADB5; color: #07111E; font-weight: 800; font-size: 14px; padding: 12px 22px; border-radius: 8px; border: none; cursor: pointer; z-index: 10; box-shadow: 0 4px 15px rgba(0,173,181,0.4); }
     
-    #status-card { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-weight: 700; font-size: 14px; display: none; line-height: 1.45; }
+    #status-card { margin-top: 14px; padding: 14px 16px; border-radius: 10px; font-weight: 700; font-size: 14px; display: none; line-height: 1.45; animation: popIn 0.15s ease-out; }
+    @keyframes popIn { from { transform: scale(0.96); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     .status-granted { background: #064E3B; color: #6EE7B7; border: 1.5px solid #10B981; }
     .status-duplicate { background: #7F1D1D; color: #FCA5A5; border: 1.5px solid #EF4444; }
     .status-evaluating { background: #1E293B; color: #38BDF8; border: 1.5px solid #0284C7; }
@@ -42,7 +43,7 @@
     .delegate-details { font-size: 14px; font-weight: 700; color: #ffffff; }
     .delegate-id { font-size: 12px; font-family: monospace; opacity: 0.9; letter-spacing: 0.5px; margin-top: 2px; }
     
-    .footer-credits { font-size: 11px; color: #64748b; font-weight: 600; margin-top: 18px; letter-spacing: 1px; text-transform: uppercase; }
+    .footer-credits { font-size: 11px; color: #64748b; font-weight: 600; margin-top: 16px; letter-spacing: 1px; text-transform: uppercase; }
     .footer-credits a { color: #00ADB5; text-decoration: none; font-weight: 700; }
   </style>
 </head>
@@ -88,6 +89,16 @@
     const btnGrantCam = document.getElementById("btnGrantCam");
     let isEvaluating = false;
     let audioCtx = null;
+    let barcodeDetector = null;
+
+    // Check if Hardware Barcode API is supported
+    if ('BarcodeDetector' in window) {
+      try {
+        barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+      } catch (e) {
+        barcodeDetector = null;
+      }
+    }
 
     function playBeep(type) {
       try {
@@ -100,22 +111,23 @@
           osc.frequency.setValueAtTime(880, audioCtx.currentTime);
           gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
           osc.start();
-          osc.stop(audioCtx.currentTime + 0.12);
-          if (navigator.vibrate) navigator.vibrate(80);
+          osc.stop(audioCtx.currentTime + 0.1);
+          if (navigator.vibrate) navigator.vibrate(60);
         } else {
           osc.frequency.setValueAtTime(300, audioCtx.currentTime);
           gain.gain.setValueAtTime(0.4, audioCtx.currentTime);
           osc.start();
-          osc.stop(audioCtx.currentTime + 0.35);
-          if (navigator.vibrate) navigator.vibrate([150, 80, 150]);
+          osc.stop(audioCtx.currentTime + 0.25);
+          if (navigator.vibrate) navigator.vibrate([120, 60, 120]);
         }
       } catch(e){}
     }
 
     function startContinuousStream() {
       btnGrantCam.style.display = "none";
+      // 720p resolution: Optimum speed & zero lag on mobile
       const constraints = {
-        video: { facingMode: "environment" },
+        video: { facingMode: { ideal: "environment" }, width: { ideal: 1280 }, height: { ideal: 720 } },
         audio: false
       };
 
@@ -130,15 +142,29 @@
           btnGrantCam.style.display = "block";
           statusCard.style.display = "block";
           statusCard.className = "status-duplicate";
-          statusCard.innerHTML = "<div class='status-header'>CAMERA ACCESS REQUIRED</div>Please permit camera permission in browser settings.";
+          statusCard.innerHTML = "<div class='status-header'>CAMERA ACCESS REQUIRED</div>Please allow camera in settings.";
         });
     }
 
-    function scanVideoFrame() {
+    async function scanVideoFrame() {
       if (video.readyState === video.HAVE_ENOUGH_DATA && !isEvaluating) {
-        canvasElement.height = video.videoHeight;
-        canvasElement.width = video.videoWidth;
+        // ⚡ 1. HARDWARE ACCELERATED SCAN (Ultra Fast for iPhone & Android)
+        if (barcodeDetector) {
+          try {
+            const barcodes = await barcodeDetector.detect(video);
+            if (barcodes.length > 0 && barcodes[0].rawValue) {
+              onQRCodeIdentified(barcodes[0].rawValue);
+              return;
+            }
+          } catch (e) {}
+        }
+
+        // ⚡ 2. SOFTWARE FALLBACK (Optimized 480px frame downsampling for lightning jsQR)
+        const scale = 480 / video.videoWidth;
+        canvasElement.width = 480;
+        canvasElement.height = video.videoHeight * scale;
         canvas.drawImage(video, 0, 0, canvasElement.width, canvasElement.height);
+
         const imageData = canvas.getImageData(0, 0, canvasElement.width, canvasElement.height);
         const code = jsQR(imageData.data, imageData.width, imageData.height, { inversionAttempts: "dontInvert" });
         if (code && code.data) {
@@ -157,7 +183,6 @@
       let cleanId = raw;
       let extractedName = "Delegate";
 
-      // 🎯 Universal Parser: "ID|Name" format aur Multiline QR dono support karta hai
       if (raw.indexOf('|') > -1) {
         const parts = raw.split('|');
         cleanId = parts[0].trim();
@@ -171,9 +196,8 @@
 
       statusCard.style.display = 'block';
       statusCard.className = 'status-evaluating';
-      statusCard.innerHTML = "<div class='status-header'>AUTHENTICATING PASS...</div>Checking database...";
+      statusCard.innerHTML = "<div class='status-header'>VERIFYING PASS...</div>Checking database...";
 
-      // Unique JSONP Callback function per scan
       const cbName = 'jsonp_handler_' + Math.floor(Math.random() * 1000000);
 
       window[cbName] = function(res) {
@@ -201,14 +225,15 @@
         } else {
           playBeep('error');
           statusCard.className = 'status-duplicate';
-          statusCard.innerHTML = "<div class='status-header'>UNRECOGNIZED PASS</div>Pass not found in system database.";
+          statusCard.innerHTML = "<div class='status-header'>UNRECOGNIZED PASS</div>Pass not found in database.";
         }
 
+        // ⚡ Reduced cooldown from 2.5s to 1.3s for rapid queue scanning
         setTimeout(() => {
           statusCard.style.display = 'none';
           isEvaluating = false;
           requestAnimationFrame(scanVideoFrame);
-        }, 2500);
+        }, 1300);
       };
 
       const script = document.createElement('script');
@@ -223,7 +248,7 @@
         setTimeout(() => {
           isEvaluating = false;
           requestAnimationFrame(scanVideoFrame);
-        }, 2500);
+        }, 1500);
       };
 
       document.body.appendChild(script);
