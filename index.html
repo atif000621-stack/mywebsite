@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* ===== HEADER DIRECT NAVIGATION STYLE (FIXED COLORS) ===== */
+        /* ===== HEADER DIRECT NAVIGATION STYLE ===== */
         .nav-center {
             display: flex;
             align-items: center;
@@ -38,7 +38,7 @@
             .nav-center { display: none; }
         }
 
-        /* ===== HERO SECTION (PREMIUM CINEMATIC UPGRADE) ===== */
+        /* ===== HERO SECTION ===== */
         .hero-slider-wrapper {
             position: relative;
             height: 100vh;
@@ -51,7 +51,6 @@
             background-color: #0c1b2e;
         }
 
-        /* Live Premium Conference Image with Breathing Animation */
         .bg-1 { 
             background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop'); 
             background-size: cover;
@@ -67,7 +66,6 @@
             100% { transform: scale(1.08); }
         }
 
-        /* Deep Navy Gradient & Geometric Mesh Overlay */
         .hero-overlay {
             position: absolute;
             inset: 0;
@@ -100,7 +98,6 @@
         }
         .eyebrow-line { width: 50px; height: 1px; background: #c9a84c; }
         
-        /* Typography Upgrade */
         .hero-title {
             font-family: var(--font-display), 'Playfair Display', serif;
             font-size: clamp(3.5rem, 8vw, 6.5rem);
@@ -112,7 +109,6 @@
             letter-spacing: -1px;
         }
         
-        /* Animated Gold Gradient Text Effect */
         .hero-title em { 
             font-style: italic; 
             background: linear-gradient(to right, #e8d08d 20%, #c9a84c 40%, #e8d08d 60%, #c9a84c 80%);
@@ -139,7 +135,7 @@
         .btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #ffffff; padding: 18px 44px; font-weight: 600; border-radius: 4px; transition: all 0.3s ease; text-decoration: none; display: inline-block; letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;}
         .btn-outline:hover { background: #ffffff; color: #0c1b2e; transform: translateY(-3px); }
 
-        /* ===== STATS STRIP (100% FIXED VISIBILITY) ===== */
+        /* ===== STATS STRIP ===== */
         .stats-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -177,7 +173,7 @@
         }
         .stat-item:hover p { color: #0c1b2e !important; }
 
-        /* ===== OPTION 1: CSS GEOMETRIC PREMIUM GLOW PANEL ===== */
+        /* ===== SHOWCASE FRAME ===== */
         .mid-showcase-section {
             max-width: 1200px;
             margin: 80px auto 0;
@@ -276,6 +272,81 @@
         .logo-slide:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
         .logo-slide img { max-width: 100%; max-height: 70px; object-fit: contain; }
         @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 7)); } }
+
+        /* ===== DYNAMIC EVENT GALLERY ===== */
+        .dynamic-gallery-section {
+            background: #081320;
+            padding: 90px 5%;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+        }
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .gallery-header .section-label { color: #c9a84c; }
+        .gallery-header .section-title { color: #ffffff; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-card {
+            position: relative;
+            border-radius: 6px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+        }
+        .gallery-card:hover {
+            transform: translateY(-8px);
+            border-color: #c9a84c;
+            box-shadow: 0 15px 35px rgba(201, 168, 76, 0.2);
+        }
+        .gallery-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-card:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Lightbox */
+        .gallery-lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 14, 24, 0.95);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery-lightbox img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 4px;
+            border: 1px solid #c9a84c;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+        }
+        .lightbox-close-btn {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 2.2rem;
+            color: #ffffff;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .lightbox-close-btn:hover { color: #c9a84c; }
 
         /* ===== CTA BANNER ===== */
         .cta-banner { background: #c9a84c; padding: 80px 5%; text-align: center; }
@@ -505,6 +576,33 @@
         </div>
     </section>
 
+    <!-- ===== DYNAMIC EVENT GALLERY (CLOUDINARY POWERED) ===== -->
+    <section class="dynamic-gallery-section">
+        <div class="gallery-header reveal-el">
+            <div class="section-label">LIVE SHOWCASE</div>
+            <h2 class="section-title">Moments of <em>Impact</em></h2>
+            <p style="color: rgba(255,255,255,0.6); max-width: 600px; margin: 15px auto 0; font-size: 0.95rem;">
+                A curated glimpse into our on-ground execution, turnkey staging, and premier conferences across India.
+            </p>
+        </div>
+
+        <div id="dynamicGalleryContainer" class="gallery-grid">
+            <p id="galleryStatus" style="color: rgba(255,255,255,0.5); text-align: center; grid-column: 1/-1; padding: 40px 0;">
+                Loading live event moments...
+            </p>
+        </div>
+
+        <div style="text-align: center; margin-top: 45px;">
+            <a href="work.html" class="btn-outline">View Complete Portfolio &nbsp;<i class="fas fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="galleryLightbox" class="gallery-lightbox" onclick="closeGalleryLightbox()">
+        <span class="lightbox-close-btn">&times;</span>
+        <img id="lightboxImage" src="" alt="Full Preview">
+    </div>
+
     <section class="cta-banner">
         <div class="cta-inner reveal-el">
             <div class="section-label light">READY TO BEGIN?</div>
@@ -626,6 +724,59 @@
             el.style.transition = 'all 0.8s ease';
             revealObserver.observe(el);
         });
+
+        // ===== DYNAMIC CLOUDINARY GALLERY ENGINE =====
+        const CLOUDINARY_CLOUD_NAME = "rb1lnkdp";
+        const CLOUDINARY_TAG = "mise_events";
+
+        async function loadDynamicShowcase() {
+            const galleryContainer = document.getElementById('dynamicGalleryContainer');
+            const galleryStatus = document.getElementById('galleryStatus');
+            const fetchUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/list/${CLOUDINARY_TAG}.json`;
+
+            try {
+                const response = await fetch(fetchUrl);
+                if (!response.ok) throw new Error("Could not fetch resources");
+
+                const result = await response.json();
+
+                if (result.resources && result.resources.length > 0) {
+                    galleryContainer.innerHTML = ''; // Clear loading status
+
+                    result.resources.forEach(img => {
+                        // High-speed auto-compressed WebP thumbnail
+                        const thumbUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto,w_800,c_fill,ar_4:3/v${img.version}/${img.public_id}.${img.format}`;
+                        const fullImageUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto/v${img.version}/${img.public_id}.${img.format}`;
+
+                        const card = document.createElement('div');
+                        card.className = 'gallery-card reveal-el';
+                        card.onclick = () => openGalleryLightbox(fullImageUrl);
+                        card.innerHTML = `<img src="${thumbUrl}" alt="Mise Global Event" loading="lazy">`;
+
+                        galleryContainer.appendChild(card);
+                    });
+                } else {
+                    galleryStatus.innerText = "No photos tagged 'mise_events' found in Cloudinary.";
+                }
+            } catch (err) {
+                console.warn('Cloudinary Fetch Error:', err);
+                galleryStatus.innerHTML = "<small style='color: rgba(255,255,255,0.4);'>Add photos with tag 'mise_events' in Cloudinary to view live moments.</small>";
+            }
+        }
+
+        function openGalleryLightbox(src) {
+            const modal = document.getElementById('galleryLightbox');
+            const img = document.getElementById('lightboxImage');
+            img.src = src;
+            modal.style.display = 'flex';
+        }
+
+        function closeGalleryLightbox() {
+            document.getElementById('galleryLightbox').style.display = 'none';
+        }
+
+        // Trigger dynamic gallery on DOM load
+        document.addEventListener('DOMContentLoaded', loadDynamicShowcase);
     </script>
 </body>
 </html>
