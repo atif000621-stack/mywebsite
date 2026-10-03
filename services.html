@@ -4,291 +4,950 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services | Mise Global</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        /* ===== SERVICES PAGE SPECIFIC ===== */
-        .page-hero {
-            background: linear-gradient(160deg, rgba(12,27,46,0.95) 0%, rgba(12,27,46,0.75) 100%),
-                        url('assets/corporate-event.jpg') center/cover no-repeat;
-            min-height: 52vh;
-            display: flex;
-            align-items: flex-end;
-            padding: 0 5% 70px;
-            padding-top: 120px;
-        }
-        .page-hero-inner h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.8rem, 5vw, 5rem);
-            color: var(--white);
-            line-height: 1.05;
-            margin-bottom: 16px;
-        }
-        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
-        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
-
-        /* Service Categories */
-        .services-intro {
-            background: var(--white);
-            text-align: center;
-            padding: 80px 5% 60px;
-        }
-        .services-intro .section-label { margin-bottom: 14px; }
-        .services-intro p {
-            max-width: 680px;
-            margin: 0 auto;
-            font-size: 1.05rem;
-            color: var(--muted);
-            line-height: 1.8;
+        :root {
+            --navy-base: #060e18;
+            --navy-deep: #0c1b2e;
+            --navy-mid: #12243a;
+            --gold-primary: #c9a84c;
+            --gold-light: #e8d08d;
+            --gold-subtle: rgba(201, 168, 76, 0.2);
+            --ivory: #FAF9F6;
+            --border-soft: #E8E0D4;
+            --text-dark: #1a222e;
+            --text-muted: #5a6679;
+            --cubic-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
         }
 
-        /* Services Grid */
-        .services-outer { background: var(--ivory); padding: 60px 5% 100px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
 
-        .service-category { margin-bottom: 80px; }
-        .category-label {
+        body {
+            font-family: var(--font-body);
+            background-color: var(--navy-base);
+            color: #ffffff;
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
             display: flex;
             align-items: center;
-            gap: 16px;
-            margin-bottom: 36px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid #E8E0D4;
+            justify-content: space-between;
+            padding: 16px 5%;
+            transition: all 0.5s var(--cubic-luxury);
+            background: rgba(6, 14, 24, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
         }
-        .category-label h3 {
+
+        .main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 10px 5%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            transition: transform 0.4s var(--cubic-luxury), box-shadow 0.4s var(--cubic-luxury);
+            text-decoration: none;
+        }
+
+        .brand-logo-frame:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.35);
+        }
+
+        .brand-logo-frame img {
+            height: 38px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .main-nav.scrolled .brand-logo-frame {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border-color: rgba(201, 168, 76, 0.25);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn span {
+            width: 20px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav.scrolled .menu-btn span {
+            background-color: var(--navy-deep);
+        }
+
+        .main-nav.scrolled .menu-btn {
+            border-color: rgba(12, 27, 46, 0.2);
+        }
+
+        .menu-btn:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-link-item a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: #ffffff !important;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s var(--cubic-luxury);
+        }
+
+        .nav-link-item a:hover::after {
+            width: 100%;
+        }
+
+        .main-nav.scrolled .nav-link-item a {
+            color: var(--navy-deep) !important;
+        }
+
+        .main-nav.scrolled .nav-link-item a:hover {
+            color: var(--gold-primary) !important;
+        }
+
+        .btn-nav-cta {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            padding: 10px 24px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s var(--cubic-luxury);
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-center { display: none; }
+        }
+
+        /* ===== SIDE DRAWER NAVIGATION ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: #091320;
+            z-index: 2000;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: left 0.4s var(--cubic-luxury);
+            border-right: 1px solid var(--gold-subtle);
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .side-nav-links a:hover,
+        .side-nav-links a.active {
+            color: var(--gold-primary);
+        }
+
+        /* ===== PAGE HERO ===== */
+        .page-hero {
+            position: relative;
+            min-height: 56vh;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 5% 75px;
+            padding-top: 130px;
+            background: linear-gradient(135deg, rgba(6, 14, 24, 0.94) 0%, rgba(12, 27, 46, 0.8) 100%),
+                        url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=2070&q=80') center/cover no-repeat;
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+            overflow: hidden;
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+            background-size: 70px 70px;
+            pointer-events: none;
+        }
+
+        .page-hero-inner {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .section-label {
+            color: var(--gold-primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 14px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
+        .page-hero-inner h1 {
             font-family: var(--font-display);
-            font-size: 1.7rem;
-            color: var(--navy);
+            font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 18px;
+            letter-spacing: -0.5px;
         }
+
+        .page-hero-inner h1 em {
+            font-style: italic;
+            background: linear-gradient(135deg, #f8e5b9 0%, #c9a84c 50%, #f8e5b9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-hero-inner p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== SERVICES INTRO ===== */
+        .services-intro {
+            background: var(--ivory);
+            color: var(--text-dark);
+            text-align: center;
+            padding: 95px 5% 70px;
+        }
+
+        .services-intro h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.3rem, 4.5vw, 3.4rem);
+            color: var(--navy-deep);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .services-intro h2 em {
+            font-style: italic;
+            color: var(--gold-primary);
+        }
+
+        .services-intro p {
+            max-width: 780px;
+            margin: 0 auto;
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            line-height: 1.85;
+            font-weight: 400;
+        }
+
+        /* ===== SERVICES SECTIONS ===== */
+        .services-outer {
+            background: #ffffff;
+            padding: 70px 5% 100px;
+        }
+
+        .service-category {
+            max-width: 1240px;
+            margin: 0 auto 90px;
+        }
+
+        .service-category:last-child {
+            margin-bottom: 0;
+        }
+
+        .category-label {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-soft);
+        }
+
         .category-label .cat-num {
             font-family: var(--font-display);
             font-size: 3.5rem;
             font-weight: 700;
-            color: rgba(12,27,46,0.06);
+            color: var(--navy-deep);
+            line-height: 0.9;
+            opacity: 0.25;
+        }
+
+        .category-label h3 {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--navy-deep);
+            font-weight: 600;
             line-height: 1;
         }
 
         .services-grid-inner {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
         }
 
         .svc-card {
-            background: var(--white);
+            background: var(--ivory);
             border-radius: 6px;
-            padding: 36px 30px;
-            border: 1px solid #E8E0D4;
-            transition: var(--transition);
+            padding: 40px 32px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.4s var(--cubic-luxury);
             position: relative;
             overflow: hidden;
-            height: 100%;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
+
         .svc-card::before {
             content: '';
             position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 3px;
-            background: var(--gold);
-            transition: width 0.4s ease;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gold-primary);
+            transition: width 0.4s var(--cubic-luxury);
         }
-        .svc-card:hover::before { width: 100%; }
+
         .svc-card:hover {
-            border-color: transparent;
-            box-shadow: var(--shadow-lg);
+            border-color: var(--gold-primary);
+            background: #ffffff;
+            box-shadow: 0 16px 35px rgba(12, 27, 46, 0.08);
             transform: translateY(-6px);
         }
-        .svc-icon {
-            width: 56px; height: 56px;
-            background: rgba(12,27,46,0.05);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px;
-            transition: var(--transition);
+
+        .svc-card:hover::before {
+            width: 100%;
         }
-        .svc-icon i { font-size: 1.4rem; color: var(--navy); transition: var(--transition); }
-        .svc-card:hover .svc-icon { background: rgba(184,150,90,0.12); }
-        .svc-card:hover .svc-icon i { color: var(--gold); }
+
+        .svc-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(12, 27, 46, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .svc-icon i {
+            font-size: 1.5rem;
+            color: var(--navy-deep);
+            transition: color 0.3s ease;
+        }
+
+        .svc-card:hover .svc-icon {
+            background: var(--navy-deep);
+        }
+
+        .svc-card:hover .svc-icon i {
+            color: var(--gold-primary);
+        }
 
         .svc-card h4 {
             font-family: var(--font-display);
-            font-size: 1.25rem;
-            color: var(--navy);
+            font-size: 1.45rem;
+            color: var(--navy-deep);
             margin-bottom: 12px;
+            font-weight: 600;
         }
-        .svc-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.7; flex-grow: 1; }
 
-        /* NAYA CSS: Subtopics list ke liye */
+        .svc-card p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            flex-grow: 1;
+        }
+
+        .svc-link-cue {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gold-primary);
+        }
+
         .svc-sub-list {
             list-style: none;
             padding: 0;
-            margin: 20px 0 0 0;
-            border-top: 1px solid #E8E0D4;
+            margin: 24px 0 0;
+            border-top: 1px solid var(--border-soft);
             padding-top: 20px;
         }
+
         .svc-sub-list li {
             font-size: 0.88rem;
-            color: var(--navy);
+            color: var(--text-dark);
             margin-bottom: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
             font-weight: 500;
         }
-        .svc-sub-list li i {
-            color: var(--gold);
-            font-size: 0.8rem;
+
+        .svc-sub-list li:last-child {
+            margin-bottom: 0;
         }
 
-        /* Process strip */
-        .process-strip {
-            background: var(--navy);
-            padding: 80px 5%;
+        .svc-sub-list li i {
+            color: var(--gold-primary);
+            font-size: 0.75rem;
         }
-        .process-header { text-align: center; margin-bottom: 56px; }
+
+        /* ===== PROCESS TIMELINE STRIP ===== */
+        .process-strip {
+            background: var(--navy-deep);
+            padding: 100px 5%;
+            position: relative;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+
+        .process-header h2 {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            color: #ffffff;
+        }
+
+        .process-header h2 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
         .process-steps {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 0;
-            max-width: 1100px;
+            gap: 30px;
+            max-width: 1200px;
             margin: 0 auto;
             position: relative;
         }
+
         .process-steps::before {
             content: '';
             position: absolute;
-            top: 28px; left: 12.5%; right: 12.5%;
+            top: 30px;
+            left: 12%;
+            right: 12%;
             height: 1px;
-            background: rgba(184,150,90,0.3);
+            background: rgba(201, 168, 76, 0.3);
+            z-index: 1;
         }
-        .process-step { text-align: center; padding: 0 20px; }
-        .step-circle {
-            width: 56px; height: 56px;
-            border: 2px solid var(--gold);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px;
-            background: var(--navy);
+
+        .process-step {
+            text-align: center;
             position: relative;
             z-index: 2;
         }
+
+        .step-circle {
+            width: 62px;
+            height: 62px;
+            border: 2px solid var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 22px;
+            background: var(--navy-deep);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .process-step:hover .step-circle {
+            transform: scale(1.1);
+            background: var(--gold-primary);
+        }
+
         .step-circle span {
             font-family: var(--font-display);
-            font-size: 1.3rem;
-            color: var(--gold);
+            font-size: 1.4rem;
+            color: var(--gold-primary);
             font-weight: 700;
+            transition: color 0.3s ease;
         }
+
+        .process-step:hover .step-circle span {
+            color: var(--navy-deep);
+        }
+
         .process-step h4 {
             font-family: var(--font-display);
-            font-size: 1.1rem;
-            color: var(--white);
-            margin-bottom: 8px;
+            font-size: 1.35rem;
+            color: #ffffff;
+            margin-bottom: 10px;
         }
-        .process-step p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
 
-        /* ===== CLIENTS SLIDER SCROLL EFFECT ===== */
-        .clients-section {
-            background: var(--white);
-            padding: 60px 0;
-            overflow: hidden;
-            border-top: 1px solid #E8E0D4;
+        .process-step p {
+            font-size: 0.88rem;
+            color: rgba(255, 255, 255, 0.55);
+            line-height: 1.65;
         }
+
+        /* ===== 2-LINE LOGO SLIDER ===== */
+        .clients-section {
+            background: var(--ivory);
+            padding: 100px 0 90px;
+            overflow: hidden;
+        }
+
         .clients-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
+
         .clients-header h2 {
             font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--navy);
+            font-size: 2.3rem;
+            color: var(--navy-deep);
         }
-        .clients-header h2 em { font-style: italic; color: var(--gold); }
-        
+
+        .clients-header h2 em {
+            font-style: italic;
+            color: var(--gold-primary);
+        }
+
         .logo-slider {
             width: 100%;
             overflow: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
         }
+
         .logo-slider::before,
         .logo-slider::after {
             content: '';
             position: absolute;
             top: 0;
-            width: 150px;
+            width: 220px;
             height: 100%;
             z-index: 2;
+            pointer-events: none;
         }
+
         .logo-slider::before {
             left: 0;
-            background: linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(to right, var(--ivory) 0%, rgba(250, 249, 246, 0) 100%);
         }
+
         .logo-slider::after {
             right: 0;
-            background: linear-gradient(to left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
+            background: linear-gradient(to left, var(--ivory) 0%, rgba(250, 249, 246, 0) 100%);
         }
-        .logo-track {
+
+        .logo-track-left {
             display: flex;
-            width: calc(200px * 14); /* 7 logos doubled */
-            animation: scroll-left 25s linear infinite;
+            width: max-content;
+            animation: scrollLeft 44s linear infinite;
             align-items: center;
         }
-        .logo-track:hover {
+
+        .logo-track-right {
+            display: flex;
+            width: max-content;
+            animation: scrollRight 44s linear infinite;
+            align-items: center;
+        }
+
+        .logo-slider:hover .logo-track-left,
+        .logo-slider:hover .logo-track-right {
             animation-play-state: paused;
         }
-        .logo-slide {
-            width: 200px;
-            padding: 0 30px;
+
+        .logo-card-wrapper {
+            width: 230px;
+            height: 92px;
+            margin: 0 12px;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-radius: 6px;
             display: flex;
-            justify-content: center;
             align-items: center;
-            opacity: 0.5;
-            transition: all 0.4s ease;
-            filter: grayscale(100%);
-        }
-        .logo-slide:hover {
-            opacity: 1;
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-        .logo-slide img {
-            max-width: 100%;
-            max-height: 70px;
-            object-fit: contain;
-        }
-        @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-200px * 7)); }
+            justify-content: center;
+            padding: 12px 20px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s var(--cubic-luxury);
         }
 
-        /* CTA */
-        .services-cta {
-            background: var(--gold);
-            padding: 80px 5%;
+        .logo-card-wrapper:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.25);
+            transform: translateY(-3px);
+        }
+
+        .logo-card-wrapper img {
+            max-width: 165px;
+            max-height: 56px;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            filter: contrast(115%) brightness(95%);
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .logo-card-wrapper:hover img {
+            opacity: 1;
+            transform: scale(1.04);
+        }
+
+        @keyframes scrollLeft {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        @keyframes scrollRight {
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0); }
+        }
+
+        /* ===== CTA BANNER ===== */
+        .cta-banner {
+            background: var(--gold-primary);
+            padding: 85px 5%;
             text-align: center;
         }
-        .services-cta h2 {
-            font-family: var(--font-display);
-            font-size: clamp(1.8rem, 3vw, 2.8rem);
-            color: var(--navy);
-            margin-bottom: 28px;
+
+        .cta-inner {
+            max-width: 720px;
+            margin: 0 auto;
         }
-        .services-cta h2 em { font-style: italic; }
-        .btn-dark {
-            display: inline-flex; align-items: center; gap: 10px;
-            padding: 15px 36px;
-            background: var(--navy); color: var(--white);
-            font-family: var(--font-body); font-size: 0.9rem; font-weight: 600;
-            border-radius: 3px; transition: var(--transition);
+
+        .cta-banner .section-label {
+            color: var(--navy-deep);
+            opacity: 0.8;
+        }
+
+        .cta-banner h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+            color: var(--navy-deep);
+            margin-bottom: 30px;
+            line-height: 1.15;
+        }
+
+        .cta-banner h2 em {
+            font-style: italic;
+            color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: var(--navy-deep);
+            color: #ffffff;
+            padding: 16px 40px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: all 0.3s var(--cubic-luxury);
+            text-decoration: none;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary:hover {
+            background: #04080e;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: #04080e;
+            padding: 85px 5% 40px;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(201, 168, 76, 0.45);
+        }
+
+        .footer-logo-frame img {
+            height: 58px;
+            width: auto;
+            max-width: 240px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--navy-deep);
+        }
+
+        .footer-col h4 {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold-primary);
+        }
+
+        .contact-list li {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .contact-list li a {
+            color: inherit;
             text-decoration: none;
         }
-        .btn-dark:hover { background: var(--charcoal); transform: translateY(-3px); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #ffffff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+            z-index: 990;
+            text-decoration: none;
+            transition: transform 0.3s var(--cubic-luxury);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+        }
 
         @media (max-width: 900px) {
-            .process-steps { grid-template-columns: repeat(2,1fr); gap: 40px; }
+            .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
             .process-steps::before { display: none; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
         }
+
         @media (max-width: 600px) {
             .process-steps { grid-template-columns: 1fr; }
         }
@@ -299,38 +958,47 @@
     <!-- NAVBAR -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-left">
-            <div class="menu-container">
-                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
-                <div class="hover-menu">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="services.html">Services</a>
-                    <a href="work.html">Our Work</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <a href="index.html" class="logo-link">
-                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            <button class="menu-btn" onclick="openMenu()" aria-label="Open Navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="index.html" class="brand-logo-frame">
+                <img src="./assets/Mise_global.png" alt="Mise Global">
             </a>
         </div>
+        
+        <div class="nav-center">
+            <div class="nav-link-item"><a href="index.html">Home</a></div>
+            <div class="nav-link-item"><a href="about.html">About Us</a></div>
+            <div class="nav-link-item"><a href="services.html">Services</a></div>
+            <div class="nav-link-item"><a href="work.html">Our Work</a></div>
+            <div class="nav-link-item"><a href="contact.html">Contact</a></div>
+        </div>
+
         <div class="nav-right">
             <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
+    <!-- MOBILE SIDE DRAWER -->
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
-        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
-        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
-        <nav class="side-nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="services.html" class="active">Services</a>
-            <a href="work.html">Our Work</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="side-menu-footer">
-            <p>Pan India Presence</p>
+        <div>
+            <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+            <div style="margin-bottom: 30px;">
+                <div class="brand-logo-frame" style="background:#fff;">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
+            </div>
+            <nav class="side-nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="work.html">Our Work</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.45);">
+            <p>Pan-India Presence</p>
             <p>+91 62053 94680</p>
         </div>
     </div>
@@ -339,101 +1007,96 @@
     <header class="page-hero">
         <div class="page-hero-inner">
             <div class="section-label">WHAT WE OFFER</div>
-            <h1>Our <em>Expertise</em></h1>
-            <p>End to end premium event solutions from concept to execution</p>
+            <h1>Our <em>Expertise.</em></h1>
+            <p>End-to-end premium event solutions, turnkey spatial engineering, and strategic activations executed with clinical precision.</p>
         </div>
     </header>
 
-    <!-- INTRO -->
-    <div class="services-intro">
+    <!-- SERVICES INTRO -->
+    <section class="services-intro">
         <div class="section-label">OUR CAPABILITIES</div>
-        <h2 class="section-title" style="margin-bottom: 18px;">Comprehensive <em>Event Solutions</em></h2>
-        <p>From large-scale medical conferences and executive corporate summits to captivating artist and cultural events, Mise Global executes with absolute precision. We deliver seamless experiences across every service vertical - physical, virtual, and hybrid - powered by strategic advertising and premium brand activations.</p>
-    </div>
+        <h2>Comprehensive <em>Event Solutions</em></h2>
+        <p>From large-scale medical conferences and executive corporate summits to captivating cultural fests and brand activations, Mise Global executes with absolute precision. We engineer frictionless experiences across physical, virtual, and hybrid formats backed by strategic ATL and BTL marketing.</p>
+    </section>
 
-    <!-- SERVICES -->
-    <div class="services-outer">
+    <!-- DETAILED SERVICES GRID -->
+    <section class="services-outer">
 
-        <!-- Section 01: Event Management -->
+        <!-- Category 01: Event Architecture & Management -->
         <div class="service-category">
             <div class="category-label">
                 <span class="cat-num">01</span>
-                <h3>Event Management</h3>
+                <h3>Turnkey Event Architecture</h3>
             </div>
             <div class="services-grid-inner">
                 
                 <a href="physical-conferences.html" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="svc-card" style="border-color: var(--gold); box-shadow: 0 4px 15px rgba(184,150,90,0.1);">
-                        <div class="svc-icon" style="background: rgba(184,150,90,0.12);"><i class="fas fa-building" style="color: var(--gold);"></i></div>
+                    <div class="svc-card">
+                        <div class="svc-icon"><i class="fas fa-building"></i></div>
                         <h4>Physical Conferences</h4>
-                        <p>End to end on ground event architecture. From venue selection and scientific programming to premium hospitality and flawless execution.</p>
-                        <span style="display: inline-block; margin-top: 15px; font-size: 0.85rem; color: var(--gold); font-weight: 600;">Explore Details <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
+                        <p>Complete on-ground conference architecture. Venue scouting, academic hall scheduling, scientific committee coordination, VIP delegate hospitality, and zero-error execution.</p>
+                        <span class="svc-link-cue">Explore Details <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
                 <a href="virtual-conferences.html" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="svc-card" style="border-color: var(--gold); box-shadow: 0 4px 15px rgba(184,150,90,0.1);">
-                        <div class="svc-icon" style="background: rgba(184,150,90,0.12);"><i class="fas fa-laptop-code" style="color: var(--gold);"></i></div>
+                    <div class="svc-card">
+                        <div class="svc-icon"><i class="fas fa-laptop-code"></i></div>
                         <h4>Virtual Conferences</h4>
-                        <p>State of the art 3D virtual summits offering real time engagement, global reach and immersive digital environments.</p>
-                        <span style="display: inline-block; margin-top: 15px; font-size: 0.85rem; color: var(--gold); font-weight: 600;">Explore Details <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
+                        <p>State-of-the-art 3D immersive virtual environments featuring multi-stream live broadcasts, virtual stalls, synchronized live Q&A, and interactive digital networking.</p>
+                        <span class="svc-link-cue">Explore Details <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
                 <a href="hybrid-conferences.html" style="text-decoration: none; color: inherit; display: block;">
-                    <div class="svc-card" style="border-color: var(--gold); box-shadow: 0 4px 15px rgba(184,150,90,0.1);">
-                        <div class="svc-icon" style="background: rgba(184,150,90,0.12);"><i class="fas fa-globe-asia" style="color: var(--gold);"></i></div>
+                    <div class="svc-card">
+                        <div class="svc-icon"><i class="fas fa-globe-asia"></i></div>
                         <h4>Hybrid Conferences</h4>
-                        <p>Seamless integration of live on-venue audiences with global virtual attendees for maximum engagement and unified experience.</p>
-                        <span style="display: inline-block; margin-top: 15px; font-size: 0.85rem; color: var(--gold); font-weight: 600;">Explore Details <i class="fas fa-arrow-right" style="font-size: 0.8rem; margin-left: 5px;"></i></span>
+                        <p>Bridging on-venue physical crowds with international virtual attendees through synchronized AV feeds, low-latency live streaming, and unified interactive dashboards.</p>
+                        <span class="svc-link-cue">Explore Details <i class="fas fa-arrow-right"></i></span>
                     </div>
                 </a>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-store"></i></div>
                     <h4>Exhibition & Stall Fabrication</h4>
-                    <p>Bespoke 3D stall designs and custom pavilion fabrication for medical expos trade shows and large scale brand exhibitions with cutting edge aesthetics.</p>
+                    <p>Bespoke 3D octanorm and wooden exhibition stalls, pharma display pavilions, spatial acoustics, custom LED backdrops, and safety-compliant structural engineering.</p>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-plane-departure"></i></div>
-                    <h4>Destination Summits & Retreats</h4>
-                    <p>Curating premium outstation conferences corporate offsites and luxury leadership retreats with end to end travel and hospitality management.</p>
+                    <h4>Destination Summits & Offsites</h4>
+                    <p>Curated residential summits, corporate retreats, and medical body conventions with end-to-end flight charters, luxury hotel liaison, and cultural excursions.</p>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-trophy"></i></div>
                     <h4>Awards & Gala Receptions</h4>
-                    <p>Designing glamorous award ceremonies and exclusive gala dinners with red carpet protocol luxury hospitality and high end acoustic setups.</p>
+                    <p>Black-tie felicitation ceremonies, dynamic red-carpet protocols, atmospheric lighting arrays, automated stage cues, and luxury hospitality coordination.</p>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-vr-cardboard"></i></div>
-                    <h4>Immersive Event Tech</h4>
-                    <p>Integrating next gen event technology including AR/VR zones holographic displays and kinetic lighting to create futuristic attendee experiences.</p>
+                    <h4>Immersive Event Technology</h4>
+                    <p>Deployment of registration kiosks, QR attendance badges, biometric delegate verification, kinetic LED ceilings, and augmented interactive event zones.</p>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-microphone-alt"></i></div>
-                    <h4>Keynote Management</h4>
-                    <p>Curating and managing high profile speakers from technical coordination to stage flow and presentation design.</p>
+                    <h4>Keynote & Speaker Operations</h4>
+                    <p>End-to-end management for global faculty and dignitaries. Stage teleprompters, presentation control consoles, Green Room concierge, and itinerary planning.</p>
                 </div>
 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-music"></i></div>
-                    <h4>Artist & Cultural Events</h4>
-                    <p>End to end artist management cultural fests and live experience production that creates lasting memories.</p>
+                    <h4>Artist & Cultural Productions</h4>
+                    <p>Celebrity riders, artist bookings, concert-grade acoustic arrays, government permissions, crowd control systems, and live entertainment production.</p>
                 </div>
-                
-                <div class="svc-card">
-                    <div class="svc-icon"><i class="fas fa-user-tie"></i></div>
-                    <h4>Corporate Brand Curation</h4>
-                    <p>Every visual aspect of your event from stage aesthetics to protocol aligned flawlessly with your premium corporate identity.</p>
-                </div>
+
             </div>
         </div>
 
-        <!-- Section 02: Advertising & Brand Activation -->
+        <!-- Category 02: Advertising & Brand Activation -->
         <div class="service-category">
             <div class="category-label">
                 <span class="cat-num">02</span>
@@ -444,130 +1107,177 @@
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-ad"></i></div>
                     <h4>360° Brand Visibility (ATL)</h4>
-                    <p>Large-scale above-the-line campaigns spanning Pan-India and global markets. From premium OOH billboards to elite print media and creative storytelling.</p>
+                    <p>Strategic Above-The-Line campaigns reaching massive regional and national audiences through high-impact physical and broadcast placements.</p>
                     <ul class="svc-sub-list">
-                        <li><i class="fas fa-check"></i> Premium OOH & Hoardings</li>
-                        <li><i class="fas fa-check"></i> Print Media Placements</li>
-                        <li><i class="fas fa-check"></i> TV & Radio Campaigns</li>
-                        <li><i class="fas fa-check"></i> Brand Identity Design</li>
+                        <li><i class="fas fa-check"></i> Prime City Hoardings & Cantilevers</li>
+                        <li><i class="fas fa-check"></i> Print Media & Journal Announcements</li>
+                        <li><i class="fas fa-check"></i> Commercial Video & Radio Spots</li>
+                        <li><i class="fas fa-check"></i> Multi-City Billboard Networks</li>
                     </ul>
                 </div>
                 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-hand-holding-heart"></i></div>
-                    <h4>On Ground Activations (BTL)</h4>
-                    <p>Experiential marketing, high-end mall activations, roadshows, and interactive pop-ups that forge a direct, memorable connection between your brand and your audience.</p>
+                    <h4>On-Ground Activations (BTL)</h4>
+                    <p>High-conversion Below-The-Line engagements designed to create direct tactile interactions between products and target consumers.</p>
                     <ul class="svc-sub-list">
-                        <li><i class="fas fa-check"></i> Experiential Pop-ups</li>
-                        <li><i class="fas fa-check"></i> Direct Consumer Sampling</li>
-                        <li><i class="fas fa-check"></i> Mall Activations</li>
-                        <li><i class="fas fa-check"></i> Trade Show Promotions</li>
+                        <li><i class="fas fa-check"></i> High-Footfall Mall Activations</li>
+                        <li><i class="fas fa-check"></i> Hospital & Clinic Engagement Drives</li>
+                        <li><i class="fas fa-check"></i> Interactive Pop-Up Canopies</li>
+                        <li><i class="fas fa-check"></i> Van Operations & Roadshow Fleets</li>
                     </ul>
                 </div>
                 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-bullhorn"></i></div>
-                    <h4>Precision Digital Growth</h4>
-                    <p>Data-driven performance marketing, elite social media management, Google Ads (SEM), and specialized medical/corporate SEO tailored for maximum ROI.</p>
+                    <h4>Performance Marketing & SEO</h4>
+                    <p>Data-driven acquisition engines tailored for conference registrations, corporate lead generation, and authority positioning.</p>
                     <ul class="svc-sub-list">
-                        <li><i class="fas fa-check"></i> Performance Marketing (PPC)</li>
-                        <li><i class="fas fa-check"></i> Medical & Corporate SEO</li>
-                        <li><i class="fas fa-check"></i> Social Media Management</li>
-                        <li><i class="fas fa-check"></i> Analytics & ROI Tracking</li>
+                        <li><i class="fas fa-check"></i> High-Conversion Google Search Ads</li>
+                        <li><i class="fas fa-check"></i> Targeted Social Campaign Engines</li>
+                        <li><i class="fas fa-check"></i> Healthcare & Conference SEO</li>
+                        <li><i class="fas fa-check"></i> Real-Time Registration Tracking</li>
                     </ul>
                 </div>
                 
                 <div class="svc-card">
                     <div class="svc-icon"><i class="fas fa-pen-nib"></i></div>
-                    <h4>Strategic Communications</h4>
-                    <p>Crafting compelling brand narratives, premium corporate brochures, high-converting event collateral, and crisp messaging architecture.</p>
+                    <h4>Design & Strategic Collateral</h4>
+                    <p>Complete visual identity governance ensuring brochures, backdrops, delegate kits, and certificates reflect an international standard.</p>
                     <ul class="svc-sub-list">
-                        <li><i class="fas fa-check"></i> Brand Storytelling & PR</li>
-                        <li><i class="fas fa-check"></i> Corporate Profile Design</li>
-                        <li><i class="fas fa-check"></i> Event Collateral Creation</li>
-                        <li><i class="fas fa-check"></i> Copywriting & Scripting</li>
+                        <li><i class="fas fa-check"></i> Comprehensive Event Brand Kits</li>
+                        <li><i class="fas fa-check"></i> Scientific Souvenir & Journal Layouts</li>
+                        <li><i class="fas fa-check"></i> Delegate Badges & Lanyard Systems</li>
+                        <li><i class="fas fa-check"></i> Stage Visual Backdrops & Motion Loops</li>
                     </ul>
                 </div>
 
             </div>
         </div>
 
-    </div>
+    </section>
 
-    <!-- PROCESS -->
+    <!-- ARCHITECTURAL PROCESS STRIP -->
     <section class="process-strip">
         <div class="process-header">
-            <div class="section-label light">HOW WE WORK</div>
-            <h2 class="section-title light">Our <em>Process</em></h2>
+            <div class="section-label">HOW WE WORK</div>
+            <h2>The Mise Global <em>Blueprint</em></h2>
         </div>
         <div class="process-steps">
             <div class="process-step">
                 <div class="step-circle"><span>01</span></div>
-                <h4>Consultation</h4>
-                <p>We listen and understand your vision and requirements in detail</p>
+                <h4>Discovery</h4>
+                <p>We analyze your scientific, corporate, or marketing objectives, attendee demographics, and protocol mandates.</p>
             </div>
             <div class="process-step">
                 <div class="step-circle"><span>02</span></div>
-                <h4>Strategy</h4>
-                <p>We architect a precise plan timeline and creative brief</p>
+                <h4>Blueprint</h4>
+                <p>Developing spatial 3D models, stage schematics, contingency roadmaps, budget projections, and production timelines.</p>
             </div>
             <div class="process-step">
                 <div class="step-circle"><span>03</span></div>
                 <h4>Execution</h4>
-                <p>Flawless on ground and digital delivery with zero compromise</p>
+                <p>On-ground deployment with dedicated control rooms, technical supervisors, protocol stewards, and live feed directors.</p>
             </div>
             <div class="process-step">
                 <div class="step-circle"><span>04</span></div>
-                <h4>Review</h4>
-                <p>Post event analysis reporting and long term partnership building</p>
+                <h4>Analysis</h4>
+                <p>Comprehensive post-event debriefs, financial reconciliations, feedback assessments, and continuous client stewardship.</p>
             </div>
         </div>
     </section>
 
-    <!-- CLIENTS SLIDER -->
+    <!-- 2-LINE LOGO SLIDER (DUAL CONTINUOUS MARQUEE) -->
     <section class="clients-section">
         <div class="clients-header">
+            <div class="section-label">OUR NETWORK</div>
             <h2>Trusted by <em>Industry Leaders</em></h2>
         </div>
+        
         <div class="logo-slider">
-            <div class="logo-track">
-                <!-- 7 Original Logos -->
-                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client 1"></div>
-                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client 2"></div>
-                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client 3"></div>
-                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client 4"></div>
-                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client 5"></div>
-                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client 6"></div>
-                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client 7"></div>
-                
-                <!-- Duplicate 7 Logos (Crucial for infinite scroll effect without jumping) -->
-                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client 1"></div>
-                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client 2"></div>
-                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client 3"></div>
-                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client 4"></div>
-                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client 5"></div>
-                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client 6"></div>
-                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client 7"></div>
+            <!-- Row 1: Leftward Stream -->
+            <div class="logo-track-left">
+                <div class="logo-card-wrapper"><img src="LOGOS/API.png" alt="API" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ICP.png" alt="ICP" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/solarris.png" alt="Solarris" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/c3.png" alt="C3" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/APICON.png" alt="APICON" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ShreeHospital.png" alt="Shree Hospital" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/icp2.000.png" alt="ICP 2.0" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/BiharGovt.png" alt="Bihar Govt" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/SCTE.png" alt="SCTE" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/larenon.png" alt="Larenon" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/medley_pharmaceuticals_.png" alt="Medley" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/zorvia.jpg" alt="Zorvia" onerror="this.parentElement.style.display='none'"></div>
+
+                <!-- Duplicate for Infinite Loop -->
+                <div class="logo-card-wrapper"><img src="LOGOS/API.png" alt="API" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ICP.png" alt="ICP" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/solarris.png" alt="Solarris" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/c3.png" alt="C3" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/APICON.png" alt="APICON" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ShreeHospital.png" alt="Shree Hospital" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/icp2.000.png" alt="ICP 2.0" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/BiharGovt.png" alt="Bihar Govt" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/SCTE.png" alt="SCTE" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/larenon.png" alt="Larenon" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/medley_pharmaceuticals_.png" alt="Medley" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/zorvia.jpg" alt="Zorvia" onerror="this.parentElement.style.display='none'"></div>
+            </div>
+
+            <!-- Row 2: Rightward Stream -->
+            <div class="logo-track-right">
+                <div class="logo-card-wrapper"><img src="LOGOS/185458-microlabslimitedlogo.jpg" alt="Micro Labs" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Adikan Healthcare.png" alt="Adikan Healthcare" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Alembic-Logo-01-1-2048x844.jpg" alt="Alembic" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/alkem-laboratories-logo-png_seeklogo-386943.png" alt="Alkem" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Daxin Pharma.png" alt="Daxin Pharma" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Dr._Reddy's_Laboratories_logo.svg.webp" alt="Dr Reddys" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Eris-logo.png" alt="Eris" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Indchemie.png" alt="Indchemie" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/intas-logo-png_seeklogo-305336.png" alt="Intas" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/logo-1024x261.png" alt="Pharma Partner" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ubl-united-bank-limited-hd-logo.png" alt="UBL" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ZYDUSLIFE.NS_BIG.png" alt="Zydus" onerror="this.parentElement.style.display='none'"></div>
+
+                <!-- Duplicate for Infinite Loop -->
+                <div class="logo-card-wrapper"><img src="LOGOS/185458-microlabslimitedlogo.jpg" alt="Micro Labs" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Adikan Healthcare.png" alt="Adikan Healthcare" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Alembic-Logo-01-1-2048x844.jpg" alt="Alembic" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/alkem-laboratories-logo-png_seeklogo-386943.png" alt="Alkem" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Daxin Pharma.png" alt="Daxin Pharma" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Dr._Reddy's_Laboratories_logo.svg.webp" alt="Dr Reddys" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Eris-logo.png" alt="Eris" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/Indchemie.png" alt="Indchemie" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/intas-logo-png_seeklogo-305336.png" alt="Intas" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/logo-1024x261.png" alt="Pharma Partner" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ubl-united-bank-limited-hd-logo.png" alt="UBL" onerror="this.parentElement.style.display='none'"></div>
+                <div class="logo-card-wrapper"><img src="LOGOS/ZYDUSLIFE.NS_BIG.png" alt="Zydus" onerror="this.parentElement.style.display='none'"></div>
             </div>
         </div>
     </section>
 
-    <!-- CTA -->
-    <section class="services-cta">
-        <h2>Ready to Plan Your Next <em>Big Event?</em></h2>
-        <a href="contact.html" class="btn-dark">Send Us an Inquiry <i class="fas fa-arrow-right"></i></a>
+    <!-- CTA BANNER -->
+    <section class="cta-banner">
+        <div class="cta-inner">
+            <div class="section-label">READY TO BEGIN?</div>
+            <h2>Let's Build Something <em>Extraordinary.</em></h2>
+            <a href="contact.html" class="btn-primary">Request an Engagement Proposal <i class="fas fa-arrow-right"></i></a>
+        </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="main-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="logo-footer">MISE <span>GLOBAL</span></div>
-                <p>Pan India Presence Global Standards<br>Driven by Precision</p>
+                <div class="footer-logo-frame">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
+                <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -583,62 +1293,56 @@
             <div class="footer-col">
                 <h4>Services</h4>
                 <ul>
-                    <li><a href="#">Medical Conferences</a></li>
-                    <li><a href="#">Corporate Events</a></li>
-                    <li><a href="#">Govt Campaigns</a></li>
-                    <li><a href="#">BTL / ATL Activations</a></li>
-                    <li><a href="#">Artist Management</a></li>
+                    <li><a href="physical-conferences.html">Medical Conferences</a></li>
+                    <li><a href="services.html">Corporate Events</a></li>
+                    <li><a href="services.html">Govt. Campaigns</a></li>
+                    <li><a href="services.html">BTL / ATL Activations</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
                 <ul class="contact-list">
-                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur Bihar Pan India</li>
-                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                    <li><i class="fas fa-map-marker-alt" style="color:var(--gold-primary);"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone" style="color:var(--gold-primary);"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope" style="color:var(--gold-primary);"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>© 2026 Mise Global All Rights Reserved</p>
-            <p class="footer-tagline">Driven by Precision</p>
+            <p>© 2026 Mise Global. All Rights Reserved.</p>
+            <p>Driven by Precision</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
+    <!-- ENGINE SCRIPTS -->
     <script>
+        // Navbar scroll behavior
         window.addEventListener('scroll', () => {
-            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
+
+        // Mobile Drawer Controls
         function openMenu() {
             document.getElementById('sideMenu').classList.add('open');
             document.getElementById('menuOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
+
         function closeMenu() {
             document.getElementById('sideMenu').classList.remove('open');
             document.getElementById('menuOverlay').classList.remove('open');
             document.body.style.overflow = '';
         }
-        const cards = document.querySelectorAll('.svc-card, .process-step, .pillar-card');
-        const ro = new IntersectionObserver(entries => {
-            entries.forEach((e,i) => {
-                if(e.isIntersecting){
-                    setTimeout(() => {
-                        e.target.style.opacity='1';
-                        e.target.style.transform='translateY(0)';
-                    }, i * 80);
-                    ro.unobserve(e.target);
-                }
-            });
-        }, {threshold: 0.1});
-        cards.forEach(el => {
-            el.style.opacity='0';
-            el.style.transform='translateY(24px)';
-            el.style.transition='opacity 0.6s ease, transform 0.6s ease';
-            ro.observe(el);
-        });
     </script>
 </body>
 </html>
