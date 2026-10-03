@@ -3,55 +3,396 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Work | Mise Global</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Event Gallery | Mise Global</title>
+    
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        /* ===== WORK GALLERY SPECIFIC ===== */
+        :root {
+            --navy-base: #060e18;
+            --navy-deep: #0c1b2e;
+            --navy-mid: #12243a;
+            --gold-primary: #c9a84c;
+            --gold-light: #e8d08d;
+            --gold-subtle: rgba(201, 168, 76, 0.2);
+            --ivory: #FAF9F6;
+            --border-soft: #E8E0D4;
+            --text-dark: #1a222e;
+            --text-muted: #5a6679;
+            --cubic-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--navy-base);
+            color: #ffffff;
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 5%;
+            transition: all 0.5s var(--cubic-luxury);
+            background: rgba(6, 14, 24, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        .main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 10px 5%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            transition: transform 0.4s var(--cubic-luxury), box-shadow 0.4s var(--cubic-luxury);
+            text-decoration: none;
+        }
+
+        .brand-logo-frame:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.35);
+        }
+
+        .brand-logo-frame img {
+            height: 38px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .main-nav.scrolled .brand-logo-frame {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border-color: rgba(201, 168, 76, 0.25);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn span {
+            width: 20px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav.scrolled .menu-btn span {
+            background-color: var(--navy-deep);
+        }
+
+        .main-nav.scrolled .menu-btn {
+            border-color: rgba(12, 27, 46, 0.2);
+        }
+
+        .menu-btn:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-link-item a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: #ffffff !important;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s var(--cubic-luxury);
+        }
+
+        .nav-link-item a:hover::after {
+            width: 100%;
+        }
+
+        .main-nav.scrolled .nav-link-item a {
+            color: var(--navy-deep) !important;
+        }
+
+        .main-nav.scrolled .nav-link-item a:hover {
+            color: var(--gold-primary) !important;
+        }
+
+        .btn-nav-cta {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            padding: 10px 24px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s var(--cubic-luxury);
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-center { display: none; }
+        }
+
+        /* ===== SIDE DRAWER NAVIGATION ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: #091320;
+            z-index: 2000;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: left 0.4s var(--cubic-luxury);
+            border-right: 1px solid var(--gold-subtle);
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .side-nav-links a:hover,
+        .side-nav-links a.active {
+            color: var(--gold-primary);
+        }
+
+        /* ===== CLEAN COMPACT PAGE HERO ===== */
         .page-hero {
-            background: linear-gradient(160deg, rgba(12,27,46,0.92) 0%, rgba(12,27,46,0.7) 100%),
-                        url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-            min-height: 52vh;
+            position: relative;
+            min-height: 42vh;
             display: flex;
             align-items: flex-end;
-            padding: 0 5% 70px;
-            padding-top: 120px;
+            padding: 0 5% 55px;
+            padding-top: 130px;
+            background: linear-gradient(135deg, #060e18 0%, #0c1b2e 100%);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
         }
+
+        .page-hero-inner {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .section-label {
+            color: var(--gold-primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
         .page-hero-inner h1 {
-            font-family: var(--font-display), 'Cormorant Garamond', serif;
-            font-size: clamp(2.8rem, 5vw, 5rem);
+            font-family: var(--font-display);
+            font-size: clamp(2.6rem, 5vw, 4.4rem);
             color: #ffffff;
-            line-height: 1.05;
-            margin-bottom: 16px;
+            line-height: 1.1;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
         }
-        .page-hero-inner h1 em { color: #c9a84c; font-style: italic; }
-        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
 
-        /* Gallery Section */
-        .gallery-section { background: #FAF9F6; padding: 80px 5% 60px; min-height: 700px; }
+        .page-hero-inner h1 em {
+            font-style: italic;
+            background: linear-gradient(135deg, #f8e5b9 0%, #c9a84c 50%, #f8e5b9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-        /* 4x4 Grid Layout */
+        .page-hero-inner p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 680px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== EVENT GALLERY SECTION ===== */
+        .gallery-section {
+            background: var(--ivory);
+            padding: 70px 5% 90px;
+            color: var(--text-dark);
+            min-height: 750px;
+        }
+
+        .filter-wrapper {
+            max-width: 1240px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        .filter-chip-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            color: var(--text-muted);
+            padding: 10px 22px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.8px;
+            transition: all 0.3s var(--cubic-luxury);
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--navy-deep);
+            color: #ffffff;
+            border-color: var(--navy-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(12, 27, 46, 0.12);
+        }
+
+        /* 4x4 Grid Structure (Desktop strict 4 columns) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
-            min-height: 500px;
+            min-height: 480px;
         }
 
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 4px;
+            border-radius: 6px;
             background: #ffffff;
-            border: 1px solid #E8E0D4;
-            aspect-ratio: 1 / 1;
+            border: 1px solid var(--border-soft);
+            aspect-ratio: 1 / 1; /* Square 1:1 format for perfect 4x4 */
             cursor: pointer;
             opacity: 0;
             transform: translateY(20px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, opacity 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            transition: transform 0.4s var(--cubic-luxury), box-shadow 0.4s var(--cubic-luxury), border-color 0.4s ease, opacity 0.4s ease;
         }
         
         .gallery-item.show {
@@ -64,30 +405,85 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            transition: transform 0.6s ease;
-        }
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            border-color: #c9a84c;
-            box-shadow: 0 10px 25px rgba(184,150,90,0.15);
-        }
-        .gallery-item:hover img {
-            transform: scale(1.06);
+            transition: transform 0.6s var(--cubic-luxury);
         }
 
+        .gallery-item:hover {
+            transform: translateY(-6px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 14px 30px rgba(201, 168, 76, 0.22);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        /* Hover Overlay with Open Option */
         .item-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(12,27,46,0.45);
+            background: rgba(12, 27, 46, 0.7);
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px;
             opacity: 0;
             transition: opacity 0.3s ease;
             z-index: 2;
         }
-        .gallery-item:hover .item-overlay { opacity: 1; }
-        .item-overlay i { color: #ffffff; font-size: 1.5rem; }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        .overlay-top-tag {
+            align-self: flex-start;
+            background: rgba(201, 168, 76, 0.9);
+            color: var(--navy-deep);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            padding: 4px 10px;
+            border-radius: 3px;
+        }
+
+        .overlay-bottom-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .overlay-event-title {
+            color: #ffffff;
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            line-height: 1.2;
+            font-weight: 600;
+        }
+
+        /* Open Button */
+        .btn-open-view {
+            background: #ffffff;
+            color: var(--navy-deep);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .gallery-item:hover .btn-open-view {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            transform: scale(1.08);
+        }
 
         /* Pagination Style */
         .gallery-pagination {
@@ -96,58 +492,67 @@
             align-items: center;
             gap: 10px;
             margin: 50px auto 0;
-            max-width: 1200px;
+            max-width: 1240px;
         }
+
         .pg-btn {
             width: 44px;
             height: 44px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid #E8E0D4;
+            border: 1px solid var(--border-soft);
             background: #ffffff;
-            color: #0c1b2e;
-            font-family: 'DM Sans', sans-serif;
+            color: var(--navy-deep);
+            font-family: var(--font-body);
             font-size: 0.9rem;
-            font-weight: 500;
-            border-radius: 3px;
+            font-weight: 600;
+            border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .pg-btn.active, .pg-btn:hover:not(:disabled) {
-            background: #0c1b2e;
+
+        .pg-btn.active,
+        .pg-btn:hover:not(:disabled) {
+            background: var(--navy-deep);
             color: #ffffff;
-            border-color: #0c1b2e;
+            border-color: var(--navy-deep);
         }
+
         .pg-btn:disabled {
             opacity: 0.4;
             cursor: not-allowed;
         }
+
         .pg-btn.pg-nav {
             width: auto;
-            padding: 0 16px;
+            padding: 0 18px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 1px;
             font-size: 0.8rem;
             gap: 8px;
         }
+
         .pg-btn.pg-nav:hover:not(:disabled) {
-            background: #c9a84c;
-            border-color: #c9a84c;
-            color: #0c1b2e;
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--navy-deep);
         }
 
-        /* Lightbox */
+        /* ===== LIGHTBOX MODAL (OPEN VIEW MODE) ===== */
         #lightboxModal {
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(10,15,25,0.98);
+            background: rgba(4, 9, 16, 0.96);
             z-index: 4000;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            padding: 20px;
         }
+
         .lightbox-content {
             position: relative;
             max-width: 85vw;
@@ -156,16 +561,66 @@
             align-items: center;
             justify-content: center;
         }
+
         .lightbox-content img {
             max-width: 100%;
-            max-height: 80vh;
+            max-height: 76vh;
             object-fit: contain;
-            border-radius: 2px;
-            border: 1px solid rgba(184,150,90,0.3);
+            border-radius: 4px;
+            border: 1px solid var(--gold-primary);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
         }
+
+        .lightbox-footer-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 85vw;
+            margin-top: 15px;
+            color: #ffffff;
+        }
+
+        .lightbox-info h3 {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--gold-light);
+        }
+
+        .lightbox-info p {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .lightbox-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-lightbox-action {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-size: 0.82rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-lightbox-action:hover {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            border-color: var(--gold-primary);
+        }
+
         .close-lightbox {
             position: absolute;
-            top: -50px; right: 0;
+            top: -45px;
+            right: 0;
             background: transparent;
             border: none;
             color: #ffffff;
@@ -173,66 +628,192 @@
             cursor: pointer;
             transition: color 0.3s;
         }
-        .close-lightbox:hover { color: #c9a84c; }
+
+        .close-lightbox:hover {
+            color: var(--gold-primary);
+        }
         
         .nav-arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: #ffffff;
-            width: 50px; height: 50px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: all 0.3s;
             z-index: 4100;
         }
-        .nav-arrow:hover { background: #c9a84c; color: #0c1b2e; border-color: #c9a84c; }
+
+        .nav-arrow:hover {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            border-color: var(--gold-primary);
+        }
+
         .arrow-left { left: -70px; }
         .arrow-right { right: -70px; }
 
-        /* Trust strip */
-        .trust-strip {
-            background: #0c1b2e;
-            padding: 70px 5%;
-            text-align: center;
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: #04080e;
+            padding: 85px 5% 40px;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
         }
-        .trust-strip .section-label { margin-bottom: 14px; color: #c9a84c; }
-        .trust-logos {
-            display: flex;
-            justify-content: center;
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-logo-frame {
+            display: inline-flex;
             align-items: center;
-            gap: 25px;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            justify-content: center;
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(201, 168, 76, 0.45);
         }
-        .trust-badge {
-            border: 1px solid rgba(184,150,90,0.3);
-            border-radius: 4px;
-            padding: 16px 28px;
-            color: rgba(255,255,255,0.75);
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.05rem;
-            letter-spacing: 1px;
-            transition: all 0.3s ease;
+
+        .footer-logo-frame img {
+            height: 58px;
+            width: auto;
+            max-width: 240px;
+            object-fit: contain;
+            display: block;
         }
-        .trust-badge:hover {
-            border-color: #c9a84c;
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             color: #ffffff;
-            transform: translateY(-3px);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--navy-deep);
+        }
+
+        .footer-col h4 {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold-primary);
+        }
+
+        .contact-list li {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .contact-list li a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #ffffff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+            z-index: 990;
+            text-decoration: none;
+            transition: transform 0.3s var(--cubic-luxury);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
         }
 
         @media (max-width: 1024px) {
             .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-            .arrow-left { left: 20px; top: auto; bottom: -70px; transform: none; }
-            .arrow-right { right: 20px; top: auto; bottom: -70px; transform: none; }
+            .arrow-left { left: 10px; }
+            .arrow-right { right: 10px; }
         }
+
         @media (max-width: 768px) {
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
         }
+
         @media (max-width: 480px) {
             .gallery-grid { grid-template-columns: 1fr; }
         }
@@ -243,62 +824,77 @@
     <!-- NAVBAR -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-left">
-            <div class="menu-container">
-                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
-                <div class="hover-menu">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="services.html">Services</a>
-                    <a href="work.html">Our Work</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <a href="index.html" class="logo-link">
-                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            <button class="menu-btn" onclick="openMenu()" aria-label="Open Navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="index.html" class="brand-logo-frame">
+                <img src="./assets/Mise_global.png" alt="Mise Global">
             </a>
         </div>
+        
+        <div class="nav-center">
+            <div class="nav-link-item"><a href="index.html">Home</a></div>
+            <div class="nav-link-item"><a href="about.html">About Us</a></div>
+            <div class="nav-link-item"><a href="services.html">Services</a></div>
+            <div class="nav-link-item"><a href="work.html">Our Work</a></div>
+            <div class="nav-link-item"><a href="contact.html">Contact</a></div>
+        </div>
+
         <div class="nav-right">
             <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
+    <!-- MOBILE SIDE DRAWER -->
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
-        <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
-        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
-        <nav class="side-nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="services.html">Services</a>
-            <a href="work.html" class="active">Our Work</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-        <div class="side-menu-footer">
+        <div>
+            <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+            <div style="margin-bottom: 30px;">
+                <div class="brand-logo-frame" style="background:#fff;">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
+            </div>
+            <nav class="side-nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="work.html" class="active">Our Work</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+        </div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.45);">
             <p>Pan-India Presence</p>
             <p>+91 62053 94680</p>
         </div>
     </div>
 
-    <!-- PAGE HERO -->
+    <!-- CLEAN PAGE HERO -->
     <header class="page-hero">
         <div class="page-hero-inner">
-            <div class="section-label" style="color:#c9a84c; letter-spacing:2px;">PORTFOLIO</div>
-            <h1>Our <em>Gallery.</em></h1>
-            <p>Witness our execution precision through landmark events across India.</p>
+            <div class="section-label">EVENT PORTFOLIO</div>
+            <h1>Visual <em>Moments.</em></h1>
+            <p>Explore high-resolution moments from medical conventions, academic conclaves, and turnkey executions across India.</p>
         </div>
     </header>
 
-    <!-- PORTFOLIO GALLERY -->
+    <!-- ===== 4x4 EVENT GALLERY SECTION ===== -->
     <section class="gallery-section">
-        <div style="text-align: center; margin-bottom: 50px;">
-            <div class="section-label" style="color:#c9a84c; letter-spacing:2px; font-weight:600;">OUR WORK</div>
-            <h2 class="section-title" style="font-family:'Cormorant Garamond',serif; font-size:2.6rem; color:#0c1b2e;">Visual <em>Showcase</em></h2>
+        <div class="filter-wrapper">
+            <!-- Event Filter Chips -->
+            <div class="filter-chip-bar">
+                <button class="filter-btn active" onclick="applyGalleryFilter('all')">All Events</button>
+                <button class="filter-btn" onclick="applyGalleryFilter('apicon')">APICON 2026</button>
+                <button class="filter-btn" onclick="applyGalleryFilter('iacmcon')">IACMCON Bihar 2026</button>
+                <button class="filter-btn" onclick="applyGalleryFilter('icp')">ICP Conclave 2.0</button>
+                <button class="filter-btn" onclick="applyGalleryFilter('ikl')">IKL Quiz Competition</button>
+            </div>
         </div>
         
-        <!-- Grid automatically handled by JavaScript -->
+        <!-- Perfect 4x4 Grid Container (Max 16 per page) -->
         <div class="gallery-grid" id="galleryGrid">
-            <p id="galleryLoaderMsg" style="grid-column: 1/-1; text-align: center; color: #64748b; padding: 40px 0;">
-                Loading live portfolio showcase...
+            <p id="galleryLoaderMsg" style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 50px 0;">
+                Loading live event moments...
             </p>
         </div>
 
@@ -310,26 +906,25 @@
         </div>
     </section>
 
-    <!-- TRUST STRIP -->
-    <section class="trust-strip">
-        <div class="section-label">TRUSTED BY</div>
-        <h2 class="section-title" style="color: #ffffff; font-family:'Cormorant Garamond',serif; margin-bottom: 0;">Events that <em>Defined Excellence</em></h2>
-        <div class="trust-logos">
-            <div class="trust-badge">APICON 2026</div>
-            <div class="trust-badge">Medical Pharma Summits</div>
-            <div class="trust-badge">Govt. of Bihar</div>
-            <div class="trust-badge">Corporate Conclaves</div>
-            <div class="trust-badge">Cultural Fests</div>
-        </div>
-    </section>
-
-    <!-- LIGHTBOX MODAL -->
+    <!-- LIGHTBOX / OPEN MODAL -->
     <div id="lightboxModal">
         <div class="lightbox-content">
-            <button class="close-lightbox" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
-            <button class="nav-arrow arrow-left" onclick="prevImage()"><i class="fas fa-chevron-left"></i></button>
-            <img id="lightboxImg" src="" alt="Mise Global Fullscreen Showcase">
-            <button class="nav-arrow arrow-right" onclick="nextImage()"><i class="fas fa-chevron-right"></i></button>
+            <button class="close-lightbox" onclick="closeLightbox()" title="Close (Esc)"><i class="fas fa-times"></i></button>
+            <button class="nav-arrow arrow-left" onclick="prevImage()" title="Previous (Left Arrow)"><i class="fas fa-chevron-left"></i></button>
+            <img id="lightboxImg" src="" alt="Mise Global Event">
+            <button class="nav-arrow arrow-right" onclick="nextImage()" title="Next (Right Arrow)"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="lightbox-footer-bar">
+            <div class="lightbox-info">
+                <h3 id="lightboxTitle">Event Showcase</h3>
+                <p id="lightboxCounter">Photo 1 of 1</p>
+            </div>
+            <div class="lightbox-actions">
+                <a id="lightboxDirectLink" href="#" target="_blank" class="btn-lightbox-action" title="Open full resolution in new tab">
+                    <i class="fas fa-external-link-alt"></i> Full Resolution
+                </a>
+            </div>
         </div>
     </div>
 
@@ -337,12 +932,14 @@
     <footer class="main-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <div class="footer-logo-frame">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
                 <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -358,51 +955,75 @@
             <div class="footer-col">
                 <h4>Services</h4>
                 <ul>
-                    <li><a href="#">Medical Conferences</a></li>
-                    <li><a href="#">Corporate Events</a></li>
-                    <li><a href="#">Govt. Campaigns</a></li>
-                    <li><a href="#">BTL / ATL Activations</a></li>
-                    <li><a href="#">Artist Management</a></li>
+                    <li><a href="physical-conferences.html">Medical Conferences</a></li>
+                    <li><a href="services.html">Corporate Events</a></li>
+                    <li><a href="services.html">Govt. Campaigns</a></li>
+                    <li><a href="services.html">BTL / ATL Activations</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
                 <ul class="contact-list">
-                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
-                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                    <li><i class="fas fa-map-marker-alt" style="color:var(--gold-primary);"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone" style="color:var(--gold-primary);"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope" style="color:var(--gold-primary);"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2026 Mise Global. All Rights Reserved.</p>
-            <p class="footer-tagline">Driven by Precision</p>
+            <p>Driven by Precision</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
+    <!-- ENGINE SCRIPTS -->
     <script>
         // ==========================================
-        // DYNAMIC CLOUDINARY ENGINE + PAGINATION
+        // DYNAMIC CLOUDINARY ENGINE + 4x4 GRID
         // ==========================================
         const CLOUDINARY_CLOUD = "rb1lnkdp";
         const CLOUDINARY_TAG = "mise_events";
 
-        // Backup images agar Cloudinary fetch na ho
+        // Initial/Fallback images
         let allGalleryItems = [
-            { thumb: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=600&q=80', full: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=90' },
-            { thumb: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=600&q=80', full: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=90' },
-            { thumb: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=600&q=80', full: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=90' },
-            { thumb: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=600&q=80', full: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1600&q=90' }
+            { 
+                thumb: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=700&q=80', 
+                full: 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1600&q=90',
+                eventKey: 'apicon',
+                eventName: 'APICON 2026'
+            },
+            { 
+                thumb: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=700&q=80', 
+                full: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1600&q=90',
+                eventKey: 'iacmcon',
+                eventName: 'IACMCON Bihar 2026'
+            },
+            { 
+                thumb: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=700&q=80', 
+                full: 'https://images.unsplash.com/photo-1492684223066-81342ee5ff30?auto=format&fit=crop&w=1600&q=90',
+                eventKey: 'icp',
+                eventName: 'ICP Conclave 2.0'
+            },
+            { 
+                thumb: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=700&q=80', 
+                full: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1600&q=90',
+                eventKey: 'ikl',
+                eventName: 'IKL Quiz Competition'
+            }
         ];
 
-        const limitPerPage = 16; // 4x4 Grid = 16 images per page
+        let filteredItems = [...allGalleryItems];
+        const limitPerPage = 16; // 4x4 Grid = Exactly 16 images per page
         let currentPage = 1;
         let activeLightboxIndex = 0;
         let currentVisibleItems = [];
 
-        // 1. Fetch from Cloudinary
+        // 1. Fetch live from Cloudinary
         async function fetchLiveCloudinaryGallery() {
             const endpoint = `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/list/${CLOUDINARY_TAG}.json`;
             try {
@@ -411,29 +1032,67 @@
 
                 const data = await response.json();
                 if (data.resources && data.resources.length > 0) {
-                    allGalleryItems = data.resources.map(img => ({
-                        thumb: `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/q_auto,f_auto,w_600,c_fill,ar_1:1/v${img.version}/${img.public_id}.${img.format}`,
-                        full: `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/q_auto,f_auto/v${img.version}/${img.public_id}.${img.format}`
-                    }));
+                    allGalleryItems = data.resources.map(img => {
+                        const nameLower = img.public_id.toLowerCase();
+                        let eventKey = 'general';
+                        let eventName = 'Mise Global Event';
+
+                        if (nameLower.includes('apicon')) {
+                            eventKey = 'apicon';
+                            eventName = 'APICON 2026';
+                        } else if (nameLower.includes('iacmcon')) {
+                            eventKey = 'iacmcon';
+                            eventName = 'IACMCON Bihar 2026';
+                        } else if (nameLower.includes('icp')) {
+                            eventKey = 'icp';
+                            eventName = 'ICP Conclave 2.0';
+                        } else if (nameLower.includes('ikl') || nameLower.includes('quiz')) {
+                            eventKey = 'ikl';
+                            eventName = 'IKL Quiz Competition';
+                        }
+
+                        return {
+                            thumb: `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/q_auto,f_auto,w_700,c_fill,ar_1:1/v${img.version}/${img.public_id}.${img.format}`,
+                            full: `https://res.cloudinary.com/${CLOUDINARY_CLOUD}/image/upload/q_auto,f_auto/v${img.version}/${img.public_id}.${img.format}`,
+                            eventKey: eventKey,
+                            eventName: eventName
+                        };
+                    });
                 }
             } catch (err) {
-                console.warn("Cloudinary dynamic fetch fallback active:", err);
+                console.warn("Cloudinary dynamic fallback active:", err);
             } finally {
+                filteredItems = [...allGalleryItems];
                 renderGrid(1);
             }
         }
 
-        // 2. Render 4x4 Grid with smooth stagger animation
+        // 2. Filter Tabs
+        function applyGalleryFilter(key) {
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (key === 'all') {
+                filteredItems = [...allGalleryItems];
+            } else {
+                filteredItems = allGalleryItems.filter(item => item.eventKey === key);
+            }
+            currentPage = 1;
+            renderGrid(1);
+        }
+
+        // 3. Render Strict 4x4 Grid
         function renderGrid(page) {
             const grid = document.getElementById('galleryGrid');
             grid.innerHTML = '';
 
             const startIdx = (page - 1) * limitPerPage;
             const endIdx = startIdx + limitPerPage;
-            currentVisibleItems = allGalleryItems.slice(startIdx, endIdx);
+            currentVisibleItems = filteredItems.slice(startIdx, endIdx);
 
             if (currentVisibleItems.length === 0) {
-                grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:#64748b; padding:40px 0;">No images uploaded yet.</p>`;
+                grid.innerHTML = `<p style="grid-column:1/-1; text-align:center; color:var(--text-muted); padding:60px 0;">No photos uploaded yet for this event.</p>`;
+                renderPaginationControls();
                 return;
             }
 
@@ -442,22 +1101,28 @@
                 card.className = 'gallery-item';
                 card.onclick = () => openLightbox(index);
                 card.innerHTML = `
-                    <div class="item-overlay"><i class="fas fa-expand"></i></div>
-                    <img src="${item.thumb}" alt="Mise Global Event Portfolio" loading="lazy" />
+                    <div class="item-overlay">
+                        <span class="overlay-top-tag">Mise Event</span>
+                        <div class="overlay-bottom-content">
+                            <h4 class="overlay-event-title">${item.eventName}</h4>
+                            <span class="btn-open-view" title="Open Photo"><i class="fas fa-eye"></i></span>
+                        </div>
+                    </div>
+                    <img src="${item.thumb}" alt="${item.eventName}" loading="lazy" />
                 `;
                 grid.appendChild(card);
 
                 setTimeout(() => {
                     card.classList.add('show');
-                }, (index % 4) * 60);
+                }, (index % 4) * 50);
             });
 
             renderPaginationControls();
         }
 
-        // 3. Render Pagination
+        // 4. Pagination Controls
         function renderPaginationControls() {
-            const totalPages = Math.ceil(allGalleryItems.length / limitPerPage) || 1;
+            const totalPages = Math.ceil(filteredItems.length / limitPerPage) || 1;
             const pageNumbers = document.getElementById('pageNumbers');
             pageNumbers.innerHTML = '';
 
@@ -474,7 +1139,7 @@
         }
 
         function changePage(newPage) {
-            const totalPages = Math.ceil(allGalleryItems.length / limitPerPage) || 1;
+            const totalPages = Math.ceil(filteredItems.length / limitPerPage) || 1;
             if (newPage >= 1 && newPage <= totalPages) {
                 currentPage = newPage;
                 renderGrid(currentPage);
@@ -482,12 +1147,22 @@
             }
         }
 
-        // 4. Lightbox Engine
+        // 5. Open / Lightbox Engine
         function openLightbox(index) {
             activeLightboxIndex = index;
-            document.getElementById('lightboxImg').src = currentVisibleItems[activeLightboxIndex].full;
+            updateLightboxContent();
             document.getElementById('lightboxModal').style.display = 'flex';
             document.body.style.overflow = 'hidden';
+        }
+
+        function updateLightboxContent() {
+            const currentItem = currentVisibleItems[activeLightboxIndex] || filteredItems[activeLightboxIndex];
+            if (!currentItem) return;
+
+            document.getElementById('lightboxImg').src = currentItem.full;
+            document.getElementById('lightboxTitle').innerText = currentItem.eventName;
+            document.getElementById('lightboxCounter').innerText = `Photo ${activeLightboxIndex + 1} of ${currentVisibleItems.length}`;
+            document.getElementById('lightboxDirectLink').href = currentItem.full;
         }
 
         function closeLightbox() {
@@ -497,15 +1172,15 @@
 
         function nextImage() {
             activeLightboxIndex = (activeLightboxIndex + 1) % currentVisibleItems.length;
-            document.getElementById('lightboxImg').src = currentVisibleItems[activeLightboxIndex].full;
+            updateLightboxContent();
         }
 
         function prevImage() {
             activeLightboxIndex = (activeLightboxIndex - 1 + currentVisibleItems.length) % currentVisibleItems.length;
-            document.getElementById('lightboxImg').src = currentVisibleItems[activeLightboxIndex].full;
+            updateLightboxContent();
         }
 
-        // Keyboard bindings
+        // Keyboard Controls (Esc, Left, Right)
         document.addEventListener('keydown', e => { 
             if (document.getElementById('lightboxModal').style.display === 'flex') {
                 if (e.key === 'Escape') closeLightbox();
@@ -518,7 +1193,12 @@
         window.addEventListener('DOMContentLoaded', fetchLiveCloudinaryGallery);
 
         window.addEventListener('scroll', () => {
-            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
         
         function openMenu() {
@@ -526,6 +1206,7 @@
             document.getElementById('menuOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
+
         function closeMenu() {
             document.getElementById('sideMenu').classList.remove('open');
             document.getElementById('menuOverlay').classList.remove('open');
