@@ -4,217 +4,755 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | Mise Global</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Typography & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
     <style>
-        /* ===== CONTACT PAGE SPECIFIC ===== */
+        :root {
+            --navy-base: #060e18;
+            --navy-deep: #0c1b2e;
+            --navy-mid: #12243a;
+            --gold-primary: #c9a84c;
+            --gold-light: #e8d08d;
+            --gold-subtle: rgba(201, 168, 76, 0.2);
+            --ivory: #FAF9F6;
+            --border-soft: #E8E0D4;
+            --text-dark: #1a222e;
+            --text-muted: #5a6679;
+            --cubic-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+            --font-display: 'Cormorant Garamond', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--navy-base);
+            color: #ffffff;
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 5%;
+            transition: all 0.5s var(--cubic-luxury);
+            background: rgba(6, 14, 24, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+        }
+
+        .main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 10px 5%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .brand-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(201, 168, 76, 0.4);
+            transition: transform 0.4s var(--cubic-luxury), box-shadow 0.4s var(--cubic-luxury);
+            text-decoration: none;
+        }
+
+        .brand-logo-frame:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.35);
+        }
+
+        .brand-logo-frame img {
+            height: 38px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .main-nav.scrolled .brand-logo-frame {
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+            border-color: rgba(201, 168, 76, 0.25);
+        }
+
+        .menu-btn {
+            background: transparent;
+            border: 1px solid rgba(201, 168, 76, 0.3);
+            width: 44px;
+            height: 44px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-btn span {
+            width: 20px;
+            height: 2px;
+            background-color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .main-nav.scrolled .menu-btn span {
+            background-color: var(--navy-deep);
+        }
+
+        .main-nav.scrolled .menu-btn {
+            border-color: rgba(12, 27, 46, 0.2);
+        }
+
+        .menu-btn:hover {
+            border-color: var(--gold-primary);
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
+        .nav-link-item a {
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: #ffffff !important;
+            text-decoration: none;
+            position: relative;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link-item a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold-primary);
+            transition: width 0.3s var(--cubic-luxury);
+        }
+
+        .nav-link-item a:hover::after {
+            width: 100%;
+        }
+
+        .main-nav.scrolled .nav-link-item a {
+            color: var(--navy-deep) !important;
+        }
+
+        .main-nav.scrolled .nav-link-item a:hover {
+            color: var(--gold-primary) !important;
+        }
+
+        .btn-nav-cta {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            padding: 10px 24px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            border-radius: 4px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s var(--cubic-luxury);
+        }
+
+        .btn-nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        @media (max-width: 1024px) {
+            .nav-center { display: none; }
+        }
+
+        /* ===== SIDE DRAWER NAVIGATION ===== */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -320px;
+            width: 320px;
+            height: 100vh;
+            background: #091320;
+            z-index: 2000;
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: left 0.4s var(--cubic-luxury);
+            border-right: 1px solid var(--gold-subtle);
+        }
+
+        .side-menu.open {
+            left: 0;
+        }
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .menu-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.5rem;
+            cursor: pointer;
+            align-self: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .side-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .side-nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .side-nav-links a:hover,
+        .side-nav-links a.active {
+            color: var(--gold-primary);
+        }
+
+        /* ===== SIMPLE CLEAN PAGE HERO ===== */
         .page-hero {
-            background: linear-gradient(160deg, rgba(12,27,46,0.96) 0%, rgba(12,27,46,0.78) 100%),
-                        url('assets/corporate-event.jpg') center/cover no-repeat;
-            min-height: 48vh;
+            position: relative;
+            min-height: 44vh;
             display: flex;
             align-items: flex-end;
-            padding: 0 5% 70px;
-            padding-top: 120px;
+            padding: 0 5% 65px;
+            padding-top: 130px;
+            background: linear-gradient(135deg, #060e18 0%, #0c1b2e 100%);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
         }
+
+        .page-hero-inner {
+            position: relative;
+            z-index: 3;
+            max-width: 900px;
+        }
+
+        .section-label {
+            color: var(--gold-primary);
+            font-size: 0.82rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 12px;
+            display: inline-block;
+            text-transform: uppercase;
+        }
+
         .page-hero-inner h1 {
             font-family: var(--font-display);
-            font-size: clamp(2.8rem, 5vw, 5rem);
-            color: var(--white);
-            line-height: 1.05;
-            margin-bottom: 16px;
+            font-size: clamp(2.8rem, 5.5vw, 4.6rem);
+            color: #ffffff;
+            line-height: 1.1;
+            margin-bottom: 14px;
+            letter-spacing: -0.5px;
         }
-        .page-hero-inner h1 em { color: var(--gold-light); font-style: italic; }
-        .page-hero-inner p { font-size: 1.05rem; color: rgba(255,255,255,0.6); }
 
-        /* Contact Layout */
+        .page-hero-inner h1 em {
+            font-style: italic;
+            background: linear-gradient(135deg, #f8e5b9 0%, #c9a84c 50%, #f8e5b9 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-hero-inner p {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.75);
+            max-width: 640px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        /* ===== CONTACT LAYOUT SECTION ===== */
+        .contact-section-outer {
+            background: var(--ivory);
+            padding: 95px 5% 105px;
+            color: var(--text-dark);
+        }
+
         .contact-wrapper {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 70px;
-            max-width: 1200px;
+            grid-template-columns: 1fr 1.25fr;
+            gap: 60px;
+            max-width: 1240px;
             margin: 0 auto;
             align-items: start;
         }
 
-        /* Info Side */
-        .contact-info-side .section-label { margin-bottom: 14px; }
+        /* Info Column */
         .contact-info-side h2 {
             font-family: var(--font-display);
-            font-size: 2.4rem;
-            color: var(--navy);
+            font-size: clamp(2.3rem, 4.5vw, 3.2rem);
+            color: var(--navy-deep);
             line-height: 1.15;
-            margin-bottom: 16px;
-        }
-        .contact-info-side h2 em { color: var(--gold); font-style: italic; }
-        .contact-info-side > p {
-            font-size: 0.98rem;
-            color: var(--muted);
-            line-height: 1.75;
-            margin-bottom: 36px;
+            margin-bottom: 18px;
         }
 
-        .info-cards { display: flex; flex-direction: column; gap: 16px; }
+        .contact-info-side h2 em {
+            font-style: italic;
+            color: var(--gold-primary);
+        }
+
+        .contact-info-side > p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .info-cards-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
 
         .info-card {
             display: flex;
             align-items: center;
-            gap: 18px;
-            padding: 20px 22px;
-            background: var(--white);
-            border: 1px solid #E8E0D4;
-            border-left: 3px solid var(--gold);
-            border-radius: 4px;
-            transition: var(--transition);
+            gap: 20px;
+            padding: 24px 26px;
+            background: #ffffff;
+            border: 1px solid var(--border-soft);
+            border-left: 3px solid var(--gold-primary);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            transition: all 0.35s var(--cubic-luxury);
         }
+
         .info-card:hover {
             transform: translateX(6px);
-            box-shadow: var(--shadow-md);
+            border-color: var(--gold-primary);
+            box-shadow: 0 10px 25px rgba(12, 27, 46, 0.08);
         }
+
         .info-card-icon {
-            width: 46px; height: 46px;
-            background: rgba(184,150,90,0.1);
+            width: 52px;
+            height: 52px;
+            background: rgba(12, 27, 46, 0.04);
             border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             flex-shrink: 0;
+            transition: all 0.3s ease;
         }
-        .info-card-icon i { font-size: 1.1rem; color: var(--gold); }
+
+        .info-card-icon i {
+            font-size: 1.3rem;
+            color: var(--navy-deep);
+            transition: color 0.3s ease;
+        }
+
+        .info-card:hover .info-card-icon {
+            background: var(--navy-deep);
+        }
+
+        .info-card:hover .info-card-icon i {
+            color: var(--gold-primary);
+        }
+
         .info-card-text strong {
             display: block;
-            font-size: 0.72rem;
-            font-weight: 600;
+            font-size: 0.75rem;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: var(--navy);
+            color: var(--navy-deep);
             margin-bottom: 4px;
         }
-        .info-card-text p, .info-card-text a {
-            font-size: 0.92rem;
-            color: var(--muted);
+
+        .info-card-text p,
+        .info-card-text a {
+            font-size: 0.95rem;
+            color: var(--text-muted);
             text-decoration: none;
             line-height: 1.5;
+            transition: color 0.3s ease;
         }
-        .info-card-text a:hover { color: var(--gold); }
 
-        /* Form Side */
-        .form-box {
-            background: var(--white);
-            border-radius: 6px;
-            padding: 48px 40px;
-            border: 1px solid #E8E0D4;
-            border-top: 4px solid var(--gold);
-            box-shadow: var(--shadow-md);
+        .info-card-text a:hover {
+            color: var(--gold-primary);
         }
-        .form-box-header { margin-bottom: 32px; }
-        .form-box-header .section-label { margin-bottom: 10px; }
+
+        /* Form Column */
+        .form-box {
+            background: #ffffff;
+            border-radius: 8px;
+            padding: 50px 45px;
+            border: 1px solid var(--border-soft);
+            border-top: 4px solid var(--gold-primary);
+            box-shadow: 0 18px 45px rgba(12, 27, 46, 0.08);
+        }
+
+        .form-box-header {
+            margin-bottom: 35px;
+        }
+
         .form-box-header h3 {
             font-family: var(--font-display);
-            font-size: 1.9rem;
-            color: var(--navy);
+            font-size: 2.1rem;
+            color: var(--navy-deep);
+            line-height: 1.15;
+            margin-top: 6px;
         }
 
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
-        .form-group { margin-bottom: 22px; }
+        .form-group {
+            margin-bottom: 22px;
+        }
+
         .form-group label {
             display: block;
             font-size: 0.78rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--navy);
+            color: var(--navy-deep);
             margin-bottom: 8px;
         }
+
         .form-group input,
         .form-group select,
         .form-group textarea {
             width: 100%;
-            padding: 13px 16px;
-            border: 1.5px solid #E8E0D4;
+            padding: 14px 18px;
+            border: 1px solid var(--border-soft);
             border-radius: 4px;
             font-family: var(--font-body);
             font-size: 0.95rem;
-            color: var(--charcoal);
+            color: var(--text-dark);
             background: var(--ivory);
-            transition: var(--transition);
+            transition: all 0.3s ease;
             appearance: none;
         }
+
+        .form-group select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230c1b2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 16px;
+            cursor: pointer;
+        }
+
         .form-group input:focus,
         .form-group select:focus,
         .form-group textarea:focus {
-            border-color: var(--gold);
+            border-color: var(--gold-primary);
             outline: none;
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(184,150,90,0.1);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(201, 168, 76, 0.15);
         }
-        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 130px;
+        }
 
         .btn-submit {
             width: 100%;
-            padding: 16px;
-            background: var(--navy);
-            color: var(--white);
+            padding: 18px;
+            background: var(--navy-deep);
+            color: #ffffff;
             font-family: var(--font-body);
-            font-size: 0.95rem;
-            font-weight: 600;
-            letter-spacing: 1px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            transition: var(--transition);
-            margin-top: 8px;
+            transition: all 0.3s var(--cubic-luxury);
+            margin-top: 10px;
         }
-        .btn-submit:hover {
-            background: var(--gold);
-            color: var(--navy);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 24px rgba(184,150,90,0.3);
-        }
-        .btn-submit i { font-size: 1.15rem; }
 
-        /* Social Strip */
-        .social-strip {
-            background: var(--navy);
-            padding: 70px 5%;
-            text-align: center;
+        .btn-submit:hover {
+            background: var(--gold-primary);
+            color: var(--navy-deep);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(201, 168, 76, 0.3);
         }
+
+        .btn-submit i {
+            font-size: 1.15rem;
+        }
+
+        /* ===== SOCIAL CONNECT STRIP ===== */
+        .social-strip {
+            background: var(--navy-deep);
+            padding: 80px 5%;
+            text-align: center;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
         .social-strip h3 {
             font-family: var(--font-display);
-            font-size: 2rem;
-            color: var(--white);
+            font-size: 2.2rem;
+            color: #ffffff;
             margin-bottom: 10px;
         }
-        .social-strip p { font-size: 0.92rem; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+
+        .social-strip h3 em {
+            font-style: italic;
+            color: var(--gold-light);
+        }
+
+        .social-strip p {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.55);
+            margin-bottom: 35px;
+        }
+
         .social-icons-row {
             display: flex;
             justify-content: center;
-            gap: 14px;
-        }
-        .social-icons-row a {
-            width: 52px; height: 52px;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            color: rgba(255,255,255,0.6);
-            font-size: 1.1rem;
-            transition: var(--transition);
-        }
-        .social-icons-row a:hover {
-            background: var(--gold);
-            border-color: var(--gold);
-            color: var(--navy);
-            transform: translateY(-4px);
+            gap: 16px;
         }
 
-        @media (max-width: 900px) {
-            .contact-wrapper { grid-template-columns: 1fr; gap: 40px; }
+        .social-icons-row a {
+            width: 52px;
+            height: 52px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(201, 168, 76, 0.25);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            transition: all 0.3s var(--cubic-luxury);
+            text-decoration: none;
+        }
+
+        .social-icons-row a:hover {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--navy-deep);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(201, 168, 76, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        .main-footer {
+            background: #04080e;
+            padding: 85px 5% 40px;
+            border-top: 1px solid rgba(201, 168, 76, 0.2);
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2.2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(201, 168, 76, 0.45);
+        }
+
+        .footer-logo-frame img {
+            height: 58px;
+            width: auto;
+            max-width: 240px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .footer-brand p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--gold-primary);
+            border-color: var(--gold-primary);
+            color: var(--navy-deep);
+        }
+
+        .footer-col h4 {
+            color: var(--gold-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.65);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--gold-primary);
+        }
+
+        .contact-list li {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .contact-list li a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.85rem;
+        }
+
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: #ffffff;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+            z-index: 990;
+            text-decoration: none;
+            transition: transform 0.3s var(--cubic-luxury);
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrapper { grid-template-columns: 1fr; gap: 50px; }
+            .footer-top { grid-template-columns: 1fr; }
+            .footer-bottom { flex-direction: column; text-align: center; gap: 10px; }
+        }
+
+        @media (max-width: 600px) {
             .form-row { grid-template-columns: 1fr; }
             .form-box { padding: 36px 24px; }
         }
@@ -222,129 +760,154 @@
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="main-nav" id="mainNav">
         <div class="nav-left">
-            <div class="menu-container">
-                <button class="menu-btn" onclick="openMenu()"><span></span><span></span><span></span></button>
-                <div class="hover-menu">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About Us</a>
-                    <a href="services.html">Services</a>
-                    <a href="work.html">Our Work</a>
-                    <a href="contact.html">Contact</a>
-                </div>
-            </div>
-            <a href="index.html" class="logo-link">
-                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            <button class="menu-btn" onclick="openMenu()" aria-label="Open Navigation">
+                <span></span><span></span><span></span>
+            </button>
+            <a href="index.html" class="brand-logo-frame">
+                <img src="./assets/Mise_global.png" alt="Mise Global">
             </a>
         </div>
+        
+        <div class="nav-center">
+            <div class="nav-link-item"><a href="index.html">Home</a></div>
+            <div class="nav-link-item"><a href="about.html">About Us</a></div>
+            <div class="nav-link-item"><a href="services.html">Services</a></div>
+            <div class="nav-link-item"><a href="work.html">Our Work</a></div>
+            <div class="nav-link-item"><a href="contact.html">Contact</a></div>
+        </div>
+
         <div class="nav-right">
             <a href="contact.html" class="btn-nav-cta">Get a Quote <i class="fas fa-arrow-right"></i></a>
         </div>
     </nav>
 
+    <!-- MOBILE SIDE DRAWER -->
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
-        <button class="close-btn" onclick="closeMenu()">✕</button>
-        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
-        <nav class="side-nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="services.html">Services</a>
-            <a href="work.html">Our Work</a>
-            <a href="contact.html" class="active">Contact</a>
-        </nav>
-        <div class="side-menu-footer">
+        <div>
+            <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
+            <div style="margin-bottom: 30px;">
+                <div class="brand-logo-frame" style="background:#fff;">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
+            </div>
+            <nav class="side-nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="services.html">Services</a>
+                <a href="work.html">Our Work</a>
+                <a href="contact.html" class="active">Contact</a>
+            </nav>
+        </div>
+        <div style="font-size: 0.85rem; color: rgba(255,255,255,0.45);">
             <p>Pan-India Presence</p>
             <p>+91 62053 94680</p>
         </div>
     </div>
 
+    <!-- CLEAN SIMPLE PAGE HERO -->
     <header class="page-hero">
         <div class="page-hero-inner">
-            <div class="section-label">GET IN TOUCH</div>
+            <div class="section-label">COMMENCE AN ENGAGEMENT</div>
             <h1>Let's <em>Connect.</em></h1>
-            <p>Plan your next big event with Bihar's premier event consultancy.</p>
+            <p>Architect your next landmark convention, corporate summit, or high-profile public campaign with Bihar's premier turnkey consultancy.</p>
         </div>
     </header>
 
-    <section class="section-padding" style="background: var(--ivory);">
+    <!-- CONTACT STRUCTURE -->
+    <section class="contact-section-outer">
         <div class="contact-wrapper">
 
+            <!-- Information Column -->
             <div class="contact-info-side">
-                <div class="section-label">REACH US</div>
-                <h2>We're Ready to <em>Build With You.</em></h2>
-                <p>Mise Global is engineered to transition complex event blueprints into seamless, high-impact realities. Connect with our consultancy today, let us strategize and elevate your next landmark execution.</p>
+                <div class="section-label">CONSULTANCY DESK</div>
+                <h2>Engineered for <em>Flawless Execution.</em></h2>
+                <p>Mise Global transitions complex logistics, academic protocols, and creative staging into seamless, measurable realities. Connect directly with our execution team to architect your upcoming event timeline.</p>
 
-                <div class="info-cards">
+                <div class="info-cards-stack">
                     <div class="info-card">
                         <div class="info-card-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="info-card-text">
-                            <strong>Our Address</strong>
-                            <p>Near Ram Janki Mandir, Shashtri Nagar,<br>Muzaffarpur – 842002, Bihar</p>
+                            <strong>Headquarters</strong>
+                            <p>Near Ram Janki Mandir, Shastri Nagar,<br>Muzaffarpur – 842002, Bihar, India</p>
                         </div>
                     </div>
+
                     <div class="info-card">
                         <div class="info-card-icon"><i class="fas fa-phone-alt"></i></div>
                         <div class="info-card-text">
-                            <strong>Call Us</strong>
-                            <a href="tel:+919534647077">+91 95346 47077</a><br>
-                            <a href="tel:+916205394680">+91 62053 94680</a>
+                            <strong>Direct Helpline</strong>
+                            <p><a href="tel:+916205394680">+91 62053 94680</a> &nbsp;·&nbsp; <a href="tel:+919534647077">+91 95346 47077</a></p>
                         </div>
                     </div>
+
                     <div class="info-card">
-                        <div class="info-card-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="info-card-icon"><i class="fas fa-envelope-open-text"></i></div>
                         <div class="info-card-text">
-                            <strong>Email Us</strong>
-                            <a href="mailto:info@miseglobal.com">info@miseglobal.com</a><br>
-                            <a href="mailto:miseglobal.india@gmail.com">miseglobal.india@gmail.com</a>
+                            <strong>Official Correspondence</strong>
+                            <p><a href="mailto:info@miseglobal.com">info@miseglobal.com</a><br><a href="mailto:miseglobal.india@gmail.com">miseglobal.india@gmail.com</a></p>
                         </div>
                     </div>
+
                     <div class="info-card">
-                        <div class="info-card-icon"><i class="fas fa-globe"></i></div>
+                        <div class="info-card-icon"><i class="fas fa-globe-asia"></i></div>
                         <div class="info-card-text">
-                            <strong>Operations</strong>
-                            <p>Pan-India — 15+ Cities Served</p>
+                            <strong>Execution Network</strong>
+                            <p>Pan-India Footprint &nbsp;·&nbsp; 15+ Cities Deployed</p>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Form Column -->
             <div class="contact-form-side">
                 <div class="form-box">
                     <div class="form-box-header">
-                        <div class="section-label">INQUIRY FORM</div>
-                        <h3>Send Us a Message</h3>
+                        <div class="section-label">DIRECT DISPATCH</div>
+                        <h3>Send an Inquiry</h3>
                     </div>
                     <form id="whatsappForm">
                         <div class="form-row">
                             <div class="form-group">
-                                <label>Your Name</label>
-                                <input type="text" id="wa-name" placeholder="Name / Company" required>
+                                <label>Your Name / Organization</label>
+                                <input type="text" id="wa-name" placeholder="Dr. / Mr. / Company" required>
                             </div>
                             <div class="form-group">
-                                <label>Email Address</label>
-                                <input type="email" id="wa-email" placeholder="example@email.com" required>
+                                <label>Official Email</label>
+                                <input type="email" id="wa-email" placeholder="delegate@organization.com" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label>Type of Event</label>
-                            <select id="wa-event" required>
-                                <option value="" disabled selected>Select Event Type...</option>
-                                <option value="Medical Conference / CME">Medical Conference / CME</option>
-                                <option value="Corporate Summit">Corporate Summit</option>
-                                <option value="Government Campaign">Government Campaign</option>
-                                <option value="Cultural Event / Artist Management">Cultural Event / Artist Management</option>
-                                <option value="BTL / ATL Activation">BTL / ATL Activation</option>
-                                <option value="Other">Other Events</option>
-                            </select>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Contact Number</label>
+                                <input type="tel" id="wa-phone" placeholder="+91 XXXXX XXXXX" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Vertical Category</label>
+                                <select id="wa-event" required>
+                                    <option value="" disabled selected>Select Event Vertical...</option>
+                                    <option value="Medical Conference / CME">Medical Conference / CME</option>
+                                    <option value="Corporate Summit / AGM">Corporate Summit / AGM</option>
+                                    <option value="Government & Public Initiative">Government & Public Initiative</option>
+                                    <option value="Turnkey Exhibition & Stall Fabrication">Turnkey Exhibition & Stall Fabrication</option>
+                                    <option value="Cultural Fest / Artist Management">Cultural Fest / Artist Management</option>
+                                    <option value="BTL / ATL Activation">BTL / ATL Activation</option>
+                                    <option value="Other Project">Other Specialized Execution</option>
+                                </select>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label>Event Requirements</label>
-                            <textarea id="wa-message" rows="5" placeholder="Tell us about your estimated guest count, dates, location, and specific needs..." required></textarea>
+                            <label>Scope & Requirements</label>
+                            <textarea id="wa-message" rows="5" placeholder="Please outline expected delegate strength, venue city, tentative dates, and staging needs..." required></textarea>
                         </div>
+
                         <button type="submit" class="btn-submit">
-                            Send via WhatsApp  <i class="fab fa-whatsapp"></i>
+                            Dispatch via WhatsApp &nbsp;<i class="fab fa-whatsapp"></i>
                         </button>
                     </form>
                 </div>
@@ -353,26 +916,31 @@
         </div>
     </section>
 
+    <!-- SOCIAL CONNECT STRIP -->
     <section class="social-strip">
-        <h3>Follow Mise Global</h3>
-        <p>Stay updated with our latest events, highlights, and industry insights.</p>
+        <div class="section-label">DIGITAL NETWORK</div>
+        <h3>Follow <em>Mise Global</em></h3>
+        <p>Stay informed on our landmark conference deliveries, stage architectures, and national project highlights.</p>
         <div class="social-icons-row">
-            <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            <a href="https://twitter.com" target="_blank"><i class="fab fa-x-twitter"></i></a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="main-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <div class="footer-logo-frame">
+                    <img src="./assets/Mise_global.png" alt="Mise Global">
+                </div>
                 <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 </div>
             </div>
             <div class="footer-col">
@@ -388,49 +956,74 @@
             <div class="footer-col">
                 <h4>Services</h4>
                 <ul>
-                    <li><a href="#">Medical Conferences</a></li>
-                    <li><a href="#">Corporate Events</a></li>
-                    <li><a href="#">Govt. Campaigns</a></li>
-                    <li><a href="#">BTL / ATL Activations</a></li>
-                    <li><a href="#">Artist Management</a></li>
+                    <li><a href="physical-conferences.html">Medical Conferences</a></li>
+                    <li><a href="services.html">Corporate Events</a></li>
+                    <li><a href="services.html">Govt. Campaigns</a></li>
+                    <li><a href="services.html">BTL / ATL Activations</a></li>
                 </ul>
             </div>
             <div class="footer-col">
                 <h4>Contact</h4>
                 <ul class="contact-list">
-                    <li><i class="fas fa-map-marker-alt"></i> Muzaffarpur, Bihar — Pan-India</li>
-                    <li><i class="fas fa-phone"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
-                    <li><i class="fas fa-envelope"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
+                    <li><i class="fas fa-map-marker-alt" style="color:var(--gold-primary);"></i> Muzaffarpur, Bihar — Pan-India</li>
+                    <li><i class="fas fa-phone" style="color:var(--gold-primary);"></i> <a href="tel:+916205394680">+91 62053 94680</a></li>
+                    <li><i class="fas fa-envelope" style="color:var(--gold-primary);"></i> <a href="mailto:info@miseglobal.com">info@miseglobal.com</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
             <p>© 2026 Mise Global. All Rights Reserved.</p>
-            <p class="footer-tagline">Driven by Precision</p>
+            <p>Driven by Precision</p>
         </div>
     </footer>
 
-    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/916205394680" class="floating-whatsapp" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
+    <!-- ENGINE SCRIPTS -->
     <script>
+        // WhatsApp Structured Dispatch Script
         document.getElementById('whatsappForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const name = document.getElementById('wa-name').value;
-            const email = document.getElementById('wa-email').value;
-            const event = document.getElementById('wa-event').value;
-            const msg = document.getElementById('wa-message').value;
-            const text = `*New Inquiry — Mise Global*%0A%0A*Name/Org:* ${name}%0A*Email:* ${email}%0A*Event Type:* ${event}%0A*Details:* ${msg}`;
-            window.open(`https://wa.me/916205394680?text=${text}`, '_blank');
+            const name = document.getElementById('wa-name').value.trim();
+            const email = document.getElementById('wa-email').value.trim();
+            const phone = document.getElementById('wa-phone').value.trim();
+            const eventType = document.getElementById('wa-event').value;
+            const msg = document.getElementById('wa-message').value.trim();
+
+            const text = 
+`*NEW PROJECT INQUIRY — MISE GLOBAL*
+──────────────────────
+*Client / Org:* ${name}
+*Phone:* ${phone}
+*Email:* ${email}
+*Vertical:* ${eventType}
+──────────────────────
+*Project Scope:*
+${msg}`;
+
+            window.open(`https://wa.me/916205394680?text=${encodeURIComponent(text)}`, '_blank');
         });
 
+        // Navbar scroll behavior
         window.addEventListener('scroll', () => {
-            document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 60);
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
         });
+
+        // Mobile Drawer Controls
         function openMenu() {
             document.getElementById('sideMenu').classList.add('open');
             document.getElementById('menuOverlay').classList.add('open');
             document.body.style.overflow = 'hidden';
         }
+
         function closeMenu() {
             document.getElementById('sideMenu').classList.remove('open');
             document.getElementById('menuOverlay').classList.remove('open');
