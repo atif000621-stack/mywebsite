@@ -9,13 +9,61 @@
     <link rel="stylesheet" href="style.css">
     <style>
         /* ===== HEADER DIRECT NAVIGATION STYLE ===== */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 18px 5%;
+            transition: all 0.4s ease;
+            background: rgba(12, 27, 46, 0.75);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+        .main-nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid #E8E0D4;
+            padding: 12px 5%;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* Luxury Logo Container */
+        .brand-logo-frame {
+            display: inline-flex;
+            align-items: center;
+            background: #ffffff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(201, 168, 76, 0.35);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .brand-logo-frame:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+        }
+        .brand-logo-frame img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+
         .nav-center {
             display: flex;
             align-items: center;
             gap: 32px;
-        }
-        .nav-link-item {
-            position: relative;
         }
         .nav-link-item a {
             font-family: var(--font-body), sans-serif;
@@ -257,26 +305,90 @@
         .spec-box h3 { font-family: var(--font-display), serif; font-size: 1.3rem; color: #0c1b2e; margin-bottom: 12px; }
         .spec-box p { font-size: 0.9rem; color: #4a5568; line-height: 1.6; }
 
-        /* ===== CLIENTS SLIDER ===== */
-        .clients-section { background: #FAF9F6; padding: 80px 0; overflow: hidden; border-top: 1px solid #E8E0D4; }
-        .clients-header { text-align: center; margin-bottom: 40px; }
-        .clients-header h2 { font-family: var(--font-display), serif; font-size: 2rem; color: #0c1b2e; }
+        /* ===== 2-LINE CLIENTS LOGO SECTION ===== */
+        .clients-section { 
+            background: #FAF9F6; 
+            padding: 90px 0; 
+            overflow: hidden; 
+            border-top: 1px solid #E8E0D4; 
+        }
+        .clients-header { text-align: center; margin-bottom: 50px; }
+        .clients-header h2 { font-family: var(--font-display), serif; font-size: 2.2rem; color: #0c1b2e; }
         .clients-header h2 em { font-style: italic; color: #c9a84c; }
-        .logo-slider { width: 100%; overflow: hidden; position: relative; }
-        .logo-slider::before, .logo-slider::after { content: ''; position: absolute; top: 0; width: 150px; height: 100%; z-index: 2; }
-        .logo-slider::before { left: 0; background: linear-gradient(to right, rgba(250,249,246,1) 0%, rgba(250,249,246,0) 100%); }
-        .logo-slider::after { right: 0; background: linear-gradient(to left, rgba(250,249,246,1) 0%, rgba(250,249,246,0) 100%); }
-        .logo-track { display: flex; width: calc(200px * 14); animation: scroll-left 25s linear infinite; align-items: center; }
-        .logo-track:hover { animation-play-state: paused; }
-        .logo-slide { width: 200px; padding: 0 30px; display: flex; justify-content: center; align-items: center; opacity: 0.5; transition: all 0.4s ease; filter: grayscale(100%); }
-        .logo-slide:hover { opacity: 1; filter: grayscale(0%); transform: scale(1.05); }
-        .logo-slide img { max-width: 100%; max-height: 70px; object-fit: contain; }
-        @keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-200px * 7)); } }
+        
+        .logo-slider { 
+            width: 100%; 
+            overflow: hidden; 
+            position: relative; 
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        .logo-slider::before, .logo-slider::after { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            width: 180px; 
+            height: 100%; 
+            z-index: 2; 
+            pointer-events: none;
+        }
+        .logo-slider::before { left: 0; background: linear-gradient(to right, #FAF9F6 0%, rgba(250,249,246,0) 100%); }
+        .logo-slider::after { right: 0; background: linear-gradient(to left, #FAF9F6 0%, rgba(250,249,246,0) 100%); }
+        
+        .logo-track-left { 
+            display: flex; 
+            width: max-content; 
+            animation: scroll-left 32s linear infinite; 
+            align-items: center; 
+        }
+        .logo-track-right { 
+            display: flex; 
+            width: max-content; 
+            animation: scroll-right 32s linear infinite; 
+            align-items: center; 
+        }
+        
+        .logo-slider:hover .logo-track-left,
+        .logo-slider:hover .logo-track-right { 
+            animation-play-state: paused; 
+        }
+
+        .logo-slide { 
+            width: 210px; 
+            padding: 0 35px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            opacity: 0.55; 
+            transition: all 0.4s ease; 
+            filter: grayscale(100%); 
+        }
+        .logo-slide:hover { 
+            opacity: 1; 
+            filter: grayscale(0%); 
+            transform: scale(1.08); 
+        }
+        .logo-slide img { 
+            max-width: 100%; 
+            max-height: 65px; 
+            object-fit: contain; 
+            display: block;
+        }
+
+        @keyframes scroll-left { 
+            0% { transform: translateX(0); } 
+            100% { transform: translateX(-50%); } 
+        }
+        @keyframes scroll-right { 
+            0% { transform: translateX(-50%); } 
+            100% { transform: translateX(0); } 
+        }
 
         /* ===== DYNAMIC EVENT GALLERY ===== */
         .dynamic-gallery-section {
             background: #081320;
-            padding: 90px 5%;
+            padding: 95px 5%;
             border-top: 1px solid rgba(201, 168, 76, 0.2);
         }
         .gallery-header {
@@ -356,6 +468,20 @@
         .cta-banner h2 em.text-highlight-white { font-style: italic; color: #ffffff !important; text-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         .cta-banner .btn-primary.large { padding: 18px 44px; font-size: 1rem; }
 
+        /* Footer Logo Frame */
+        .footer-logo-frame {
+            display: inline-block;
+            background: #ffffff;
+            padding: 8px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+        .footer-logo-frame img {
+            height: 48px;
+            width: auto;
+            display: block;
+        }
+
         @media (max-width: 900px) {
             .stats-strip { grid-template-columns: repeat(2, 1fr) !important; margin: 0; border-radius: 0; box-shadow: none; border-bottom: 1px solid #E8E0D4; }
             .stat-item { border-bottom: 1px solid #E8E0D4; border-right: 1px solid #E8E0D4 !important; }
@@ -386,8 +512,9 @@
                     <a href="contact.html">Contact</a>
                 </div>
             </div>
-            <a href="index.html" class="logo-link">
-                <div class="logo-text">MISE <span>GLOBAL</span></div>
+            <!-- Logo Section with Protected Frame -->
+            <a href="index.html" class="brand-logo-frame">
+    <img src="assets/Mise_global.png" alt="Mise Global">
             </a>
         </div>
         
@@ -407,7 +534,9 @@
     <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
     <div class="side-menu" id="sideMenu">
         <button class="close-btn" onclick="closeMenu()">&#x2715;</button>
-        <div class="logo-sidebar">MISE <span>GLOBAL</span></div>
+        <div style="background:#fff; padding:8px 12px; border-radius:4px; display:inline-block; margin-bottom:20px;">
+            <img src="LOGOS/mise-logo.png" alt="Mise Global" style="height:36px; display:block;">
+        </div>
         <nav class="side-nav-links">
             <a href="index.html" class="active">Home</a>
             <a href="about.html">About Us</a>
@@ -552,31 +681,71 @@
         </div>
     </section>
 
+    <!-- ===== 2-LINE CLIENTS LOGO SECTION ===== -->
     <section class="clients-section">
         <div class="clients-header reveal-el">
+            <div class="section-label">OUR NETWORK</div>
             <h2>Trusted by <em>Industry Leaders</em></h2>
         </div>
+        
         <div class="logo-slider">
-            <div class="logo-track">
-                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/API.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/c3.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Client"></div>
-                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="Client"></div>
+            <!-- Row 1: Leftward Scroll -->
+            <div class="logo-track-left">
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="API" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="ICP" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Solarris" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="C3" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="APICON" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Shree Hospital" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="ICP 2.0" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/BiharGovt.png" alt="Govt Partner" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/SCTE.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/larenon.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/medley_pharmaceuticals_.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/zorvia.jpg" alt="SCTE" onerror="this.style.display='none'"></div>
+
+                <!-- Duplicate for Infinite Loop -->
+                <div class="logo-slide"><img src="LOGOS/185458-microlabslimitedlogo.jpg" alt="API" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Adikan Healthcare.png" alt="ICP" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Alembic-Logo-01-1-2048x844.jpg" alt="Solarris" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/alkem-laboratories-logo-png_seeklogo-386943.png" alt="C3" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Daxin Pharma.png" alt="APICON" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Dr._Reddy's_Laboratories_logo.svg.webp" alt="Shree Hospital" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Eris-logo.png" alt="ICP 2.0" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/Indchemie.png" alt="Govt Partner" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/intas-logo-png_seeklogo-305336.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/logo-1024x261.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ubl-united-bank-limited-hd-logo.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ZYDUSLIFE.NS_BIG.png" alt="SCTE" onerror="this.style.display='none'"></div>
+            </div>
+
+            <!-- Row 2: Rightward Scroll -->
+            <div class="logo-track-right">
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="APICON" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Shree Hospital" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="ICP 2.0" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="API" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Solarris" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="ICP" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="C3" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/SCTE.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/BiharGovt.png" alt="Govt Partner" onerror="this.style.display='none'"></div>
+
+                <!-- Duplicate for Infinite Loop -->
+                <div class="logo-slide"><img src="LOGOS/APICON.png" alt="APICON" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ShreeHospital.png" alt="Shree Hospital" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/icp2.000.png" alt="ICP 2.0" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/API.png" alt="API" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/solarris.png" alt="Solarris" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/ICP.png" alt="ICP" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/c3.png" alt="C3" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/SCTE.png" alt="SCTE" onerror="this.style.display='none'"></div>
+                <div class="logo-slide"><img src="LOGOS/BiharGovt.png" alt="Govt Partner" onerror="this.style.display='none'"></div>
             </div>
         </div>
     </section>
 
-    <!-- ===== DYNAMIC EVENT GALLERY (CLOUDINARY POWERED) ===== -->
+    <!-- ===== DYNAMIC EVENT GALLERY ===== -->
     <section class="dynamic-gallery-section">
         <div class="gallery-header reveal-el">
             <div class="section-label">LIVE SHOWCASE</div>
@@ -614,7 +783,9 @@
     <footer class="main-footer">
         <div class="footer-top">
             <div class="footer-brand">
-                <div class="logo-footer">MISE <span>GLOBAL</span></div>
+                <div class="footer-logo-frame">
+                    <img src="LOGOS/mise-logo.png" alt="Mise Global">
+                </div>
                 <p>Pan-India Presence. Global Standards.<br>Driven by Precision.</p>
                 <div class="social-links">
                     <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
@@ -741,10 +912,9 @@
                 const result = await response.json();
 
                 if (result.resources && result.resources.length > 0) {
-                    galleryContainer.innerHTML = ''; // Clear loading status
+                    galleryContainer.innerHTML = '';
 
                     result.resources.forEach(img => {
-                        // High-speed auto-compressed WebP thumbnail
                         const thumbUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto,w_800,c_fill,ar_4:3/v${img.version}/${img.public_id}.${img.format}`;
                         const fullImageUrl = `https://res.cloudinary.com/${CLOUDINARY_CLOUD_NAME}/image/upload/q_auto,f_auto/v${img.version}/${img.public_id}.${img.format}`;
 
@@ -775,7 +945,6 @@
             document.getElementById('galleryLightbox').style.display = 'none';
         }
 
-        // Trigger dynamic gallery on DOM load
         document.addEventListener('DOMContentLoaded', loadDynamicShowcase);
     </script>
 </body>
